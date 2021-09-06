@@ -1,5 +1,2 @@
 # Project exclude paths
 /runtime/
-/static/
-/thinkphp/
-/vendor/
