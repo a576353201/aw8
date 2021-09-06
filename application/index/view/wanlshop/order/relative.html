@@ -1,0 +1,360 @@
+<style type="text/css">
+
+	.content{
+
+		padding: 0;
+
+	}
+
+	/* 框架 */
+
+	.wanl_kuaidi{
+
+		background: url(/assets/addons/wanlshop/img/kuaidi/spider_search_v4.png) 0px 0px repeat-x;
+
+		padding: 20px 15px;
+
+	}
+
+	.wanl_kuaidi td{
+
+	  padding: 7px;
+
+	}
+
+	.wanl_kuaidi th{
+
+		padding: 7px;
+
+		font-weight: inherit;
+
+		font-size: 16px;
+
+	}
+
+	.wanl_kuaidi .last td,  .wanl_kuaidi .last td a{
+
+	  color: #ff7800;
+
+	  border-bottom: none;
+
+	}
+
+	/* 图标线段 */
+
+	.wanl_kuaidi .process{
+
+		position: relative;
+
+		color: #b3b3b3;
+
+	    width: 60px;
+
+	    text-align: center;
+
+	}
+
+	.wanl_kuaidi .process .line{
+
+		background: #b3b3b3;
+
+		position: absolute;
+
+		width: 1px;
+
+		height: 72%;
+
+		left: 29px;
+
+		bottom: -17px;
+
+	}
+
+	/* 时间 */
+
+	.wanl_kuaidi .status {
+
+	  width: 105px;
+
+	  text-align: center;
+
+	  padding-left: 14px;
+
+	  padding-right: 0;
+
+	}
+
+	.wanl_kuaidi .status .day {
+
+	  display:block;
+
+	}
+
+	.wanl_kuaidi .status .time {
+
+	  font-size: 13px;
+
+	}
+
+	/* 內容 */
+
+	.wanl_kuaidi .info span{
+
+		display: block;
+
+		font-weight: bold;
+
+	}
+
+</style>
+
+
+
+<div class="wanl_kuaidi">
+	<table class="">
+		<thead>
+		    <?php if(isset($data['name'])){?>
+            <tr>
+    	    <th style="text-align: center;padding-left: 14px;">快递公司：</th>
+            <th style="text-align: center;padding-left: 14px;"><?php echo isset($data['name'])?$data['name']:'';?></th>
+            </tr>
+            <tr>
+    	    <th style="text-align: center;padding-left: 14px;">快递单号：</th>
+            <th style="text-align: center;padding-left: 14px;"><?php echo isset($row['express_no'])?$row['express_no']:'';?></th>
+            </tr>
+            <?php }else{?>
+            <tr>
+    	    <th style="text-align: center;padding-left: 14px;">快递公司：</th>
+            <th style="text-align: center;padding-left: 14px;">台新物流</th>
+            </tr>
+            <tr>
+    	    <th style="text-align: center;padding-left: 14px;">快递单号：</th>
+            <th style="text-align: center;padding-left: 14px;">{$address.order_no}</th>
+            </tr>
+            <?php }?>
+		    <tr>
+
+		      <th style="text-align: center;padding-left: 14px;">时间</th>
+
+		      <th></th>
+
+			  <th>地点和跟踪进度</th>
+
+		    </tr>
+
+		  </thead>
+
+		<tbody>
+
+		{switch name="row.state" }
+
+		    {case value="1"}
+
+				<tr>
+
+					<td class="status"><span class="day">{$row.createtime|date="Y.m.d",###}</span><span class="time">{$row.createtime|date="H:i",###}</span><span class="week">{$week[date('w', $row.paymenttime)]}</span></td>
+
+					<td class="process">
+
+						<i class="fa fa-credit-card"></i>
+
+					</td>
+
+					<td class="info"><span>尚未付款</span>付款后，即可将商品发出</td>
+
+				</tr>
+
+			{/case}
+
+		    {case value="2"}
+
+				<tr>
+
+					<td class="status"><span class="day">{$row.paymenttime|date="Y.m.d",###}</span><span class="time">{$row.paymenttime|date="H:i",###}</span> <span class="week">{$week[date('w', $row.paymenttime)]}</span></td>
+
+					<td class="process">
+
+						<i class="fa fa-shopping-cart"></i>
+
+					</td>
+
+					<td class="info"><span>已付款</span>商家正在处理订单</td>
+
+				</tr>
+
+			{/case}
+
+		    {default /}
+				{empty name="list"}
+				<tr>
+					<td class="status">
+						<span class="day">{$row.delivertime|date="Y.m.d",###}</span>
+						<span class="time">{$row.delivertime|date="H:i",###}</span>
+						<span class="week"></span>
+					</td>
+					<td class="process">
+						<i class="fa fa-truck"></i>
+					</td>
+					<td class="info"><span>待出库</span>厂家正在备货中，预计24小时之内发货
+					<?php $time1 = date('H',$row['delivertime']);
+					    $time2 = 259200;
+					if($time1 >= 0 && $time1 < 7){
+					    $time2 = 259200;
+					}else if($time1 >= 18 && $time1 < 24){
+					    $time2 = 259200+3600*24;
+					} 
+					?>
+<!--                    {$row.delivertime+$time2|date="Y.m.d",###}请耐心等待交货~</td>-->
+					<!---包裹正在等待快遞小哥攬收-->
+				</tr>
+				
+				<?php if(!isset($data['name'])){ ?>
+    				<?php $time1 = date('H',$row['delivertime']);
+					    $time2 = 3600*20+3600*1;
+					if($time1 >= 0 && $time1 < 3){
+					    $time2 = 3600*20+3600*7;
+					}else if($time1 >= 3 && $time1 < 7){
+					    $time2 = 3600*20+3600*6;
+					}else if($time1 >= 7 && $time1 < 13){
+					    $time2 = 3600*20+3600*5;
+					}else if($time1 >= 13 && $time1 < 18){
+					    $time2 = 3600*20+3600*3;
+					}else if($time1 >= 22 && $time1 < 24){
+					    $time2 = 3600*20+3600*8;
+					} 
+					$time2 = $time2+600;
+					$fa1 = $time2+3600*4+1000;
+					$fa2 = $time2+3600*15+1201;
+					$fa3 = $time2+3600*45+2587;
+					$fa4 = $time2+3600*(24*3-10)+1234;
+					$fa5 = $time2+3600*(24*3-3)+999;
+					if($row['delivertime']<(time()-$time2)){ ?>
+    				<tr>
+    					<td class="status">
+    						<span class="day">{$row.delivertime+$time2|date="Y.m.d",###}</span>
+    						<span class="time">{$row.delivertime+$time2|date="H:i",###}</span>
+    						<span class="week"></span>
+    					</td>
+    					<td class="process">
+    						<i class="fa fa-truck"></i>
+    					</td>
+    					<td class="info"><span>待揽件（已揽件）</span></td>
+    				</tr>  				<?php } ?>
+    				<?php if($row['delivertime']<(time()-$fa1)){ ?>
+    				<tr>
+    					<td class="status">
+    						<span class="day">{$row.delivertime+$fa1|date="Y.m.d",###}</span>
+    						<span class="time">{$row.delivertime+$fa1|date="H:i",###}</span>
+    						<span class="week"></span>
+    					</td>
+    					<td class="process">
+    						<i class="fa fa-truck"></i>
+    					</td>
+    					<td class="info"><span>运输中</span>(由运转中心运送至中转站)</td>
+    				</tr>
+    				<?php } ?>
+    				<?php if($row['delivertime']<(time()-$fa2)){ ?>
+    				<tr>
+    					<td class="status">
+    						<span class="day">{$row.delivertime+$fa2|date="Y.m.d",###}</span>
+    						<span class="time">{$row.delivertime+$fa2|date="H:i",###}</span>
+    						<span class="week"></span>
+    					</td>
+    					<td class="process">
+    						<i class="fa fa-truck"></i>
+    					</td>
+    					<td class="info"><span>运输中</span>(由中转站运往分部)</td>
+    				</tr>
+    				<?php } ?>
+    				<?php if($row['delivertime']<(time()-$fa3)){ ?>
+    				<tr>
+    					<td class="status">
+    						<span class="day">{$row.delivertime+$fa3|date="Y.m.d",###}</span>
+    						<span class="time">{$row.delivertime+$fa3|date="H:i",###}</span>
+    						<span class="week"></span>
+    					</td>
+    					<td class="process">
+    						<i class="fa fa-truck"></i>
+    					</td>
+    					<td class="info"><span>运输中</span>(由分部运往快递网点)</td>
+    				</tr>
+    				<?php } ?>
+    				<?php if($row['delivertime']<(time()-$fa4)){ ?>
+    				<tr>
+    					<td class="status">
+    						<span class="day">{$row.delivertime+$fa4|date="Y.m.d",###}</span>
+    						<span class="time">{$row.delivertime+$fa4|date="H:i",###}</span>
+    						<span class="week"></span>
+    					</td>
+    					<td class="process">
+    						<i class="fa fa-truck"></i>
+    					</td>
+    					<td class="info"><span>派件中</span>(由快递小哥送达物件)</td>
+    				</tr>
+    				<?php } ?>
+    				<?php if($row['delivertime']<(time()-$fa5)){ ?>
+    				<tr>
+    					<td class="status">
+    						<span class="day">{$row.delivertime+$fa5|date="Y.m.d",###}</span>
+    						<span class="time">{$row.delivertime+$fa5|date="H:i",###}</span>
+    						<span class="week"></span>
+    					</td>
+    					<td class="process">
+    						<i class="fa fa-truck"></i>
+    					</td>
+    					<td class="info"><span>已送达</span>(顾客已签收物件) 买家若无异议，10天內系統將自动确认收货，货款將打到卖家钱包</td>
+    				</tr>
+    				<?php } ?>
+				<?php } ?>
+                <br>
+				{else /}
+
+				<!-- 快遞单當前狀态，包括0在途，1攬收，2疑難，3签收，4退签，5派件，6退回，7轉投 等7个狀态 -->
+
+					{volist name="list" id="vo"}
+
+					<tr class="{in name="key" value="0"} last {/in}">
+
+						<td class="status"><span class="day">{$vo.time|date="Y.m.d",###}</span><span class="time">{$vo.time|date="H:i",###}</span><span class="week">{$vo.week}</span></td>
+
+						<td class="process">
+
+							{switch name="vo.status"}
+
+							    {case value="在途"}<i class="fa fa-chevron-circle-up"></i>{/case}
+
+							    {case value="揽收"}<i class="fa fa-archive"></i>{/case}
+
+								{case value="疑难"}<i class="fa fa-exclamation-circle"></i>{/case}
+
+								{case value="签收"}<i class="fa fa-check"></i>{/case}
+
+								{case value="退签"}<i class="fa fa-reply"></i>{/case}
+
+								{case value="派件"}<i class="fa fa-user"></i>{/case}
+
+								{case value="退回"}<i class="fa fa-hand-paper-o"></i>{/case}
+
+								{case value="转投"}<i class="fa fa-share-square"></i>{/case}
+
+							{/switch}
+
+							<div class="line"></div>
+
+						</td>
+
+						<td class="info"><span>{if condition="$vo.status neq '在途'"}{$vo.status}{/if}</span>{$vo.context}</td>
+
+					</tr>
+
+					{/volist}
+
+				{/empty}
+
+		{/switch}	
+
+		</tbody>
+
+	</table>
+
+</div>

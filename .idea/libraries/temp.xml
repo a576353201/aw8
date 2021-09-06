@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="temp">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/addons/wanlshop/library/AutoProject/temp/wanlshop_v1.0.0_20210623174025.zip!/" />
+      <root url="jar://$PROJECT_DIR$/addons/wanlshop/library/AutoProject/temp/wanlshop_v1.0.0_20210515193452.zip!/" />
+      <root url="jar://$PROJECT_DIR$/addons/wanlshop/library/AutoProject/temp/wanlshop_v1.0.0_20210517233616.zip!/" />
+      <root url="jar://$PROJECT_DIR$/addons/wanlshop/library/AutoProject/temp/wanlshop_v1.0.0_20201217174349.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

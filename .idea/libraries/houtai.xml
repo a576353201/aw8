@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="houtai">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/houtai.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
