@@ -3,7 +3,7 @@
 return [
     [
         'name' => 'ini',
-        'title' => '客户端配置',
+        'title' => '客户端配置11',
         'type' => 'array',
         'value' => [
             'name' => 'hhh',
