@@ -40,7 +40,7 @@ return [
     'Reset password successful' => '修改密码成功',
     'Account is locked' => '帳戶已經被鎖定',
     'Password is incorrect' => '密码不正确',
-    'Account is incorrect' => '帳戶不正确',
+    'Account is incorrect' => 'Account is incorrect',
     'Account not exist' => '帳戶不存在',
     'Account can not be empty' => '帳戶不能为空',
     'Username or password is incorrect' => '用戶名或密码不正确',

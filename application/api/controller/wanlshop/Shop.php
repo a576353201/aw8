@@ -87,7 +87,7 @@ class Shop extends Api
 				$this->success('返回成功', $row);
 			}
 			if($type == 'chat'){
-				$this->error(__('对方在您店铺购买了商品，请到卖家中心回復'));
+				$this->error(__('The other party has purchased goods in your store. Please reply to the seller center'));
 			}
 		}
 		$this->error(__('非正常访问'));

@@ -42,7 +42,7 @@ class Feedback extends Api
     		$params = $this->request->post();
     		$params['user_id'] = $this->auth->id;
     		$data = $this->model->allowField(true)->save($params);
-    		$data? $this->success('ok',$data) : $this->error(__('服务器繁忙'));
+    		$data? $this->success('ok',$data) : $this->error(__('server busy'));
     	}
     	$list = $this->model
     		->where('user_id', $this->auth->id)

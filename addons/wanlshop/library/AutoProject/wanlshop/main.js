@@ -173,15 +173,15 @@ api.interceptor.fail = ((res, config) => {
 
 	} else if (res.statusCode === 404) {
 
-		error = 'API接口不存在';
+		error = 'api interface does not exist';
 
 	} else if (res.statusCode === 500) {
 
-		error = 'API接口异常';
+		error = 'api interface exception';
 
 	} else {
 
-		error = '服务器繁忙';
+		error = 'server busy';
 
 	}
 
