@@ -212,7 +212,7 @@ class User extends Api
 			if ($ret) {
 			    $ret = $this->auth->login($mobile, $password);
 			    if($client_id){
-			        $this->wanlchat->bind($client_id, $this->auth->id);
+			    //    $this->wanlchat->bind($client_id, $this->auth->id);
 			    }
 				$data = [
 					'userinfo' => $this->auth->getUserinfo(),

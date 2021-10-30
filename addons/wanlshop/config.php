@@ -13,7 +13,7 @@ return [
             'package_name' => 'app.shop.pro',
             'cdnurl' => 'https://www.amazon.wealth-mall.com',
             'appurl' => 'https://www.amazon.wealth-mall.com/api',
-            'socketurl' => 'wss://wss.amazon.wealth-mall.com',
+            'socketurl' => 'ws://127.0.0.1:7272',
             'debug' => 'Y',
         ],
         'rule' => '',

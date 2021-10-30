@@ -565,7 +565,7 @@ class Order extends Wanlshop
 
 			if(!$this->wanlchat->isWsStart()){
 
-				$this->error('平台未啟动IM即时通讯服务，暫时不可以发货');
+				//$this->error('平台未啟动IM即时通讯服务，暫时不可以发货');
 
 			}
 
@@ -598,7 +598,7 @@ class Order extends Wanlshop
 				// 推送消息
 				$this->pushOrder($id,'已发货');
             }
-            $this->model->saveAll($order);
+           $this->model->saveAll($order);
             // 写入快遞订閱列表
             if ($config['kuaidi']['secretKey']) {
                 //model('app\index\model\wanlshop\KuaidiSub')->saveAll($express);

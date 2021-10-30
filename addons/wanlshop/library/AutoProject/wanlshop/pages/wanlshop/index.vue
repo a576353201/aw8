@@ -130,9 +130,9 @@ export default {
 		uni.getNetworkType({
 		    success: (res) => {
 				if (res.networkType == '2g' || res.networkType == '3g' || res.networkType == '4g') {
-					this.$wanlshop.msg('当前使用非WIFI环境，请注意流量使用');
+					this.$wanlshop.msg('Currently, non WiFi environment is used. Please pay attention to traffic usage');
 				}else if(res.networkType == 'none'){
-					this.$wanlshop.msg('没有网络');
+					this.$wanlshop.msg('No network');
 				}
 		    }
 		});
