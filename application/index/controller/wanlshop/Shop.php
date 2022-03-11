@@ -90,7 +90,15 @@ class Shop extends Wanlshop
                     if($row['shopname']!=$params['shopname']){
                         $params['isedit'] = 1;
                     }
+
+
+
                     $result = $row->allowField(true)->save($params);
+
+
+                    if($row->shop->dpspjjb!=$params['dpspjjb']){
+
+                    }
                     Db::commit();
                 } catch (ValidateException $e) {
                     Db::rollback();

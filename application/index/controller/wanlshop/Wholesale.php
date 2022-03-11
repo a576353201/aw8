@@ -516,7 +516,7 @@ class Wholesale extends Wanlshop
                 ->select();
         
         if (!empty($wholesale)) {
-            $this->error('您已經上架过了');
+           // $this->error('您已經上架过了');
         }
         $result = false;
         Db::startTrans();
@@ -525,7 +525,9 @@ class Wholesale extends Wanlshop
             //$spuItem = isset($params['spuItem'])?$params['spuItem']:$this->error(__('请填写销售信息-产品属性-产品規格'));
             // 獲取自增ID
             $DD = 1.1+mt_rand(0,20)/1000;
-            
+            if($this->shop->dpspjjb>0)$DD = 1+$this->shop->dpspjjb/100;//按加价比计算商品现价
+
+
             $this->model->shop_id = $this->shop->id;
             $this->model->wholesale_id = $row['id'];
             //$this->model->brand_id = $row['brand_id'];
