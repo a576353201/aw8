@@ -5,8 +5,8 @@
       <paths name="tttt">
         <serverdata>
           <mappings>
-            <mapping deploy="/www/wwwroot/m.hi-shopping.com" local="$PROJECT_DIR$" web="/" />
-            <mapping local="" />
+            <mapping deploy="/www/wwwroot/www.b.com" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="" local="" />
           </mappings>
         </serverdata>
       </paths>

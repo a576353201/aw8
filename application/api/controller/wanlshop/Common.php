@@ -24,26 +24,26 @@ class Common extends Api
 	protected $noNeedRight = ['*'];
     
 	/**
-	 * 壹次性加载App
+	 * 壹次性加載App
 	 *
-	 * @ApiSummary  (WanlShop 獲取首页、购物车、类目数据)
+	 * @ApiSummary  (WanlShop 獲取首頁、購物車、類目數據)
 	 * @ApiMethod   (GET)
 	 *
 	 */
     public function init()
     {
-		// 首页
+		// 首頁
 		$homeList = model('app\api\model\wanlshop\Page')
 			->where('type','index')
 			->field('page, item')
 			->find();			
 		if(!$homeList){
-			$this->error(__('尚未添加首页，请到后台【页面管理】添加首页'));
+			$this->error(__('尚未添加首頁，請到後臺【頁面管理】添加首頁'));
 		}
-		// 类目
+		// 類目
 		$tree = Tree::instance();
 		$tree->init(model('app\api\model\wanlshop\Category')->where(['type' => 'goods', 'isnav' => 1])->field('id, pid, name, image')->order('weigh asc')->select());
-		// 搜索关键字
+		// 搜索關鍵字
 		$searchList = model('app\api\model\wanlshop\Search')
 			->where(['flag' => 'index'])
 			->field('keywords')
@@ -55,17 +55,17 @@ class Common extends Api
 		// 壹次性獲取模塊
 		$modulesData  = [
 			"homeModules" => $homeList,
-			"categoryModules" => $tree->genTree($tree->arr),//$tree->getTreeArray(0),
+			"categoryModules" => $tree->getTreeArray(0),
 			"searchModules" => $searchList
 		];
-		// 追加h5地址用於分享二維码等
+		// 追加h5地址用於分享二維碼等
 		$config['config']['domain'] = $config['h5']['domain'].($config['h5']['router_mode'] == 'hash' ? '/#':'');
-		// 输出
+		// 輸出
 		$this->success('返回成功', [
 			"modulesData" => $modulesData,
 			"appStyle" => $config['style'],
 			"appConfig" => $config['config'],
-			"serviceVersion" => '202006183294701'  //数据版本号必须是整数
+			"serviceVersion" => '202006183294701'  //數據版本號必須是整數
 		]);
     }
 	
@@ -78,7 +78,7 @@ class Common extends Api
 	 */
 	public function update()
 	{
-		//设置过濾方法
+		//設置過濾方法
 		$this->request->filter(['strip_tags']);
 		$row = model('app\api\model\wanlshop\Version')
 			->order('versionCode desc')
@@ -90,15 +90,15 @@ class Common extends Api
 	
 	
 	/**
-	 * 加载廣告
+	 * 加載廣告
 	 *
-	 * @ApiSummary  (WanlShop 加载廣告)
+	 * @ApiSummary  (WanlShop 加載廣告)
 	 * @ApiMethod   (GET)
 	 *
 	 */
 	public function adverts()
 	{
-		//设置过濾方法
+		//設置過濾方法
 		$this->request->filter(['strip_tags']);
 		$data = [
 			'openAdverts' => [],
@@ -130,7 +130,7 @@ class Common extends Api
 				$data['otherAdverts'][] = $value;
 			}
 		}
-		// 通过大版本号查詢，对应数据，未來版本升級开发
+		// 通過大版本號查詢，對應數據，未來版本升級開發
 		$version = $this->request->request("version", '');
 		$this->success('返回成功', ['data' => $data,'version' => $version]);	
 	}
@@ -138,13 +138,13 @@ class Common extends Api
 	/**
 	 * 熱門搜索
 	 *
-	 * @ApiSummary  (WanlShop 搜索关键詞列表)
+	 * @ApiSummary  (WanlShop 搜索關鍵詞列表)
 	 * @ApiMethod   (GET)
 	 * 
 	 */
 	public function searchList()
 	{
-		//设置过濾方法
+		//設置過濾方法
 		$this->request->filter(['strip_tags']);
 		$list = model('app\api\model\wanlshop\Search')
 			->field('id,keywords,flag')
@@ -155,16 +155,16 @@ class Common extends Api
 	}
 	
 	/**
-	 * 提交搜索关键字給系統
+	 * 提交搜索關鍵字給系統
 	 *
-	 * @ApiSummary  (WanlShop 搜索关键詞列表)
+	 * @ApiSummary  (WanlShop 搜索關鍵詞列表)
 	 * @ApiMethod   (GET)
 	 * 
-	 * @param string $keywords 关键字
+	 * @param string $keywords 關鍵字
 	 */
 	public function setSearch()
 	{
-		//设置过濾方法
+		//設置過濾方法
 		$this->request->filter(['strip_tags']);
 		$keywords = $this->request->request("keywords", '');
 		$model = model('app\api\model\wanlshop\Search');
@@ -179,27 +179,27 @@ class Common extends Api
 	
 	
     /**
-     * 實時搜索类目&相关类目
+     * 實時搜索類目&相關類目
      *
-     * @ApiSummary  (WanlShop 搜索关键詞列表)
+     * @ApiSummary  (WanlShop 搜索關鍵詞列表)
      * @ApiMethod   (GET)
      * 
 	 * @param string $search 搜索內容
      */
     public function search()
     {
-    	//设置过濾方法
+    	//設置過濾方法
     	$this->request->filter(['strip_tags']);
 		$search = $this->request->request('search', '');
 		if($search){
-			// 查詢相关类目
+			// 查詢相關類目
 			$categoryList = model('app\api\model\wanlshop\Category')
 			    ->where('name','like','%'.$search.'%')
 				->field('id,name')
 				->limit(20)
 			    ->select();
 				
-			// 查詢搜索数据
+			// 查詢搜索數據
 			$searchList = model('app\api\model\wanlshop\Search')
 			    ->where('keywords','like','%'.$search.'%')
 				->field('keywords')
@@ -208,22 +208,22 @@ class Common extends Api
 			$result = array("categoryList" => $categoryList, "searchList" => $searchList);
 			$this->success('返回成功', $result);	
 		}else{
-			$this->success('请输入关键字');
+			$this->success('請輸入關鍵字');
 		}
     }
     
 	
 	
 	/**
-	 * 二維码配置
+	 * 二維碼配置
 	 *
-	 * @ApiSummary  (WanlShop 查詢二維码配置)
+	 * @ApiSummary  (WanlShop 查詢二維碼配置)
 	 * @ApiMethod   (POST)
 	 *
 	 */
 	public function qrcode()
 	{
-		//设置过濾方法
+		//設置過濾方法
 		$this->request->filter(['strip_tags']);
 		if ($this->request->isPost()) {
 			$list = model('app\api\model\wanlshop\Qrcode')
@@ -233,7 +233,7 @@ class Common extends Api
 		    $list[0]['luodiurl'] = Config::get('site.luodiurl');
 			$this->success('返回成功', $list);	
 		}
-		$this->error(__('非正常访问'));
+		$this->error(__('非正常訪問'));
 	}
 
 	
@@ -242,11 +242,11 @@ class Common extends Api
 
 	/**
 
-	 * 关於系統
+	 * 關於系統
 
 	 *
 
-	 * @ApiSummary  (WanlShop 关於系統)
+	 * @ApiSummary  (WanlShop 關於系統)
 
 	 * @ApiMethod   (GET)
 
@@ -276,11 +276,11 @@ class Common extends Api
 
 	/**
 
-	 * 獲取上传配置 1.0.2升級
+	 * 獲取上傳配置 1.0.2升級
 
 	 *
 
-	 * @ApiSummary  (WanlShop 上传配置)
+	 * @ApiSummary  (WanlShop 上傳配置)
 
 	 * @ApiMethod   (GET)
 
@@ -296,11 +296,11 @@ class Common extends Api
 
 		$upload = Config::get('upload');
 
-		//如果非服务端中轉模式需要修改为中轉
+		//如果非服務端中轉模式需要修改為中轉
 
 		if ($upload['storage'] != 'local' && isset($upload['uploadmode']) && $upload['uploadmode'] != 'server') {
 
-		    //臨時修改上传模式为服务端中轉
+		    //臨時修改上傳模式為服務端中轉
 
 		    set_addon_config($upload['storage'], ["uploadmode" => "server"], false);
 
@@ -308,7 +308,7 @@ class Common extends Api
 
 		    $upload = \app\common\model\Config::upload();
 
-		    // 上传信息配置后
+		    // 上傳信息配置後
 
 		    Hook::listen("upload_config_init", $upload);
 

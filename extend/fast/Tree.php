@@ -79,39 +79,7 @@ class Tree
         }
         return $this;
     }
-    function genTree($items,$id='id',$pid='pid',$son = 'childlist'){
-        $tree = array();
-        $tmpMap = array();
 
-        foreach ($items as $item) {
-            $tmpMaps[$item[$id]] = $item->toarray();
-        }
-        $items=array_values($tmpMaps);
-        $tree = array();
-//第一步，将分类id作为数组key,并创建children单元
-        foreach($items as $category){
-            $tree[$category['id']] = $category;
-            $tree[$category['id']]['childlist'] = array();
-        }
-//第二步，利用引用，将每个分类添加到父类children数组中，这样一次遍历即可形成树形结构。
-        foreach($tree as $key=>$item){
-            if($item['pid'] != 0){
-                $tree[$item['pid']]['childlist'][] = &$tree[$key];//注意：此处必须传引用否则结果不对
-                if($tree[$key]['childlist'] == null){
-                    unset($tree[$key]['childlist']); //如果children为空，则删除该children元素（可选）
-                }
-            }
-        }
-
-        foreach($tree as $key=>$category){
-            if($category['pid'] != 0){
-                unset($tree[$key]);
-            }
-        }
-        return $tree;
-
-        $dd=2;
-    }
     /**
      * 得到子级数组
      * @param int
