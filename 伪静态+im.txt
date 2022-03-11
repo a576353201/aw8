@@ -41,4 +41,7 @@ location / {
 
 php think wanlshop:chat start --daemon
 php think wanlshop:order start --daemon
+
+
+
 ss
