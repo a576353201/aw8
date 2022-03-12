@@ -29,6 +29,34 @@ class Goods extends Backend
         $this->view->assign("activityList", $this->model->getActivityList());
         $this->view->assign("statusList", $this->model->getStatusList());
     }
+
+
+    public function zjxl($ids = null)
+    {
+
+        $row = $this->model->all($ids);
+        $sales = $this->request->post('sales/f', 0);
+        //设置过滤方法
+        $this->request->filter(['strip_tags', 'trim']);
+        if ($this->request->isAjax()) {
+            foreach ($row as $vo) {
+//                if ($vo['shop_id'] != $this->shop->id) {
+//                    $this->error(__('You have no permission'));
+//                }
+//                if ($vo['wholesale_id'] == 0) {
+//                    $this->error('批发订单才能壹键发货');
+//                }
+                $order[] = [
+                    'id' => $vo['id'],
+                    'sales' =>$vo['sales']+$sales
+                ];
+            }
+
+            $this->model->saveAll($order);
+            $this->success();
+        }
+        return $this->view->fetch();
+    }
     
     /**
 

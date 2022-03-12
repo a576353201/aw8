@@ -178,6 +178,29 @@ function(e, t, a, i, r) {
                     formatter: i.api.formatter.operate
                 }]]
             }),
+
+                e(document).on("click", ".btn-dialog3",
+                    function() {
+
+
+                     var io=   i.api.selectedids(t).join(",");
+                        alert(io);
+
+                        layer.prompt({title: '请输入新的销量',}, function (value, index, elem) {
+                            if (parseFloat(value) < 0 ) {
+                                //alert('没有改变');
+                                Toastr.error("没有改变")
+                                //layer.close(index);
+                                return false;
+                            }
+
+                            Fast.api.ajax({
+                                url: 'wanlshop/goods/zjxl',
+                                data: {'ids':io, 'sales': parseFloat(value)}
+                            });
+                            layer.close(index);
+                        });
+                    }),
             i.api.bindevent(t)
         },
         recyclebin: function() {
