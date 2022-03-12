@@ -6,10 +6,10 @@ function(e, t, a, i, d) {
             i.api.init({
                 extend: {
                     index_url: "wanlshop/pinlun/index" + location.search,
-                    add_url: "wanlshop/address/add",
-                    edit_url: "wanlshop/address/edit",
-                    del_url: "wanlshop/address/del",
-                    multi_url: "wanlshop/address/multi",
+                    add_url: "wanlshop/pinlun/add",
+                    edit_url: "wanlshop/pinlun/edit",
+                    del_url: "wanlshop/pinlun/del",
+                    multi_url: "wanlshop/pinlun/multi",
                     table: "wanlshop_pinlun"
                 }
             });

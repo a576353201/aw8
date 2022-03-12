@@ -997,7 +997,7 @@ class Order extends Api
 
 				// 獲取快遞及价格
 
-				$goods['freight'] = $this->freight($goods['freight_id'], $sku['weigh'], $post['number'], $address['city']);
+				$goods['freight'] = $this->freight($goods['shop_id'], $sku['weigh'], $post['number'], $address['city']);
 
 				// 獲取SKU
 
@@ -1699,7 +1699,7 @@ class Order extends Api
 
 		// 運費模板
 
-		$data = model('app\api\model\wanlshop\ShopFreight')->where('id', $id)->field('id,delivery,isdelivery,name,valuation')->find();
+		$data = model('app\api\model\wanlshop\ShopFreight')->where('shop_id', $id)->field('id,delivery,isdelivery,name,valuation')->find();
 
 		$data['price'] = 0;
 
