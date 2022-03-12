@@ -28,6 +28,7 @@
                             </ul>
                         </div>
 
+                        <a class="btn btn-success btn-recyclebin btn-dialog {:$auth->check('wanlshop/shop/zjxl')?'':'hide'}" href="wanlshop/shop/zjxl" title="{:__('Zjxl')}"><i class="fa fa-recycle"></i> {:__('Zjxl')}</a>
                         <a class="btn btn-success btn-recyclebin btn-dialog {:$auth->check('wanlshop/shop/recyclebin')?'':'hide'}" href="wanlshop/shop/recyclebin" title="{:__('Recycle bin')}"><i class="fa fa-recycle"></i> {:__('Recycle bin')}</a>
                     </div>
                     <table id="table" class="table table-striped table-bordered table-hover"
