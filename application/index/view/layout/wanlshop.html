@@ -6,7 +6,7 @@
 
 		<meta charset="utf-8">
 
-		<title>{$title|default='賣家控制台'}</title>
+		<title>{$title|default='Seller Console'}</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
@@ -132,7 +132,7 @@
 
 						<!-- 普通模式下Logo -->
 
-						<span class="logo-lg">賣家中心</span>
+						<span class="logo-lg">seller Center</span>
 
 					</a>
 
@@ -680,9 +680,9 @@
 
 									<div v-cloak>
 
-										<span v-if="shopOnline == 1"><i class="fa fa-circle text-success margin-r-5"></i> IM線上</span>
+										<span v-if="shopOnline == 1"><i class="fa fa-circle text-success margin-r-5"></i> IM online</span>
 
-										<span v-else><i class="fa fa-circle text-gray margin-r-5"></i> IM連接異常</span>
+										<span v-else><i class="fa fa-circle text-gray margin-r-5"></i> IM connection is abnormal</span>
 
 									</div>
 
@@ -726,7 +726,7 @@
 
 									<a href="{:url('index/wanlshop.console/index')}">
 
-										<i class="fa fa-dashboard fa-fw"></i> <span>控制台</span>
+										<i class="fa fa-dashboard fa-fw"></i> <span>console</span>
 
 										<span class="pull-right-container"><small class="label pull-right bg-blue">hot</small></span>
 
@@ -738,7 +738,7 @@
 
 									<a href="javascript:;">
 
-										<i class="fa fa-user"></i> <span>個人資料</span>
+										<i class="fa fa-user"></i> <span>personal information</span>
 
 										<span class="pull-right-container"><i class="fa fa-angle-left"></i></span>
 
@@ -752,7 +752,7 @@
 
 											<a href="{:url('index/wanlshop.user/index')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>會員中心</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>Member Centre</span>
 
 											</a>
 
@@ -771,7 +771,7 @@
 
 											<a href="{:url('index/wanlshop.user/changepwd2')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>修改支付密碼</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>Change payment password</span>
 
 											</a>
 
@@ -781,7 +781,7 @@
 
 											<a href="{:url('index/wanlshop.user/changepwd')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>修改密碼</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>change Password</span>
 
 											</a>
 
@@ -798,7 +798,7 @@
 
 									<a href="javascript:;">
 
-										<i class="fa fa-leaf fa-fw"></i> <span>交易管理</span>
+										<i class="fa fa-leaf fa-fw"></i> <span>Transaction management</span>
 
 										<span class="pull-right-container"><i class="fa fa-angle-left"></i></span>
 
@@ -812,7 +812,7 @@
 
 											<a href="{:url('index/wanlshop.order/index')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>訂單管理</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>Order management</span>
 
 											</a>
 
@@ -822,7 +822,7 @@
 
 											<a href="{:url('index/wanlshop.order/comment')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>評論管理</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>Comment management</span>
 
 											</a>
 
@@ -832,7 +832,7 @@
 
 											<a href="{:url('index/wanlshop.refund/index')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>退款管理</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>Refund management</span>
 
 											</a>
 
@@ -846,7 +846,7 @@
 
 									<a href="javascript:;">
 
-										<i class="fa fa-rocket fa-fw"></i> <span>物流管理</span>
+										<i class="fa fa-rocket fa-fw"></i> <span>Logistics management</span>
 
 										<span class="pull-right-container"><i class="fa fa-angle-left"></i> </span>
 
@@ -882,7 +882,7 @@
 
 									<a href="javascript:;">
 
-										<i class="fa fa-shopping-bag fa-fw"></i> <span>商品管理</span>
+										<i class="fa fa-shopping-bag fa-fw"></i> <span>commodity management</span>
 
 										<span class="pull-right-container"><i class="fa fa-angle-left"></i> </span>
 
@@ -928,7 +928,7 @@
 
 									<a href="javascript:;">
 
-										<i class="fa fa-archive fa-fw"></i> <span>店鋪管理</span>
+										<i class="fa fa-archive fa-fw"></i> <span>Store management</span>
 
 										<span class="pull-right-container"><i class="fa fa-angle-left"></i> </span>
 
@@ -1035,7 +1035,7 @@
 
 									<a href="javascript:;">
 
-										<i class="fa fa-th fa-fw text-red"></i> <span>應用中心</span>
+										<i class="fa fa-th fa-fw text-red"></i> <span>application Center</span>
 
 										<span class="pull-right-container"><i class="fa fa-angle-left"></i> </span>
 
@@ -1111,9 +1111,9 @@
 
 								</li>
 
-								<li class="header">相關連結</li>
-								<li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.wholesale.index'?'active':''}"><a href="{:url('index/wanlshop.wholesale/index')}?order=desc&offset=0&limit=10"><i class="fa fa-list text-red"></i> <span>批發中心</span></a></li>
-								<li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.wholesale.index'?'active':''}"><a href="#"><i class="fa fa-list text-red"></i> <span>官網客服</span></a></li>
+								<li class="header">Related Links</li>
+								<li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.wholesale.index'?'active':''}"><a href="{:url('index/wanlshop.wholesale/index')}?order=desc&offset=0&limit=10"><i class="fa fa-list text-red"></i> <span>Wholesale Center</span></a></li>
+								<li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.wholesale.index'?'active':''}"><a href="#"><i class="fa fa-list text-red"></i> <span>Official website customer service</span></a></li>
 
 								<!--li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.user.line'?'active':''}"><a href="{:url('index/wanlshop.user/line')}"><i class="fa fa-qq text-aqua"></i> <span>line交流羣</span></a></li-->
 
@@ -1186,7 +1186,7 @@
 
 											<ol class="breadcrumb pull-left">
 
-												<li><a href="dashboard" class="addtabsit"><i class="fa fa-dashboard"></i> 控制台</a></li>
+												<li><a href="dashboard" class="addtabsit"><i class="fa fa-dashboard"></i> console</a></li>
 
 											</ol>
 

@@ -378,9 +378,9 @@
 									<span class="text-<%=labelarr[0]%>"><i class="fa fa-circle"></i> 
 									<% if(item.wholesale_id!=0){%>
 									<% if(item.is_wholesale==0){%>
-                                    <span style="color:red;">待批發</span>
+                                    <span style="color:red;">To be wholesaled</span>
                                     <% }else {%>
-									<span style="color:red;">待批發中心發貨</span>
+									<span style="color:red;">To be shipped from wholesale center</span>
 									<% }%>
                                     <% }else {%>
 									<%=item.state_text%>

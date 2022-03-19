@@ -58,7 +58,7 @@
 
 	{volist name="row" id="order"}
 
-		<h3 align="center">商品發貨單</h3>
+		<h3 align="center">product invoice</h3>
 
 		<table class="table table-head">
 
@@ -66,7 +66,7 @@
 
 				<tr>
 
-					<td>用戶名：{$order.user.username}</td>
+					<td>username：{$order.user.username}</td>
 
 					<td colspan="2">姓名：{$order.address.name}</td>
 
@@ -82,7 +82,7 @@
 echo $order['address']['mobile'];
 }?></td>
 
-					<td style="text-align: right;">下單時間：{$order.createtime|datetime}</td>
+					<td style="text-align: right;">order time：{$order.createtime|datetime}</td>
 
 				</tr>
 
