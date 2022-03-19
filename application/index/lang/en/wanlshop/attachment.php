@@ -1,0 +1,43 @@
+<?php
+return [
+    'All' => 'All',
+    'Id' => 'Id',
+    'Admin_id' => 'Admin_id',
+    'User_id' => 'User_id',
+    'Url' => 'Url',
+    'Imagewidth' => 'Imagewidth',
+    'Imageheight' => 'Imageheight',
+    'Imagetype' => 'Imagetype',
+    'Imageframes' => 'Imageframes',
+    'Preview' => 'Preview',
+    'Filesize' => 'Filesize',
+    'Mimetype' => 'Mimetype',
+    'Extparam' => 'Extparam',
+    'Createtime' => 'Createtime',
+    'Uploadtime' => 'Uploadtime',
+    'Storage' => 'Storage',
+    'Upload to third' => 'Upload to third',
+    'Upload to local' => 'Upload to local',
+    'Upload from editor' => 'Upload from editor'
+];
+/*return [
+	'All'                 => '全部',
+    'Id'                 => 'ID',
+    'Admin_id'           => '管理員ID',
+    'User_id'            => '會員ID',
+    'Url'                => '物理路徑',
+    'Imagewidth'         => '寬度',
+    'Imageheight'        => '高度',
+    'Imagetype'          => '圖片類型',
+    'Imageframes'        => '圖片幀數',
+    'Preview'            => '預覽',
+    'Filesize'           => '文件大小',
+    'Mimetype'           => 'Mime類型',
+    'Extparam'           => '透傳數據',
+    'Createtime'         => '創建日期',
+    'Uploadtime'         => '上傳時間',
+    'Storage'            => '存儲引擎',
+    'Upload to third'    => '上傳到第三方',
+    'Upload to local'    => '上傳到本地',
+    'Upload from editor' => 'Upload from editor'
+];*/

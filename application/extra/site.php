@@ -9,7 +9,7 @@ return [
     'forbiddenip' => '',
     'languages' => [
         'backend' => 'zh-cn',
-        'frontend' => 'zh-cn',
+        'frontend' => 'en',
     ],
     'fixedpage' => 'dashboard',
     'categorytype' => [
