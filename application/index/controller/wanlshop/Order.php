@@ -4,10 +4,10 @@ namespace app\index\controller\wanlshop;
 use addons\wanlshop\library\WanlChat\WanlChat;
 use app\common\controller\Wanlshop;
 use think\Db;
-use addons\wanlshop\library\Ehund; //快遞100订閱
+use addons\wanlshop\library\Ehund; //快遞100訂閱
 use addons\wanlshop\library\WanlPay\WanlPay2;
 /**
- * 订单管理
+ * 訂單管理
  *
  * @icon fa fa-circle-o
  */
@@ -16,7 +16,7 @@ class Order extends Wanlshop
     protected $noNeedLogin = '';
     protected $noNeedRight = '*';
     /**
-     * Order模型对象
+     * Order模型對象
      */
     protected $model = null;
 
@@ -37,9 +37,9 @@ class Order extends Wanlshop
      */
     public function index()
     {
-        //當前是否为关联查詢
+        //當前是否爲關聯查詢
         $this->relationSearch = true;
-        //设置过濾方法
+        //設置過濾方法
         $this->request->filter(['strip_tags', 'trim']);
         if ($this->request->isAjax()) {
             if ($this->request->request('keyField')) {
@@ -90,7 +90,7 @@ class Order extends Wanlshop
 	}
 	
     /**
-     * 壹键发货
+     * 壹鍵發貨
      */
     public function wholesale1($id = null)
     {
@@ -123,16 +123,16 @@ class Order extends Wanlshop
 	        $password = $this->request->post('password');
 	        //var_dump($user['paypass']);var_dump($password);exit;
 	        if(empty($user['paypass'])){
-	            $this->error('请设置支付密码');
+	            $this->error('請設置支付密碼');
 	        }
 	        if($user['paypass'] != $password){
-	            $this->error('支付密码錯誤');
+	            $this->error('支付密碼錯誤');
 	        }
             if ($row['wholesale_id'] == 0) {
-                $this->error('批发订单才能壹键发货');
+                $this->error('批發訂單才能壹鍵發貨');
             }
             if($row['is_wholesale'] == 1){
-                $this->error('订单已批发');
+                $this->error('訂單已批發');
             }
             $user = model('app\common\model\User')->get($row['user_id']);
             // 調用支付
@@ -157,18 +157,18 @@ class Order extends Wanlshop
             ->order('isaddress desc')
             ->field('id,name,mobile,address,address_name')
             ->find();
-		// 查詢快遞狀态
+		// 查詢快遞狀態
 		switch ($row['state']) {
 			case 1:
 				$express = [
-					'context' => '付款后，即可將商品发出',
+					'context' => '付款後，即可將商品發出',
 					'status' => '尚未付款',
 					'time' => date('Y-m-d H:i:s', $row['createtime'])
 				];
 				break;
 			case 2:
 				$express = [
-					'context' => '商家正在处理订单',
+					'context' => '商家正在處理訂單',
 					'status' => '已付款',
 					'time' => date('Y-m-d H:i:s', $row['paymenttime'])
 				];
@@ -181,12 +181,12 @@ class Order extends Wanlshop
 				if($ybData){
 					$express = $ybData[0];
 				}else{
-				    $tex = '物流配送中，預计';
+				    $tex = '物流配送中，預計';
 				    $time1 = date('H',$row['paymenttime']);$time2 = 259200;if($time1 >= 0 && $time1 < 7){$time2 = 259200;}else if($time1 >= 18 && $time1 < 24){$time2 = 259200+3600*24;}
-                    $tex = $tex.date('Y-m-d', $row['paymenttime']+$time2).'送達，请耐心等待收货~';
+                    $tex = $tex.date('Y-m-d', $row['paymenttime']+$time2).'送達，請耐心等待收貨~';
 				    
 					$express = [
-						'status' => '已发货',
+						'status' => '已發貨',
 						'context' => $tex,
 						'time' => date('Y-m-d H:i:s', $row['delivertime'])
 					];
@@ -198,7 +198,7 @@ class Order extends Wanlshop
     }
     
      /**
-     * 详情
+     * 詳情
      */
     public function detail1($id = null)
     {
@@ -218,7 +218,7 @@ class Order extends Wanlshop
 	       
 	        
             if ($row['state'] != 1) {
-                $this->error('待支付订单才能修改价格');
+                $this->error('待支付訂單才能修改價格');
             }
             $payinfo = model('app\api\model\wanlshop\Pay')
 			->where('order_id', 'in', $row['id'])
@@ -246,7 +246,7 @@ class Order extends Wanlshop
             ->field('id,name,mobile,address,address_name')
             ->find();
 
-		// 查詢快遞狀态
+		// 查詢快遞狀態
 
 		switch ($row['state']) {
 
@@ -254,7 +254,7 @@ class Order extends Wanlshop
 
 				$express = [
 
-					'context' => '付款后，即可將商品发出',
+					'context' => '付款後，即可將商品發出',
 
 					'status' => '尚未付款',
 
@@ -268,7 +268,7 @@ class Order extends Wanlshop
 
 				$express = [
 
-					'context' => '商家正在处理订单',
+					'context' => '商家正在處理訂單',
 
 					'status' => '已付款',
 
@@ -293,13 +293,13 @@ class Order extends Wanlshop
 					$express = $ybData[0];
 
 				}else{
-				    $tex = '物流配送中，預计'; 
+				    $tex = '物流配送中，預計'; 
 				    $time1 = date('H',$row['paymenttime']);$time2 = 259200;if($time1 >= 0 && $time1 < 7){$time2 = 259200;}else if($time1 >= 18 && $time1 < 24){$time2 = 259200+3600*24;}
-                    $tex = $tex.date('Y-m-d', $row['paymenttime']+$time2).'送達，请耐心等待收货~';
+                    $tex = $tex.date('Y-m-d', $row['paymenttime']+$time2).'送達，請耐心等待收貨~';
 
 					$express = [
 
-						'status' => '已发货',
+						'status' => '已發貨',
 
 						'context' => $tex,
 
@@ -317,7 +317,7 @@ class Order extends Wanlshop
         return $this->view->fetch();
     }
     /**
-     * 壹键发货
+     * 壹鍵發貨
      */
     public function wholesale($ids = null)
     {
@@ -333,7 +333,7 @@ class Order extends Wanlshop
                 $this->error(__('You have no permission'));
             }
             if ($vo['wholesale_id'] == 0) {
-                $this->error('批发订单才能壹键发货');
+                $this->error('批發訂單才能壹鍵發貨');
             }
             $order[] = [
                 'id' => $vo['id'],
@@ -347,7 +347,7 @@ class Order extends Wanlshop
     
     
     /**
-     * 详情
+     * 詳情
      */
     public function detail($id = null)
     {
@@ -365,7 +365,7 @@ class Order extends Wanlshop
             ->field('id,name,mobile,address,address_name')
             ->find();
 
-		// 查詢快遞狀态
+		// 查詢快遞狀態
 
 		switch ($row['state']) {
 
@@ -373,7 +373,7 @@ class Order extends Wanlshop
 
 				$express = [
 
-					'context' => '付款后，即可將商品发出',
+					'context' => '付款後，即可將商品發出',
 
 					'status' => '尚未付款',
 
@@ -387,7 +387,7 @@ class Order extends Wanlshop
 
 				$express = [
 
-					'context' => '商家正在处理订单',
+					'context' => '商家正在處理訂單',
 
 					'status' => '已付款',
 
@@ -413,13 +413,13 @@ class Order extends Wanlshop
 
 				}else{
 				    
-				    $tex = '物流配送中，預计';
+				    $tex = '物流配送中，預計';
 				    $time1 = date('H',$row['paymenttime']);$time2 = 259200;if($time1 >= 0 && $time1 < 7){$time2 = 259200;}else if($time1 >= 18 && $time1 < 24){$time2 = 259200+3600*24;}
-                    $tex = $tex.date('Y-m-d', $row['paymenttime']+$time2).'送達，请耐心等待收货~';
+                    $tex = $tex.date('Y-m-d', $row['paymenttime']+$time2).'送達，請耐心等待收貨~';
 
 					$express = [
 
-						'status' => '已发货',
+						'status' => '已發貨',
 
 						'context' => $tex,
 
@@ -505,7 +505,7 @@ class Order extends Wanlshop
 	
     
     /**
-     * 打印发货单
+     * 打印發貨單
      */
     public function invoice($ids = null)
     {
@@ -529,7 +529,7 @@ class Order extends Wanlshop
     }
     
     /**
-     * 发货 &批量发货
+     * 發貨 &批量發貨
      */
     public function delivery($ids = null)
     {
@@ -544,7 +544,7 @@ class Order extends Wanlshop
                 $this->error(__('You have no permission'));
             }
             if ($vo['wholesale_id'] != 0) {
-                $this->error('请去除批发订单');
+                $this->error('請去除批發訂單');
             }
             $vo['address'] = model('app\index\model\wanlshop\OrderAddress')
                 ->where(['order_id' => $vo['id'], 'shop_id' => $this->shop->id])
@@ -560,12 +560,12 @@ class Order extends Wanlshop
         if ($this->request->isAjax()) {
             $request = $this->request->post();
             if (!array_key_exists("order", $request['row'])) {
-                $this->success(__('沒有发现可以发货订单~'));
+                $this->success(__('沒有發現可以發貨訂單~'));
             }
 
 			if(!$this->wanlchat->isWsStart()){
 
-				//$this->error('平台未啟动IM即时通讯服务，暫时不可以发货');
+				//$this->error('平台未啟動IM即時通訊服務，暫時不可以發貨');
 
 			}
 
@@ -582,11 +582,11 @@ class Order extends Wanlshop
                     'delivertime' => time(),
                     'state' => 3
                 ];
-                // 订閱快遞查詢
+                // 訂閱快遞查詢
                 /*if ($config['kuaidi']['secretKey']) {
                     $returncode = $ehund->subScribe($express_name, $express_no);
                     if ($returncode['returnCode'] != 200) {
-                        $this->error('快遞订閱接口异常-'.$returncode['message']);
+                        $this->error('快遞訂閱接口異常-'.$returncode['message']);
                     }
                     $express[] = [
                         'sign' => $ehund->sign($express_no),
@@ -596,22 +596,22 @@ class Order extends Wanlshop
                     ];
                 }*/
 				// 推送消息
-				$this->pushOrder($id,'已发货');
+				$this->pushOrder($id,'已發貨');
             }
            $this->model->saveAll($order);
-            // 写入快遞订閱列表
+            // 寫入快遞訂閱列表
             if ($config['kuaidi']['secretKey']) {
                 //model('app\index\model\wanlshop\KuaidiSub')->saveAll($express);
             }
             $this->success();
         }
-        $this->view->assign("lists", $lists); //可以发货
+        $this->view->assign("lists", $lists); //可以發貨
         $this->view->assign("data", $data);
         return $this->view->fetch();
     }
     
     /**
-     * 评论管理
+     * 評論管理
      */
     public function comment()
     {
@@ -619,12 +619,12 @@ class Order extends Wanlshop
     }
 	
 	/**
-	 * 订单推送消息（方法內使用）
+	 * 訂單推送消息（方法內使用）
 	 * 
-	 * @param string order_id 订单ID
-	 * @param string state 狀态
+	 * @param string order_id 訂單ID
+	 * @param string state 狀態
 	 */
-	private function pushOrder($order_id = 0, $state = '已发货')
+	private function pushOrder($order_id = 0, $state = '已發貨')
 	{
 		$order = $this->model->get($order_id);
 		$orderGoods = model('app\index\model\wanlshop\OrderGoods')
@@ -633,15 +633,15 @@ class Order extends Wanlshop
 		$msgData = [];
 		foreach ($orderGoods as $goods) {
 			$msg = [
-				'user_id' => $order['user_id'], // 推送目标用戶
+				'user_id' => $order['user_id'], // 推送目標用戶
 				'shop_id' => $this->shop->id, 
-				'title' => '您的订单'.$state, // 推送标题
-				'image' => $goods['image'], // 推送图片
-				'content' => '您购买的商品 '.(mb_strlen($goods['title'],'utf8') >= 25 ? mb_substr($goods['title'],0,25,'utf-8').'...' : $goods['title']).' '.$state, 
-				'type' => 'order',  // 推送类型
-				'modules' => 'order',  // 模塊类型
+				'title' => '您的訂單'.$state, // 推送標題
+				'image' => $goods['image'], // 推送圖片
+				'content' => '您購買的商品 '.(mb_strlen($goods['title'],'utf8') >= 25 ? mb_substr($goods['title'],0,25,'utf-8').'...' : $goods['title']).' '.$state, 
+				'type' => 'order',  // 推送類型
+				'modules' => 'order',  // 模塊類型
 				'modules_id' => $order_id,  // 模塊ID
-				'come' => '订单'.$order['order_no'] // 來自
+				'come' => '訂單'.$order['order_no'] // 來自
 			];
 			$msgData[] = $msg;
 			$this->wanlchat->send($order['user_id'], $msg);

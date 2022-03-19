@@ -10,7 +10,7 @@ use think\exception\ValidateException;
 
 
 /**
- * 店铺运费模板
+ * 店鋪運費模板
  *
  * @icon fa fa-circle-o
  */
@@ -19,8 +19,8 @@ class Freight extends Wanlshop
     protected $noNeedLogin = '';
     protected $noNeedRight = '*';
     /**
-     * ShopFreight模型对象
-     * 添加 编輯 刪除 批量 回收站 還原
+     * ShopFreight模型對象
+     * 添加 編輯 刪除 批量 回收站 還原
      */
     protected $model = null;
 
@@ -33,7 +33,7 @@ class Freight extends Wanlshop
 
 		if(!db()->query('SHOW TABLES LIKE '."'".config('database.prefix')."area'")) {
 
-			$this->error(__('地區表不存在，请安裝开发示例插件后卸载即可'));
+			$this->error(__('地區表不存在，請安裝開發示例插件後卸載即可'));
 
 		}
 
@@ -55,10 +55,10 @@ class Freight extends Wanlshop
      */
     public function index()
     {
-        //设置过濾方法
+        //設置過濾方法
         $this->request->filter(['strip_tags']);
         if ($this->request->isAjax()) {
-            //如果发送的來源是Selectpage，則轉发到Selectpage
+            //如果發送的來源是Selectpage，則轉發到Selectpage
             if ($this->request->request('keyField')) {
                 return $this->selectpage();
             }
@@ -87,7 +87,7 @@ class Freight extends Wanlshop
      */
     public function recyclebin()
     {
-        //设置过濾方法
+        //設置過濾方法
         $this->request->filter(['strip_tags']);
         if ($this->request->isAjax()) {
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
@@ -121,7 +121,7 @@ class Freight extends Wanlshop
 
 			if($params['isdelivery'] == 0 && empty($params['rule'])){
 
-				$this->error(__('自定義运费，必须添加配送區域！！'));
+				$this->error(__('自定義運費，必須添加配送區域！！'));
 
 			}
             if ($params) {
@@ -150,11 +150,11 @@ class Freight extends Wanlshop
 
 					}
 
-					// 如果不包邮
+					// 如果不包郵
 
 					if($params['isdelivery'] == 0){
 
-						// 写入模板数据
+						// 寫入模板數據
 
 						$list = [];
 
@@ -213,7 +213,7 @@ class Freight extends Wanlshop
     }
     
     /**
-     * 编輯
+     * 編輯
      */
     public function edit($ids = null)
     {
@@ -234,11 +234,11 @@ class Freight extends Wanlshop
                 try {
                     $result = $row->allowField(true)->save($params);
 
-					// 如果不包邮写入数据，否則刪除
+					// 如果不包郵寫入數據，否則刪除
 
 					if($params['isdelivery'] == 0){
 
-						// 刪除原來数据
+						// 刪除原來數據
 
 						model('app\index\model\wanlshop\ShopFreightData')
 
@@ -246,7 +246,7 @@ class Freight extends Wanlshop
 
 							->delete();
 
-						// 生成新数据
+						// 生成新數據
 
 						$list = [];
 
@@ -278,7 +278,7 @@ class Freight extends Wanlshop
 
 					}else{
 
-						// 刪除原來数据
+						// 刪除原來數據
 
 						model('app\index\model\wanlshop\ShopFreightData')
 
@@ -333,11 +333,11 @@ class Freight extends Wanlshop
                 foreach ($list as $value) {
                     $count += $value->delete();
 
-					// 如果不包邮
+					// 如果不包郵
 
 					if($value['isdelivery'] == 0){
 
-						// 刪除模板数据
+						// 刪除模板數據
 
 						model('app\index\model\wanlshop\ShopFreightData')
 
@@ -387,7 +387,7 @@ class Freight extends Wanlshop
 
 				if($item['isdelivery'] == 0){
 
-					// 還原模板数据
+					// 還原模板數據
 
 					model('app\index\model\wanlshop\ShopFreightData')
 
@@ -456,7 +456,7 @@ class Freight extends Wanlshop
 
 	/**
 
-	 * 內部得到子級数组方法，开发者不要外部調用
+	 * 內部得到子級數組方法，開發者不要外部調用
 
 	 * @param int
 

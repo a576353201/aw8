@@ -14,15 +14,15 @@ class OrderGoods extends Model
     // 表名
     protected $name = 'wanlshop_order_goods';
     
-    // 自动写入时间戳字段
+    // 自動寫入時間戳字段
     protected $autoWriteTimestamp = 'int';
 
-    // 定义时间戳字段名
+    // 定義時間戳字段名
     protected $createTime = 'createtime';
     protected $updateTime = 'updatetime';
     protected $deleteTime = 'deletetime';
 
-    // 追加属性
+    // 追加屬性
     protected $append = [
         'status_text',
 
@@ -49,7 +49,7 @@ class OrderGoods extends Model
 
 	{
 
-	    return [0 => '', 1 => __('退款中'), 2 => __('待退货'), 3 => __('退款完成'), 4 => __('退款关闭'), 5 => __('退款被拒')];
+	    return [0 => '', 1 => __('退款中'), 2 => __('待退貨'), 3 => __('退款完成'), 4 => __('退款關閉'), 5 => __('退款被拒')];
 
 	}
 

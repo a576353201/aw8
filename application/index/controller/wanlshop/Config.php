@@ -8,7 +8,7 @@ use think\Exception;
  * 系統配置
  *
  * @icon   fa fa-cogs
- * @remark 可以在此增改系統的變量和分组,也可以自定義分组和變量,如果需要刪除请從数据库中刪除
+ * @remark 可以在此增改系統的變量和分組,也可以自定義分組和變量,如果需要刪除請從數據庫中刪除
  */
 class Config extends Wanlshop
 {

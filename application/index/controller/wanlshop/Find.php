@@ -7,7 +7,7 @@ use app\common\controller\Wanlshop;
 use think\Db;
 
 /**
- * 发现动态管理
+ * 發現動態管理
  *
  * @icon fa fa-circle-o
  */
@@ -17,7 +17,7 @@ class Find extends Wanlshop
 
     protected $noNeedRight = '*';
     /**
-     * Find模型对象
+     * Find模型對象
      * @var \app\index\model\wanlshop\Find
      */
     protected $model = null;
@@ -36,13 +36,13 @@ class Find extends Wanlshop
      */
     public function index()
     {
-        //當前是否为关联查詢
+        //當前是否爲關聯查詢
         $this->relationSearch = true;
-        //设置过濾方法
+        //設置過濾方法
         $this->request->filter(['strip_tags', 'trim']);
         if ($this->request->isAjax())
         {
-            //如果发送的來源是Selectpage，則轉发到Selectpage
+            //如果發送的來源是Selectpage，則轉發到Selectpage
             if ($this->request->request('keyField'))
             {
                 return $this->selectpage();
@@ -79,7 +79,7 @@ class Find extends Wanlshop
 
 	{
 
-		//设置过濾方法
+		//設置過濾方法
 
 		$this->request->filter(['']);
 
@@ -161,7 +161,7 @@ class Find extends Wanlshop
 
 	{
 
-	    //设置过濾方法
+	    //設置過濾方法
 
 	    $this->request->filter(['strip_tags']);
 

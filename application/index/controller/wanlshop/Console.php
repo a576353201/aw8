@@ -5,7 +5,7 @@ namespace app\index\controller\wanlshop;
 use app\common\controller\Wanlshop;
 
 /**
- * 主页
+ * 主頁
  * @internal
  */
 class Console extends Wanlshop
@@ -45,7 +45,7 @@ class Console extends Wanlshop
 
 			$end = $time + 86400;
 
-			// 订单数
+			// 訂單數
 
 		    $createlist[$day] = model('app\index\model\wanlshop\Order')
 
@@ -55,7 +55,7 @@ class Console extends Wanlshop
 
 				->count();
 
-			// 成交数
+			// 成交數
 
 		    $paylist[$day] = model('app\index\model\wanlshop\Order')
 
@@ -88,16 +88,16 @@ class Console extends Wanlshop
 		}
 
         $this->view->assign([
-            'totaluser'        => model('app\index\model\wanlshop\Goods')->where('shop_id', $shop_id)->count(), //商品总数
-            'totalviews'       => model('app\index\model\wanlshop\Goods')->where('shop_id', $shop_id)->sum('views'), //总访问数
-            'totalorder'       => model('app\index\model\wanlshop\Order')->where('shop_id', $shop_id)->count(), // 总订单数
-            'totalorderamount' => model('app\index\model\wanlshop\Pay')->where('shop_id', $shop_id)->sum('price'), //总金额
-            'todayuserlogin'   => model('app\api\model\wanlshop\Cart')->where('shop_id', $shop_id)->count(), // 加购物车
-            'todayusersignup'  => model('app\index\model\wanlshop\ShopFollow')->where('shop_id', $shop_id)->count(), // 店铺收藏
-            'todayorder'       => model('app\index\model\wanlshop\Order')->whereTime('createtime', 'today')->where('shop_id', $shop_id)->count(), // 今日订单数量
-            'unsettleorder'    => model('app\index\model\wanlshop\Order')->where(['shop_id' => $shop_id, 'state' => 2])->count(), // 未处理数量
+            'totaluser'        => model('app\index\model\wanlshop\Goods')->where('shop_id', $shop_id)->count(), //商品總數
+            'totalviews'       => model('app\index\model\wanlshop\Goods')->where('shop_id', $shop_id)->sum('views'), //總訪問數
+            'totalorder'       => model('app\index\model\wanlshop\Order')->where('shop_id', $shop_id)->count(), // 總訂單數
+            'totalorderamount' => model('app\index\model\wanlshop\Pay')->where('shop_id', $shop_id)->sum('price'), //總金額
+            'todayuserlogin'   => model('app\api\model\wanlshop\Cart')->where('shop_id', $shop_id)->count(), // 加購物車
+            'todayusersignup'  => model('app\index\model\wanlshop\ShopFollow')->where('shop_id', $shop_id)->count(), // 店鋪收藏
+            'todayorder'       => model('app\index\model\wanlshop\Order')->whereTime('createtime', 'today')->where('shop_id', $shop_id)->count(), // 今日訂單數量
+            'unsettleorder'    => model('app\index\model\wanlshop\Order')->where(['shop_id' => $shop_id, 'state' => 2])->count(), // 未處理數量
             'sevendnu'         => $sevendnu.'%', 
-            'sevendau'         => model('app\index\model\wanlshop\Pay')->whereTime('createtime', 'today')->where('shop_id', $shop_id)->sum('price'), //今日销售额
+            'sevendau'         => model('app\index\model\wanlshop\Pay')->whereTime('createtime', 'today')->where('shop_id', $shop_id)->sum('price'), //今日銷售額
             'paylist'          => $paylist,
 
             'createlist'       => $createlist

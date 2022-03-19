@@ -10,7 +10,7 @@ use think\Db;
  * 附件管理
  *
  * @icon fa fa-circle-o
- * @remark 主要用於管理上传到又拍雲的数据或上传至本服务的上传数据
+ * @remark 主要用於管理上傳到又拍雲的數據或上傳至本服務的上傳數據
  */
 class Teams extends Wanlshop
 {
@@ -45,7 +45,7 @@ class Teams extends Wanlshop
     {
 
 
-        //设置过濾方法
+        //設置過濾方法
 
         $this->request->filter(['strip_tags']);
 
@@ -141,7 +141,7 @@ class Teams extends Wanlshop
 
     /**
 
-     * 选择附件
+     * 選擇附件
 
      */
 

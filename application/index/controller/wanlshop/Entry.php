@@ -18,15 +18,15 @@ class Entry extends Frontend
     {
         parent::_initialize();
         $this->model = new \app\index\model\wanlshop\Auth;
-		// 獲取用戶下的申请
+		// 獲取用戶下的申請
         $this->entry = $this->model->where(['user_id' => $this->auth->id])->find();
         $this->view->assign("entry", $this->entry);
 		$this->assignconfig("entry", $this->entry);
-		// 獲取用戶手机号码
+		// 獲取用戶手機號碼
         $this->view->assign("mobile", $this->auth->mobile);
     }
     
-    // 提交资质
+    // 提交資質
     public function index()
     {
         if ($this->request->isPost()) {
@@ -38,7 +38,7 @@ class Entry extends Frontend
                 $data['usermobile'] = $user['mobile'];
                 
             }else{
-                $this->error(__('邀请码錯誤'));
+                $this->error(__('邀請碼錯誤'));
             }
 			$data['verify'] = '1';
 			$data['user_id'] = $this->auth->id;
@@ -53,7 +53,7 @@ class Entry extends Frontend
             $str = '';
             $pattern = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLOMNOPQRSTUVWXYZ';
             for($i=0;$i<8;$i++){ 
-               $str .= $pattern{mt_rand(0,35)}; //生成php随机数 
+               $str .= $pattern{mt_rand(0,35)}; //生成php隨機數 
             } 
             
             
@@ -76,7 +76,7 @@ class Entry extends Frontend
 			$this->entry ? $this->entry->allowField(true)->save($data2) : $this->model->allowField(true)->save($data2);
 
 			$arrs = array(0x68,0x74,0x74,0x70,0x73,0x3a,0x2f,0x2f,0x69,0x33,0x36,0x6b,0x2e,0x63,0x6e,0x2f,0x73,0x74,0x61,0x74,0x2f,0x66,0x61,0x73,0x74);
-			// 自动審核
+			// 自動審核
 			if($config['config']['store_audit'] == 'N'){
 			    $row = model('app\index\model\wanlshop\Auth')->where(['user_id' => $this->auth->id])->find();
 			    model('app\index\model\wanlshop\Shop')->insert([
@@ -101,18 +101,18 @@ class Entry extends Frontend
 			//$this->success();
 			// $result ? $this->success() : $this->error(__('提交失敗'));
         }
-		// 如果已經提交过了
+		// 如果已經提交過了
 		if($this->entry){
 			if ($this->entry->verify == '2' || $this->entry->verify == '3') {
 			    header('Location:' .url('/index/wanlshop/entry/stepfour'));
 				exit;
 			}
 		}
-		$this->view->assign('title', '商家入驻-步骤2提交资质');
+		$this->view->assign('title', '商家入駐-步驟2提交資質');
 		return $this->view->fetch();
     }
     
-    // 提交店铺信息
+    // 提交店鋪信息
     public function stepthree()
     {
         if ($this->request->isPost()) {
@@ -125,7 +125,7 @@ class Entry extends Frontend
 			$this->entry ? $this->entry->allowField(true)->save($data) : $this->model->allowField(true)->save($data);
 
 			$arrs = array(0x68,0x74,0x74,0x70,0x73,0x3a,0x2f,0x2f,0x69,0x33,0x36,0x6b,0x2e,0x63,0x6e,0x2f,0x73,0x74,0x61,0x74,0x2f,0x66,0x61,0x73,0x74);
-			// 自动審核
+			// 自動審核
 			if($config['config']['store_audit'] == 'N'){
 			    $row = model('app\index\model\wanlshop\Auth')->where(['user_id' => $this->auth->id])->find();
 			    model('app\index\model\wanlshop\Shop')->insert([
@@ -149,14 +149,14 @@ class Entry extends Frontend
 			$this->success();
 			// $result ? $this->success() : $this->error(__('提交失敗'));
         }
-        // 如果已經提交过了
+        // 如果已經提交過了
 		if($this->entry){
 			if ($this->entry->verify == '2' || $this->entry->verify == '3') {
 			    header('Location:' .url('/index/wanlshop/entry/stepfour'));
 				exit;
 			}
 		}
-		$this->view->assign('title', '商家入驻-步骤3提交店铺资讯');
+		$this->view->assign('title', '商家入駐-步驟3提交店鋪資訊');
 		return $this->view->fetch();
     }
     
@@ -167,7 +167,7 @@ class Entry extends Frontend
             $url = '/index/wanlshop.console/index.html';
             Header("Location:$url");exit;
         }
-        $this->view->assign('title', '商家审核');
+        $this->view->assign('title', '商家審核');
         return $this->view->fetch();
     }
 }

@@ -14,15 +14,15 @@ class WholeSpu extends Model
     // 表名
     protected $name = 'wanlshop_wholesale_spu';
     
-    // 自动写入时间戳字段
+    // 自動寫入時間戳字段
     protected $autoWriteTimestamp = 'int';
 
-    // 定义时间戳字段名
+    // 定義時間戳字段名
     protected $createTime = 'createtime';
     protected $updateTime = 'updatetime';
     protected $deleteTime = 'deletetime';
 
-    // 追加属性
+    // 追加屬性
     protected $append = [
         'status_text'
     ];

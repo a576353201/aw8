@@ -9,15 +9,15 @@ class Attribute extends Model
     // 表名
     protected $name = 'wanlshop_category_attribute';
     
-    // 自动写入时间戳字段
+    // 自動寫入時間戳字段
     protected $autoWriteTimestamp = 'int';
 
-    // 定义时间戳字段名
+    // 定義時間戳字段名
     protected $createTime = 'createtime';
     protected $updateTime = 'updatetime';
 	
 	/**
-	 * 将value字段转换数组
+	 * 將value字段轉換數組
 	 */
 	public function getValueAttr($value)
 	{

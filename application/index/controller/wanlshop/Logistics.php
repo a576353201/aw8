@@ -25,16 +25,16 @@ class Logistics extends Wanlshop
     }
     
     /**
-     * 发货
+     * 發貨
      */
     public function deliver()
     {
-        $this->view->assign("stateList", ['2' => __('待发货订单'), '3' => __('发货中订单')]);
+        $this->view->assign("stateList", ['2' => __('待發貨訂單'), '3' => __('發貨中訂單')]);
         return $this->view->fetch('wanlshop/order/index');
     }
     
     /**
-     * 运费模板
+     * 運費模板
      */
     public function template()
     {

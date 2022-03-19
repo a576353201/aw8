@@ -16,7 +16,7 @@ class Brand extends Wanlshop
     protected $noNeedLogin = '';
     protected $noNeedRight = '*';
     /**
-     * Brand模型对象
+     * Brand模型對象
      * @var \app\index\model\wanlshop\Brand
      */
     protected $model = null;
@@ -45,9 +45,9 @@ class Brand extends Wanlshop
      */
     public function index()
     {
-        //當前是否为关联查詢
+        //當前是否爲關聯查詢
         $this->relationSearch = true;
-        //设置过濾方法
+        //設置過濾方法
         $this->request->filter(['strip_tags', 'trim']);
         if ($this->request->isAjax()) {
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
@@ -87,7 +87,7 @@ class Brand extends Wanlshop
 
 	{
 
-	    //设置过濾方法
+	    //設置過濾方法
 
 	    $this->request->filter(['strip_tags', 'trim']);
 
@@ -123,7 +123,7 @@ class Brand extends Wanlshop
 
 	{
 
-		//设置过濾方法
+		//設置過濾方法
 
 		$this->request->filter(['strip_tags', 'trim']);
 
@@ -191,7 +191,7 @@ class Brand extends Wanlshop
 
 	/**
 
-	 * 编輯
+	 * 編輯
 
 	 */
 

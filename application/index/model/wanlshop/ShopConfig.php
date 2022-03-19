@@ -9,15 +9,15 @@ use think\Model;
 class ShopConfig extends Model
 {
 
-    // 表名,不含前缀
+    // 表名,不含前綴
     protected $name = 'wanlshop_shop_config';
-    // 自动写入时间戳字段
+    // 自動寫入時間戳字段
 
     protected $autoWriteTimestamp = 'int';
 
     
 
-    // 定义时间戳字段名
+    // 定義時間戳字段名
 
     protected $createTime = 'createtime';
 
@@ -33,15 +33,15 @@ class ShopConfig extends Model
 
 	    return [
 
-			'freight' => __('商家店铺配寘'), 
+			'freight' => __('商家店鋪配寘'), 
 
 			//'kuaidi' => __('快遞100雲列印配寘'),
 
-			//'facesheet' => __('面单參数'),
+			//'facesheet' => __('面單參數'),
 
-			'mailing' => __('寄件人资讯'),
+			'mailing' => __('寄件人資訊'),
 
-			'return' => __('退货资讯')
+			'return' => __('退貨資訊')
 
 		];
 

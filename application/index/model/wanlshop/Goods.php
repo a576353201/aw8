@@ -14,15 +14,15 @@ class Goods extends Model
     // 表名
     protected $name = 'wanlshop_goods';
     
-    // 自动写入时间戳字段
+    // 自動寫入時間戳字段
     protected $autoWriteTimestamp = 'int';
 
-    // 定义时间戳字段名
+    // 定義時間戳字段名
     protected $createTime = 'createtime';
     protected $updateTime = 'updatetime';
     protected $deleteTime = 'deletetime';
 
-    // 追加属性
+    // 追加屬性
     protected $append = [
         'flag_text',
         'stock_text',
@@ -69,7 +69,7 @@ class Goods extends Model
 
     public function getStatusList()
     {
-        return ['normal' => __('出售中商品'), 'hidden' => __('仓库中商品')];
+        return ['normal' => __('出售中商品'), 'hidden' => __('倉庫中商品')];
     }
 
 

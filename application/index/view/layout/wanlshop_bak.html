@@ -6,7 +6,7 @@
 
 		<meta charset="utf-8">
 
-		<title>{$title|default='卖家控制台'}</title>
+		<title>{$title|default='賣家控制台'}</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
@@ -86,7 +86,7 @@
 
 			}
 
-			/* 修改默认樣式 */
+			/* 修改默認樣式 */
 
 			.bootstrap-table .table:not(.table-condensed),
 
@@ -126,13 +126,13 @@
 
 					<a href="javascript:;" class="logo">
 
-						<!-- 迷妳模式下Logo的大小为50X50 -->
+						<!-- 迷妳模式下Logo的大小爲50X50 -->
 
 						<span class="logo-mini">商家</span>
 
 						<!-- 普通模式下Logo -->
 
-						<span class="logo-lg">卖家中心</span>
+						<span class="logo-lg">賣家中心</span>
 
 					</a>
 
@@ -140,7 +140,7 @@
 
 					<nav class="navbar navbar-static-top">
 
-						<!--第壹級菜单-->
+						<!--第壹級菜單-->
 
 						<div id="firstnav">
 
@@ -168,21 +168,21 @@
 
 										<ul class="dropdown-menu wipecache">
 
-											<li><a href="{:url('index/wanlshop.goods/add')}"><i class="fa fa-circle-o"></i> 发布商品</a></li>
+											<li><a href="{:url('index/wanlshop.goods/add')}"><i class="fa fa-circle-o"></i> 發布商品</a></li>
 
 											<li class="divider"></li>
 
-											<li><a href="javascript:;" @click="toFind('new')"><i class="fa fa-circle-o"></i> 发布商品上新</a></li>
+											<li><a href="javascript:;" @click="toFind('new')"><i class="fa fa-circle-o"></i> 發布商品上新</a></li>
 
-											<!--<li><a href="javascript:;" @click="toFind('want')"><i class="fa fa-circle-o"></i> 发布种草</a></li>-->
+											<!--<li><a href="javascript:;" @click="toFind('want')"><i class="fa fa-circle-o"></i> 發布種草</a></li>-->
 
-											<li><a href="javascript:;" @click="toFind('show')"><i class="fa fa-circle-o"></i> 发布买家秀</a></li>
+											<li><a href="javascript:;" @click="toFind('show')"><i class="fa fa-circle-o"></i> 發布買家秀</a></li>
 
 										</ul>
 
 									</li>
 
-									<!-- 即时通讯  open-->
+									<!-- 即時通訊  open-->
 
 									<li class="dropdown messages-menu" v-cloak>
 
@@ -204,9 +204,9 @@
 
 														<h3>{{shop.shopname}}</h3>
 
-														<span v-if="shopOnline == 1"><i class="fa fa-circle text-success margin-r-5"></i> H5线上</span>
+														<span v-if="shopOnline == 1"><i class="fa fa-circle text-success margin-r-5"></i> H5線上</span>
 
-														<span v-else><i class="fa fa-circle text-gray margin-r-5"></i> IM连接异常</span>
+														<span v-else><i class="fa fa-circle text-gray margin-r-5"></i> IM連接異常</span>
 
 													</div>
 
@@ -230,7 +230,7 @@
 
 														<img src="/assets/addons/wanlshop/img/default/find_default3x.png">
 
-														<p>沒有找到任何连絡人</p>
+														<p>沒有找到任何連絡人</p>
 
 													</div>
 
@@ -266,7 +266,7 @@
 
 															<span v-if="item.count > 0">
 
-																[未讀{{item.count}}条]
+																[未讀{{item.count}}條]
 
 															</span> 
 
@@ -284,7 +284,7 @@
 
 									</li>
 				                    <li> <a href="{:url('/index/')}"><i class="fa fa-home" style="font-size:20px;"></i></a> </li>
-									<!-- 賬号信息下拉框 -->
+									<!-- 賬號信息下拉框 -->
 
 									<li class="dropdown user user-menu">
 
@@ -320,11 +320,11 @@
 
 												<div class="row">
 
-													<div class="col-xs-4 text-center">余额：{$user.money|htmlentities}</div>
+													<div class="col-xs-4 text-center">餘額：{$user.money|htmlentities}</div>
 
-													<div class="col-xs-4 text-center">积分：{$user.score|htmlentities}</div>
+													<div class="col-xs-4 text-center">積分：{$user.score|htmlentities}</div>
 
-													<div class="col-xs-4 text-center">登录{$user.successions|htmlentities}次</div>
+													<div class="col-xs-4 text-center">登錄{$user.successions|htmlentities}次</div>
 
 												</div>
 
@@ -340,7 +340,7 @@
 
 													<a href="{:url('index/wanlshop.shop/profile')}" class="btn btn-primary"><i class="fa fa-user"></i>
 
-														{:__('店铺资料')}</a>
+														{:__('店鋪資料')}</a>
 
 												</div>
 
@@ -428,9 +428,9 @@
 
 								<span class="name">{{wanlchat[chatSelect].nickname}}</span>
 
-								<p v-if="wanlchat[chatSelect].isOnline == 1"><i class="fa fa-circle text-success"></i> 线上</p>
+								<p v-if="wanlchat[chatSelect].isOnline == 1"><i class="fa fa-circle text-success"></i> 線上</p>
 
-								<p v-else><i class="fa fa-circle text-gray"></i> 離线</p>
+								<p v-else><i class="fa fa-circle text-gray"></i> 離線</p>
 
 							</div>
 
@@ -486,11 +486,11 @@
 
 									<div class="chat-voice" v-if="item.message.type == 'voice'" @click="playVoice(item.message.content.url)">
 
-										<span :style="{marginRight: item.message.content.length * 8 +'px'}"></span>{{item.message.content.length}} ”
+										<span :style="{marginRight: item.message.content.length * 8 +'px'}"></span>{{item.message.content.length}} 」
 
 									</div>
 
-									<!-- 图片消息 -->
+									<!-- 圖片消息 -->
 
 									<div class="chat-img" v-if="item.message.type == 'img'">
 
@@ -518,11 +518,11 @@
 
 									</div>
 
-									<!-- 订单消息 -->
+									<!-- 訂單消息 -->
 
 									<div class="chat-order" v-if="item.message.type == 'order'" @click="onOrder(item.message.content.id)">
 
-										<div> 订单详情：</div>
+										<div> 訂單詳情：</div>
 
 										<div class="product">
 
@@ -592,13 +592,13 @@
 
 							<div class="input">
 
-								<textarea id="content" placeholder="请输入消息" v-model="textarea" @keyup.ctrl.enter="submit" autofocus></textarea>
+								<textarea id="content" placeholder="請輸入消息" v-model="textarea" @keyup.ctrl.enter="submit" autofocus></textarea>
 
 							</div>
 
 							<div class="operation">
 
-								<button type="button" class="btn btn-danger" @click="submit">发送 Ctrl+Enter</button>
+								<button type="button" class="btn btn-danger" @click="submit">發送 Ctrl+Enter</button>
 
 							</div>
 
@@ -650,7 +650,7 @@
 
 				<aside class="main-sidebar">
 
-					<!-- 左侧菜单欄 -->
+					<!-- 左側菜單欄 -->
 
 					<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 897px;">
 
@@ -672,9 +672,9 @@
 
 									<div v-cloak>
 
-										<span v-if="shopOnline == 1"><i class="fa fa-circle text-success margin-r-5"></i> IM线上</span>
+										<span v-if="shopOnline == 1"><i class="fa fa-circle text-success margin-r-5"></i> IM線上</span>
 
-										<span v-else><i class="fa fa-circle text-gray margin-r-5"></i> IM连接异常</span>
+										<span v-else><i class="fa fa-circle text-gray margin-r-5"></i> IM連接異常</span>
 
 									</div>
 
@@ -682,13 +682,13 @@
 
 							</div>
 
-							<!-- 菜单搜索 -->
+							<!-- 菜單搜索 -->
 
 							<form action="" method="get" class="sidebar-form" onsubmit="return false;">
 
 								<div class="input-group">
 
-									<input type="text" name="q" class="form-control" placeholder="搜索选单">
+									<input type="text" name="q" class="form-control" placeholder="搜索選單">
 
 									<span class="input-group-btn">
 
@@ -706,11 +706,11 @@
 
 							</form>
 
-							<!-- 移动端壹級菜单 -->
+							<!-- 移動端壹級菜單 -->
 
 							<div class="mobilenav visible-xs"> </div>
 
-							<!--如果想始終显示子菜单,則給ul加上show-submenu类即可,當multiplenav开啟的情況下默认为展开-->
+							<!--如果想始終顯示子菜單,則給ul加上show-submenu類即可,當multiplenav開啟的情況下默認爲展開-->
 
 							<ul class="sidebar-menu ">
 
@@ -730,7 +730,7 @@
 
 									<a href="javascript:;">
 
-										<i class="fa fa-user"></i> <span>个人资料</span>
+										<i class="fa fa-user"></i> <span>個人資料</span>
 
 										<span class="pull-right-container"><i class="fa fa-angle-left"></i></span>
 
@@ -744,7 +744,7 @@
 
 											<a href="{:url('index/wanlshop.user/index')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>会员中心</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>會員中心</span>
 
 											</a>
 
@@ -754,7 +754,7 @@
 
 											<a href="{:url('index/wanlshop.user/profile')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>个人资料</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>個人資料</span>
 
 											</a>
 
@@ -763,7 +763,7 @@
 
 											<a href="{:url('index/wanlshop.user/changepwd2')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>修改支付密码</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>修改支付密碼</span>
 
 											</a>
 
@@ -773,7 +773,7 @@
 
 											<a href="{:url('index/wanlshop.user/changepwd')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>修改密码</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>修改密碼</span>
 
 											</a>
 
@@ -788,7 +788,7 @@
 
 									<a href="//app.shopapp.tw/pages/user/money/money1?userid={$user.id}">
 
-										<i class="fa fa-money"></i> <span>商城钱包</span>
+										<i class="fa fa-money"></i> <span>商城錢包</span>
 
 										<span class="pull-right-container"></span>
 
@@ -814,7 +814,7 @@
 
 											<a href="{:url('index/wanlshop.order/index')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>订单管理</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>訂單管理</span>
 
 											</a>
 
@@ -824,7 +824,7 @@
 
 											<a href="{:url('index/wanlshop.order/comment')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>评论管理</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>評論管理</span>
 
 											</a>
 
@@ -860,7 +860,7 @@
 
 											<a href="{:url('index/wanlshop.logistics/deliver')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>发货</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>發貨</span>
 
 											</a>
 
@@ -870,7 +870,7 @@
 
 											<a href="{:url('index/wanlshop.logistics/template')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>运费范本</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>運費範本</span>
 
 											</a>
 
@@ -896,7 +896,7 @@
 
 											<a href="{:url('index/wanlshop.goods/add')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>发布商品</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>發布商品</span>
 
 											</a>
 
@@ -916,7 +916,7 @@
 
 											<a href="{:url('index/wanlshop.goods/stock')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>仓库中的商品</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>倉庫中的商品</span>
 
 											</a>
 
@@ -930,7 +930,7 @@
 
 									<a href="javascript:;">
 
-										<i class="fa fa-archive fa-fw"></i> <span>店铺管理</span>
+										<i class="fa fa-archive fa-fw"></i> <span>店鋪管理</span>
 
 										<span class="pull-right-container"><i class="fa fa-angle-left"></i> </span>
 
@@ -944,7 +944,7 @@
 
 											<a href="{:url('index/wanlshop.shop/attachment')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>图片空间</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>圖片空間</span>
 
 											</a>
 
@@ -954,7 +954,7 @@
 
 											<a href="{:url('index/wanlshop.shop/index')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>店铺裝修</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>店鋪裝修</span>
 
 											</a>
 
@@ -964,7 +964,7 @@
 
 											<a href="{:url('index/wanlshop.shop/category')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>类目管理</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>類目管理</span>
 
 											</a>
 
@@ -984,7 +984,7 @@
 
 											<a href="{:url('index/wanlshop.shop/profile')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>店铺资料</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>店鋪資料</span>
 
 											</a>
 
@@ -994,7 +994,7 @@
 
 											<a href="{:url('index/wanlshop.shop/invitation')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>邀请开店</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>邀請開店</span>
 
 											</a>
 
@@ -1004,7 +1004,7 @@
 
 											<a href="{:url('index/wanlshop.config/index')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>店铺配寘</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>店鋪配寘</span>
 
 											</a>
 
@@ -1018,7 +1018,7 @@
 
 									<a href="{:url('index/user/index')}">
 
-										<i class="fa fa-user fa-fw"></i> <span>会员中心</span>
+										<i class="fa fa-user fa-fw"></i> <span>會員中心</span>
 
 										<span class="pull-right-container"> </span>
 
@@ -1030,7 +1030,7 @@
 
 									<a href="javascript:;">
 
-										<i class="fa fa-th fa-fw text-red"></i> <span>应用中心</span>
+										<i class="fa fa-th fa-fw text-red"></i> <span>應用中心</span>
 
 										<span class="pull-right-container"><i class="fa fa-angle-left"></i> </span>
 
@@ -1044,7 +1044,7 @@
 
 											<a href="{:url('index/wanlshop.find/index')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>社區种草</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>社區種草</span>
 
 											</a>
 
@@ -1054,7 +1054,7 @@
 
 											<a href="{:url('index/wanlshop.coupon/index')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>优惠券</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>優惠券</span>
 
 											</a>
 
@@ -1064,7 +1064,7 @@
 
 											<a href="{:url('index/wanlshop.operate/index')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>分销</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>分銷</span>
 
 											</a> 
 
@@ -1084,7 +1084,7 @@
 
 											<a href="{:url('index/wanlshop.operate/index')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>砍价</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>砍價</span>
 
 											</a> 
 
@@ -1094,7 +1094,7 @@
 
 											<a href="{:url('index/wanlshop.operate/index')}">
 
-												<i class="fa fa-circle-o fa-fw"></i><span>限时秒殺</span>
+												<i class="fa fa-circle-o fa-fw"></i><span>限時秒殺</span>
 
 											</a> 
 
@@ -1106,31 +1106,31 @@
 
 								</li>
 
-								<li class="header">相关连結</li>
-								<li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.wholesale.index'?'active':''}"><a href="{:url('index/wanlshop.wholesale/index')}?order=desc&offset=0&limit=10"><i class="fa fa-list text-red"></i> <span>批发中心</span></a></li>
+								<li class="header">相關連結</li>
+								<li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.wholesale.index'?'active':''}"><a href="{:url('index/wanlshop.wholesale/index')}?order=desc&offset=0&limit=10"><i class="fa fa-list text-red"></i> <span>批發中心</span></a></li>
 
-								<!--li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.user.line'?'active':''}"><a href="{:url('index/wanlshop.user/line')}"><i class="fa fa-qq text-aqua"></i> <span>line交流群</span></a></li-->
+								<!--li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.user.line'?'active':''}"><a href="{:url('index/wanlshop.user/line')}"><i class="fa fa-qq text-aqua"></i> <span>line交流羣</span></a></li-->
 
 
-								<!--<li class="header">相关鏈接</li>
+								<!--<li class="header">相關鏈接</li>
 
 								{empty name="config.document"}
 
-								<li><a href="javascript:;" onclick="layer.msg('平一尚未配置官方文当')"><i class="fa fa-list text-red"></i> <span>官方文当</span></a></li>
+								<li><a href="javascript:;" onclick="layer.msg('平一尚未配置官方文當')"><i class="fa fa-list text-red"></i> <span>官方文當</span></a></li>
 
 								{else /}
 
-								<li><a href="{$config.document}" target="_blank"><i class="fa fa-list text-red"></i> <span>官方文当</span></a></li>
+								<li><a href="{$config.document}" target="_blank"><i class="fa fa-list text-red"></i> <span>官方文當</span></a></li>
 
 								{/empty}
 
 								{empty name="config.qun"}
 
-								<li><a href="javascript:;" onclick="layer.msg('平一尚未配置QQ交流群')"><i class="fa fa-qq text-aqua"></i> <span>QQ交流群</span></a></li>
+								<li><a href="javascript:;" onclick="layer.msg('平一尚未配置QQ交流羣')"><i class="fa fa-qq text-aqua"></i> <span>QQ交流羣</span></a></li>
 
 								{else /}
 
-								<li><a href="{$config.qun}" target="_blank"><i class="fa fa-qq text-aqua"></i> <span>QQ交流群</span></a></li>
+								<li><a href="{$config.qun}" target="_blank"><i class="fa fa-qq text-aqua"></i> <span>QQ交流羣</span></a></li>
 
 								{/empty}-->
 

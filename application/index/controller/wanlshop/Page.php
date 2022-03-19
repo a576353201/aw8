@@ -13,7 +13,7 @@ use fast\Tree;
 use fast\Random;
 
 /**
- * 产品管理
+ * 產品管理
  * @internal
  */
 class Page extends Wanlshop
@@ -21,7 +21,7 @@ class Page extends Wanlshop
     protected $noNeedLogin = '';
     protected $noNeedRight = '*';
     /**
-     * Page模型对象
+     * Page模型對象
      */
     protected $model = null;
     
@@ -35,7 +35,7 @@ class Page extends Wanlshop
 		$this->view->assign("sortList", $this->model->getSortList());
         $this->view->assign("statusList", $this->model->getStatusList());
         $tree = Tree::instance();
-        $category = new \app\index\model\wanlshop\Category;// 类目
+        $category = new \app\index\model\wanlshop\Category;// 類目
         $tree->init(collection($category->where(['type' => 'goods'])->order('weigh desc,id desc')->field('id,pid,type,name,name_spacer')->select())->toArray(), 'pid');
         $this->assignconfig('pageCategory', $tree->getTreeList($tree->getTreeArray(0), 'name_spacer'));
     }
@@ -45,10 +45,10 @@ class Page extends Wanlshop
      */
     public function index()
     {
-        //设置过濾方法
+        //設置過濾方法
         $this->request->filter(['strip_tags']);
         if ($this->request->isAjax()) {
-            //如果发送的來源是Selectpage，則轉发到Selectpage
+            //如果發送的來源是Selectpage，則轉發到Selectpage
             if ($this->request->request('keyField')) {
                 return $this->selectpage();
             }
@@ -73,7 +73,7 @@ class Page extends Wanlshop
     }
     
     /**
-     * 编輯
+     * 編輯
      */
     public function edit($ids = null)
     {
@@ -81,7 +81,7 @@ class Page extends Wanlshop
             $params = $this->request->post();
             if ($params) {
                 if (!array_key_exists("item", $params)) {
-                    $this->error('请编輯页面后再发布');
+                    $this->error('請編輯頁面後再發布');
                 }
                 $this->model->shop_id = $this->shop->id;
                 $this->model->name = $params['name'];
@@ -92,7 +92,7 @@ class Page extends Wanlshop
                 $this->model->save();
                 $page_token = $this->model->page_token;
                 $id = $this->model->id;
-                // 把除此之外的数据全部扔進回收站
+                // 把除此之外的數據全部扔進回收站
                 $list = $this->model->where(['page_token' => $page_token])->select();
                 
                 foreach ($list as $vo) {
@@ -100,9 +100,9 @@ class Page extends Wanlshop
                         $this->model->destroy($vo->id);
                     }
                 }
-                // 查詢最新历史狀态
+                // 查詢最新歷史狀態
                 $recover = $this->model->onlyTrashed()->where(['page_token'=> $page_token])->select();
-                $this->success("发布並保存成功", "url", $recover);
+                $this->success("發布並保存成功", "url", $recover);
             }
             $this->error(__('Parameter %s can not be empty', ''));
         }
@@ -137,7 +137,7 @@ class Page extends Wanlshop
                     }
                     if ($params['type'] == 'shop') {
                         if ($this->model->where(['type' => 'shop','shop_id' => $this->shop->id])->count() > 0) {
-                            $this->error('店铺首页已經存在');
+                            $this->error('店鋪首頁已經存在');
                         }
                     }
                     $params['page_token'] = Random::alnum(16);
@@ -167,7 +167,7 @@ class Page extends Wanlshop
     }
     
     /**
-     * 恢復历史
+     * 恢復歷史
      */
     public function recover($id = null)
     {
@@ -182,7 +182,7 @@ class Page extends Wanlshop
             if ($row['shop_id'] !=$this->shop->id) {
                 $this->error(__('You have no permission'));
             }
-            $this->success("拉取历史资料成功", "url", $row);
+            $this->success("拉取歷史資料成功", "url", $row);
         }
     }
     
@@ -222,7 +222,7 @@ class Page extends Wanlshop
     
     
     /**
-     * 真实刪除
+     * 真實刪除
      */
     public function destroy($ids = "")
     {
@@ -260,7 +260,7 @@ class Page extends Wanlshop
      */
     public function recyclebin()
     {
-        //设置过濾方法
+        //設置過濾方法
         $this->request->filter(['strip_tags']);
         if ($this->request->isAjax()) {
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
@@ -319,7 +319,7 @@ class Page extends Wanlshop
 
 	/**
 
-	 * 选择鏈接
+	 * 選擇鏈接
 
 	 */
 
@@ -327,7 +327,7 @@ class Page extends Wanlshop
 
 	{
 
-	    //设置过濾方法
+	    //設置過濾方法
 
 	    $this->request->filter(['strip_tags']);
 
@@ -373,7 +373,7 @@ class Page extends Wanlshop
 
 			}
 
-			// 分类
+			// 分類
 
 			if(!$filter || $filter == 'sort'){
 
@@ -407,7 +407,7 @@ class Page extends Wanlshop
 
 			}
 
-			// 自定義页面
+			// 自定義頁面
 
 			if(!$filter || $filter == 'page'){
 

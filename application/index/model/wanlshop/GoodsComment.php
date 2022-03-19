@@ -14,31 +14,36 @@ class GoodsComment extends Model
     // 表名
     protected $name = 'wanlshop_goods_comment';
     
-    // 自动写入时间戳字段
+    // 自動寫入時間戳字段
     protected $autoWriteTimestamp = 'int';
 
-    // 定义时间戳字段名
+    // 定義時間戳字段名
     protected $createTime = 'createtime';
     protected $updateTime = 'updatetime';
     protected $deleteTime = 'deletetime';
 
-    // 追加属性
+    // 追加屬性
     protected $append = [
         'state_text',
         'status_text'
     ];
     
-	// 将图片数组转字符串输入
-	public function getImagesAttr($value)
-	{
-		return $value ? explode(',', $value):[];
+	// 將圖片數組轉字符串輸入
+
+	public function getImagesAttr($value)
+
+	{
+
+		return $value ? explode(',', $value):[];
+
 	}
     
     public function getStateList()
     {
         return ['0' => __('State 0'), '1' => __('State 1'), '2' => __('State 2')];
     }
-
+
+
 
     public function getStatusList()
     {

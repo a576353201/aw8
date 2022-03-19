@@ -12,7 +12,7 @@ use think\exception\ValidateException;
 use fast\Tree;
 
 /**
- * 店铺管理
+ * 店鋪管理
  * @internal
  */
 class Shop extends Wanlshop
@@ -20,7 +20,7 @@ class Shop extends Wanlshop
     protected $noNeedLogin = '';
     protected $noNeedRight = '*';
     /**
-     * Shop模型对象
+     * Shop模型對象
      */
 
     public $user;
@@ -38,13 +38,13 @@ class Shop extends Wanlshop
         
         $this->view->assign("typeList", $this->model->getTypeList());
         $tree = Tree::instance();
-        $category = new \app\index\model\wanlshop\Category;// 类目
+        $category = new \app\index\model\wanlshop\Category;// 類目
         $tree->init(collection($category->where(['type' => 'goods'])->order('weigh desc,id desc')->field('id,pid,type,name,name_spacer')->select())->toArray(), 'pid');
         $this->assignconfig('pageCategory', $tree->getTreeList($tree->getTreeArray(0), 'name_spacer'));
     }
     
     /**
-     * 类目管理
+     * 類目管理
      */
     public function index()
     {
@@ -69,7 +69,7 @@ class Shop extends Wanlshop
     }
     
     /**
-     * 店铺资料
+     * 店鋪資料
      */
     public function profile($ids = null)
     {
@@ -125,7 +125,7 @@ class Shop extends Wanlshop
     
     
      /**
-     * 店铺资料
+     * 店鋪資料
      */
     public function invitation($ids = null)
     {
@@ -146,7 +146,7 @@ class Shop extends Wanlshop
     
 
     /**
-     * 图片空间
+     * 圖片空間
      */
     public function attachment()
     {
@@ -261,7 +261,7 @@ class Shop extends Wanlshop
     }
     
     /**
-     * 类目管理
+     * 類目管理
      */
     public function category()
     {
@@ -269,7 +269,7 @@ class Shop extends Wanlshop
     }
     
     /**
-     * 服务
+     * 服務
      */
     public function service()
     {

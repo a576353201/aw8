@@ -9,7 +9,7 @@ use think\exception\PDOException;
 use think\exception\ValidateException;
 
 /**
- * 商品评论
+ * 商品評論
  *
  * @icon fa fa-circle-o
  */
@@ -17,7 +17,7 @@ class Comment extends Wanlshop
 {
     
     /**
-     * GoodsComment模型对象
+     * GoodsComment模型對象
      */
     protected $noNeedLogin = '';
     protected $noNeedRight = '*';
@@ -35,12 +35,12 @@ class Comment extends Wanlshop
      */
     public function index()
     {
-        //當前是否为关联查詢
+        //當前是否爲關聯查詢
         $this->relationSearch = true;
-        //设置过濾方法
+        //設置過濾方法
         $this->request->filter(['strip_tags', 'trim']);
         if ($this->request->isAjax()) {
-            //如果发送的來源是Selectpage，則轉发到Selectpage
+            //如果發送的來源是Selectpage，則轉發到Selectpage
             if ($this->request->request('keyField')) {
                 return $this->selectpage();
             }
@@ -72,7 +72,7 @@ class Comment extends Wanlshop
     
     /**
 
-     * 评论详情
+     * 評論詳情
 
      */
 
@@ -112,7 +112,7 @@ class Comment extends Wanlshop
 
 	/**
 
-	 * 选择鏈接
+	 * 選擇鏈接
 
 	 */
 

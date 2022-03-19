@@ -186,17 +186,17 @@
 
 		<ul class="nav nav-tabs">
 
-			<li class="active"><a href="#basics">基礎资讯</a></li>
+			<li class="active"><a href="#basics">基礎資訊</a></li>
 
-			<li><a href="#sale">商品属性</a></li>
+			<li><a href="#sale">商品屬性</a></li>
 
-			<li><a href="#wanlinfo">图文描述</a></li>
+			<li><a href="#wanlinfo">圖文描述</a></li>
 
-			<li><a href="#payment">支付资讯</a></li>
+			<li><a href="#payment">支付資訊</a></li>
 
-			<li><a href="#logistics">物流资讯</a></li>
+			<li><a href="#logistics">物流資訊</a></li>
 
-			<li><a href="#service">售后资讯</a></li>
+			<li><a href="#service">售後資訊</a></li>
 
 		</ul>
 
@@ -220,7 +220,7 @@
 
 									<div class="panel panel-default">
 
-										<div class="panel-heading">基礎资讯</div>
+										<div class="panel-heading">基礎資訊</div>
 
 										<div class="panel-body">
 
@@ -230,7 +230,7 @@
 
 												<div class="col-xs-12 col-sm-8">
 
-													<input id="c-title" data-rule="required" class="form-control" name="row[title]" type="text" placeholder="请输入商品标题" value="{$row.title|htmlentities}">
+													<input id="c-title" data-rule="required" class="form-control" name="row[title]" type="text" placeholder="請輸入商品標題" value="{$row.title|htmlentities}">
 
 												</div>
 
@@ -290,7 +290,7 @@
 
 												<div class="col-xs-12 col-sm-8">
 
-													<input id="c-brand" data-rule="required" class="form-control" name="row[brand]" type="text" placeholder="请输入商品标题" value="{$row.brand|htmlentities}">
+													<input id="c-brand" data-rule="required" class="form-control" name="row[brand]" type="text" placeholder="請輸入商品標題" value="{$row.brand|htmlentities}">
 
 												</div>
 
@@ -312,11 +312,11 @@
 
 														name="row[brand_id]" 
 
-														type="text" placeholder="点击选择商品品牌" value="{$row.brand_id|htmlentities}">
+														type="text" placeholder="點擊選擇商品品牌" value="{$row.brand_id|htmlentities}">
 
 														<div class="input-group-addon no-border no-padding">
 
-															<span><button type="button" class="btn btn-danger btn-brand">{:__('申请品牌')}</button></span>
+															<span><button type="button" class="btn btn-danger btn-brand">{:__('申請品牌')}</button></span>
 
 														</div>
 
@@ -330,7 +330,7 @@
 
 											<div class="form-group" v-if="attributeData.length != 0">
 
-												<label class="control-label col-xs-12 col-sm-2">{:__('类目内容')}:</label>
+												<label class="control-label col-xs-12 col-sm-2">{:__('類目內容')}:</label>
 
 												<div class="col-xs-12 col-sm-8">
 
@@ -372,21 +372,21 @@
 
 									<div class="panel panel-default">
 
-										<div class="panel-heading">商品属性</div>
+										<div class="panel-heading">商品屬性</div>
 
 										<div class="panel-body">
 
 											<div class="form-group wanl-specs">
 
-												<label class="control-label col-xs-12 col-sm-2">{:__('商品属性')}:</label>
+												<label class="control-label col-xs-12 col-sm-2">{:__('商品屬性')}:</label>
 
 												<div class="col-xs-12 col-sm-8">
 
 													<div class="input-group add-option">
 
-														<input type="text" class="form-control" ref="specs-name" placeholder="多个商品属性以空格隔开">
+														<input type="text" class="form-control" ref="specs-name" placeholder="多個商品屬性以空格隔開">
 
-														<span class="input-group-addon pointer" @click="spuAdd">新增属性</span>
+														<span class="input-group-addon pointer" @click="spuAdd">新增屬性</span>
 
 													</div>
 
@@ -408,7 +408,7 @@
 
 																<div class="input-group">
 
-																	<input type="text" class="form-control" :ref="'specs-name-' + i" placeholder="多属性以空格隔开">
+																	<input type="text" class="form-control" :ref="'specs-name-' + i" placeholder="多屬性以空格隔開">
 
 																	<span class="input-group-addon pointer" @click="skuAdd(i)"><i class="fa fa-plus"></i></span>
 
@@ -460,15 +460,15 @@
 
 																		<th v-for="item in spu"> {{item}} </th>
 
-																		<th width="80">原价</th>
+																		<th width="80">原價</th>
 
-																		<th width="80">现价</th>
+																		<th width="80">現價</th>
 
-																		<th width="80">库存</th>
+																		<th width="80">庫存</th>
 
 																		<th width="83">重量(kg)</th>
 
-																		<th width="80">编码</th>
+																		<th width="80">編碼</th>
 
 																	</tr>
 
@@ -502,13 +502,13 @@
 
 																<span v-if="batch == 0">
 
-																	是否要批量设定？
+																	是否要批量設定？
 
 																</span>
 
 																<span v-else>
 
-																	取消批量设定？
+																	取消批量設定？
 
 																</span>
 
@@ -524,31 +524,31 @@
 
 														<div class="input-group">
 
-															<div class="input-group-addon">原价 $</div>
+															<div class="input-group-addon">原價 $</div>
 
-															<input type="number" class="form-control" id="batch-market_price" placeholder="一键设定原价">
+															<input type="number" class="form-control" id="batch-market_price" placeholder="一鍵設定原價">
 
-															<div class="input-group-addon" onclick="batchSet('market_price')">批量设定</div>
-
-														</div>
-
-														<div class="input-group">
-
-															<div class="input-group-addon">现价 $</div>
-
-															<input type="number" class="form-control" id="batch-price" placeholder="一键设定现价">
-
-															<div class="input-group-addon" onclick="batchSet('price')">批量设定</div>
+															<div class="input-group-addon" onclick="batchSet('market_price')">批量設定</div>
 
 														</div>
 
 														<div class="input-group">
 
-															<div class="input-group-addon">库存</div>
+															<div class="input-group-addon">現價 $</div>
 
-															<input type="number" class="form-control" id="batch-stock" placeholder="一键设定库存">
+															<input type="number" class="form-control" id="batch-price" placeholder="一鍵設定現價">
 
-															<div class="input-group-addon" onclick="batchSet('stock')">批量设定</div>
+															<div class="input-group-addon" onclick="batchSet('price')">批量設定</div>
+
+														</div>
+
+														<div class="input-group">
+
+															<div class="input-group-addon">庫存</div>
+
+															<input type="number" class="form-control" id="batch-stock" placeholder="一鍵設定庫存">
+
+															<div class="input-group-addon" onclick="batchSet('stock')">批量設定</div>
 
 														</div>
 
@@ -556,19 +556,19 @@
 
 															<div class="input-group-addon">重量</div>
 
-															<input type="number" class="form-control" id="batch-weigh" placeholder="一键设定重量">
+															<input type="number" class="form-control" id="batch-weigh" placeholder="一鍵設定重量">
 
-															<div class="input-group-addon" onclick="batchSet('weigh')">批量设定</div>
+															<div class="input-group-addon" onclick="batchSet('weigh')">批量設定</div>
 
 														</div>
 
 														<div class="input-group">
 
-															<div class="input-group-addon">编码</div>
+															<div class="input-group-addon">編碼</div>
 
-															<input type="text" class="form-control" id="batch-sn" placeholder="一键设定编码">
+															<input type="text" class="form-control" id="batch-sn" placeholder="一鍵設定編碼">
 
-															<div class="input-group-addon" onclick="batchSet('sn')">批量设定</div>
+															<div class="input-group-addon" onclick="batchSet('sn')">批量設定</div>
 
 														</div>
 
@@ -598,7 +598,7 @@
 
 								<div class="panel panel-default">
 
-									<div class="panel-heading">图文描述</div>
+									<div class="panel-heading">圖文描述</div>
 
 									<div class="panel-body">
 
@@ -682,11 +682,11 @@
 
 										</div>
 
-										<!-- 1.0.2升级优化 点击弹出图片上传，再次编辑商品异常 -->
+										<!-- 1.0.2升級優化 點擊彈出圖片上傳，再次編輯商品異常 -->
 
 										<div class="form-group">
 
-											<label class="control-label col-xs-12 col-sm-2">{:__('店铺中分类')}:</label>
+											<label class="control-label col-xs-12 col-sm-2">{:__('店鋪中分類')}:</label>
 
 											<div class="col-xs-12 col-sm-8">
 
@@ -714,7 +714,7 @@
 
 													<div class="input-group-addon no-border no-padding">
 
-														<span><button type="button" class="btn btn-danger btn-shopsort" >{:__('新建分类')}</button></span>
+														<span><button type="button" class="btn btn-danger btn-shopsort" >{:__('新建分類')}</button></span>
 
 													</div>
 
@@ -738,7 +738,7 @@
 
 								<div class="panel panel-default">
 
-									<div class="panel-heading">支付资讯</div>
+									<div class="panel-heading">支付資訊</div>
 
 									<div class="panel-body">
 
@@ -780,7 +780,7 @@
 
 								<div class="panel panel-default">
 
-									<div class="panel-heading">物流资讯</div>
+									<div class="panel-heading">物流資訊</div>
 
 									<div class="panel-body">
 
@@ -796,7 +796,7 @@
 
 													<div class="input-group-addon no-border no-padding">
 
-														<span><button type="button" class="btn btn-danger btn-freight" >{:__('新建范本')}</button></span>
+														<span><button type="button" class="btn btn-danger btn-freight" >{:__('新建範本')}</button></span>
 
 													</div>
 
@@ -820,7 +820,7 @@
 
 								<div class="panel panel-default">
 
-									<div class="panel-heading">售后资讯</div>
+									<div class="panel-heading">售後資訊</div>
 
 									<div class="panel-body">
 
@@ -935,21 +935,21 @@
     function previewImg(obj) {
    var img = new Image(); 
    img.src = obj.src;
-   //var height = img.height + 50; // 原图片大小
-   //var width = img.width; //原图片大小
+   //var height = img.height + 50; // 原圖片大小
+   //var width = img.width; //原圖片大小
    var imgHtml = "<img src='" + obj.src + "' width='350px' height='350px'/>"; 
-   //弹出层
+   //彈出層
    layer.open({ 
      type: 1, 
      shade: 0.8,
      offset: 'auto',
-     area: [350 + 'px',400+'px'], // area: [width + 'px',height+'px'] //原图显示
+     area: [350 + 'px',400+'px'], // area: [width + 'px',height+'px'] //原圖顯示
      shadeClose:true,
      scrollbar: false,
-     title: "图片預览", //不显示标题
-     content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响 
+     title: "圖片預覽", //不顯示標題
+     content: imgHtml, //捕獲的元素，注意：最好該指定的元素要存放在body最外層，否則可能被其它的相對元素所影響 
      cancel: function () { 
-       //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 }); 
+       //layer.msg('捕獲就是從頁面已經存在的元素上，包裹layer的結構', { time: 5000, icon: 6 }); 
      } 
    }); 
  }

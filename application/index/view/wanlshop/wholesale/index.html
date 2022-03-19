@@ -89,7 +89,7 @@
             </div>
             <div class="title">{$item.title}</div>
             <div class="tag_warp">
-                <div class="sdby">一件代发</div> <div class="price"><i><strong>$</strong></i>{$item.price}</div>
+                <div class="sdby">一件代發</div> <div class="price"><i><strong>$</strong></i>{$item.price}</div>
             </div>
             <div class="tag_warp1">
                 <div class="price1">{$item.manufacturer}</div>
@@ -104,7 +104,7 @@ $item['title']=str_replace('\'','',$item['title']);
 
 ?>
             <div class="view_button">
-                <a style="cursor:pointer;" onclick="puhuo('/index/wanlshop/wholesale/import/ids/{$item.id}','{$item.title}','{$item.price}','{$item.wholesale_price}','{$item.manufacturer}')">一键铺货</a>
+                <a style="cursor:pointer;" onclick="puhuo('/index/wanlshop/wholesale/import/ids/{$item.id}','{$item.title}','{$item.price}','{$item.wholesale_price}','{$item.manufacturer}')">一鍵鋪貨</a>
             </div>
     </div>
 {/volist}
@@ -113,17 +113,17 @@ $item['title']=str_replace('\'','',$item['title']);
 <div class="empty-content">
     <div class="wanl-gray text-center">
         <img style="width: 260px;" src="/assets/addons/wanlshop/img/default/default3x.png">
-        <div  class="text-30">沒找到相关的商品</div>
+        <div  class="text-30">沒找到相關的商品</div>
     </div>
 </div>
 <?php }?>
 <?php if(!empty($result['rows'])){?>
 <div class="pro_page">
-    <a href='{:url('index/wanlshop.wholesale/index')}?status=<?php echo $status;?>&order=desc&offset={$preoffset}&limit=10&op={"category.id":"IN"}&filter={$filter}'>上一页</a>
+    <a href='{:url('index/wanlshop.wholesale/index')}?status=<?php echo $status;?>&order=desc&offset={$preoffset}&limit=10&op={"category.id":"IN"}&filter={$filter}'>上一頁</a>
     <?php for($j=$j_start;$j<=$j_end;$j++){?>
     <a href='{:url('index/wanlshop.wholesale/index')}?status=<?php echo $status;?>&order=desc&offset=<?php echo ($j-1)*$limit;?>&limit=10&op={"category.id":"IN"}&filter={$filter}' class="<?php if($page == $j) echo 'current';?>"><?php echo $j;?></a>
     <?php }?>
-    <a href='{:url('index/wanlshop.wholesale/index')}?status=<?php echo $status;?>&order=desc&offset={$nexoffset}&limit=10&op={"category.id":"IN"}&filter={$filter}' >下一页</a>
+    <a href='{:url('index/wanlshop.wholesale/index')}?status=<?php echo $status;?>&order=desc&offset={$nexoffset}&limit=10&op={"category.id":"IN"}&filter={$filter}' >下一頁</a>
     
     <span><em>{$page}</em>/{$page_total}</span>
     <form method="POST" action='{:url('index/wanlshop.wholesale/goindex')}?status=<?php echo $status;?>&order=desc&limit=10&op={"category.id":"IN"}&filter={$filter}'>
@@ -132,8 +132,8 @@ $item['title']=str_replace('\'','',$item['title']);
             <span class="next-input">
                 <input type="number" name="offset" height="100%">
             </span>
-            <span>页</span>
-            <button type="submit">确定</button>
+            <span>頁</span>
+            <button type="submit">確定</button>
         </div>
     </form>
 </div>
@@ -157,22 +157,22 @@ function gggurl(){
     window.location.href=gggurl1
 }
 </script>
-<div class="shadow-box" id="model" style="display: none;"><!--修改手机号码-->
+<div class="shadow-box" id="model" style="display: none;"><!--修改手機號碼-->
 	<div class="shadow" style="margin-top:20%">
         <div class="shadow-bg">
             <h4 id="title"></h4>
-            <div class="shadow_text">供货商:<span id="manufacturer"></span></div>
-            <div class="shadow_text">销售价:<span class="red">$<span id="price"></span></span></div>
-            <div class="shadow_text">批发价:<span class="red">$<span id="wholesale_price"></span></span></div>
+            <div class="shadow_text">供貨商:<span id="manufacturer"></span></div>
+            <div class="shadow_text">銷售價:<span class="red">$<span id="price"></span></span></div>
+            <div class="shadow_text">批發價:<span class="red">$<span id="wholesale_price"></span></span></div>
             <div class="shadow-con">
                 <button class="bg fl" type="button" onclick="closebutton();">取消上架</button>
-                <button class="bg1 fr" id="confirm" url="" onclick="gggurl();">确认上架</button>
+                <button class="bg1 fr" id="confirm" url="" onclick="gggurl();">確認上架</button>
             </div>
             <div class="shadow-con" style="color:red;">
 <br/>溫馨提示：<br/>
-1、一键上货的商品利润为随机10%--12%，也就是零售价比批发价格高10%--12%<br/>
-2、根据{$site.name}与各批发商签订的協议規定，零售价不能高出批发价的12%<br/>
-3、每个卖家每天最多只能從批发中心上架10件商品<br/>
+1、一鍵上貨的商品利潤爲隨機10%--12%，也就是零售價比批發價格高10%--12%<br/>
+2、根據{$site.name}與各批發商簽訂的協議規定，零售價不能高出批發價的12%<br/>
+3、每個賣家每天最多只能從批發中心上架10件商品<br/>
             </div>
             <br/>
         </div>
@@ -191,11 +191,11 @@ function gggurl(){
 .pro_type3{width:100%; background:#e74c3c;display:black;overflow:hidden; padding-top:3px; padding-bottom:3px;}
 .pro_type1 li,.pro_type2 li,.pro_type3 li,.pro_type1 ul,.pro_type2 ul,.pro_type3 ul{margin:0;padding:0;list-style:none;}
 .pro_type1 li,.pro_type2 li,.pro_type3 li{
-width:100px; /*每个元素的初始化宽度*/
+width:100px; /*每個元素的初始化寬度*/
 height: 20px;
 line-height: 20PX;
 text-align: center;
-flex:auto;  /*这是关键*/
+flex:auto;  /*這是關鍵*/
 margin-left: 0.5%; 
 margin-right: 0.5%; 
 overflow: hidden;
@@ -233,11 +233,11 @@ padding-bottom: 5PX;
 
 @media (max-width:900px){
 .pro_type1 li,.pro_type2 li,.pro_type3 li{
-width: 32.33%; /*每个元素的初始化宽度*/
+width: 32.33%; /*每個元素的初始化寬度*/
 height: 20px;
 line-height: 20PX;
 text-align: center;
-flex:auto;  /*这是关键*/
+flex:auto;  /*這是關鍵*/
 margin-left: 0.5%; 
 margin-right: 0.5%; 
 overflow: hidden;

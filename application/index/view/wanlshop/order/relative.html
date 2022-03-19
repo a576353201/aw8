@@ -40,7 +40,7 @@
 
 	}
 
-	/* 图标线段 */
+	/* 圖標線段 */
 
 	.wanl_kuaidi .process{
 
@@ -70,7 +70,7 @@
 
 	}
 
-	/* 时间 */
+	/* 時間 */
 
 	.wanl_kuaidi .status {
 
@@ -115,30 +115,30 @@
 		<thead>
 		    <?php if(isset($data['name'])){?>
             <tr>
-    	    <th style="text-align: center;padding-left: 14px;">快递公司：</th>
+    	    <th style="text-align: center;padding-left: 14px;">快遞公司：</th>
             <th style="text-align: center;padding-left: 14px;"><?php echo isset($data['name'])?$data['name']:'';?></th>
             </tr>
             <tr>
-    	    <th style="text-align: center;padding-left: 14px;">快递单号：</th>
+    	    <th style="text-align: center;padding-left: 14px;">快遞單號：</th>
             <th style="text-align: center;padding-left: 14px;"><?php echo isset($row['express_no'])?$row['express_no']:'';?></th>
             </tr>
             <?php }else{?>
             <tr>
-    	    <th style="text-align: center;padding-left: 14px;">快递公司：</th>
+    	    <th style="text-align: center;padding-left: 14px;">快遞公司：</th>
             <th style="text-align: center;padding-left: 14px;">台新物流</th>
             </tr>
             <tr>
-    	    <th style="text-align: center;padding-left: 14px;">快递单号：</th>
+    	    <th style="text-align: center;padding-left: 14px;">快遞單號：</th>
             <th style="text-align: center;padding-left: 14px;">{$address.order_no}</th>
             </tr>
             <?php }?>
 		    <tr>
 
-		      <th style="text-align: center;padding-left: 14px;">时间</th>
+		      <th style="text-align: center;padding-left: 14px;">時間</th>
 
 		      <th></th>
 
-			  <th>地点和跟踪进度</th>
+			  <th>地點和跟蹤進度</th>
 
 		    </tr>
 
@@ -160,7 +160,7 @@
 
 					</td>
 
-					<td class="info"><span>尚未付款</span>付款后，即可将商品发出</td>
+					<td class="info"><span>尚未付款</span>付款後，即可將商品發出</td>
 
 				</tr>
 
@@ -178,7 +178,7 @@
 
 					</td>
 
-					<td class="info"><span>已付款</span>商家正在处理订单</td>
+					<td class="info"><span>已付款</span>商家正在處理訂單</td>
 
 				</tr>
 
@@ -195,7 +195,7 @@
 					<td class="process">
 						<i class="fa fa-truck"></i>
 					</td>
-					<td class="info"><span>待出库</span>厂家正在备货中，预计24小时之内发货
+					<td class="info"><span>待出庫</span>廠家正在備貨中，預計24小時之內發貨
 					<?php $time1 = date('H',$row['delivertime']);
 					    $time2 = 259200;
 					if($time1 >= 0 && $time1 < 7){
@@ -204,7 +204,7 @@
 					    $time2 = 259200+3600*24;
 					} 
 					?>
-<!--                    {$row.delivertime+$time2|date="Y.m.d",###}请耐心等待交货~</td>-->
+<!--                    {$row.delivertime+$time2|date="Y.m.d",###}請耐心等待交貨~</td>-->
 					<!---包裹正在等待快遞小哥攬收-->
 				</tr>
 				
@@ -238,7 +238,7 @@
     					<td class="process">
     						<i class="fa fa-truck"></i>
     					</td>
-    					<td class="info"><span>待揽件（已揽件）</span></td>
+    					<td class="info"><span>待攬件（已攬件）</span></td>
     				</tr>  				<?php } ?>
     				<?php if($row['delivertime']<(time()-$fa1)){ ?>
     				<tr>
@@ -250,7 +250,7 @@
     					<td class="process">
     						<i class="fa fa-truck"></i>
     					</td>
-    					<td class="info"><span>运输中</span>(由运转中心运送至中转站)</td>
+    					<td class="info"><span>運輸中</span>(由運轉中心運送至中轉站)</td>
     				</tr>
     				<?php } ?>
     				<?php if($row['delivertime']<(time()-$fa2)){ ?>
@@ -263,7 +263,7 @@
     					<td class="process">
     						<i class="fa fa-truck"></i>
     					</td>
-    					<td class="info"><span>运输中</span>(由中转站运往分部)</td>
+    					<td class="info"><span>運輸中</span>(由中轉站運往分部)</td>
     				</tr>
     				<?php } ?>
     				<?php if($row['delivertime']<(time()-$fa3)){ ?>
@@ -276,7 +276,7 @@
     					<td class="process">
     						<i class="fa fa-truck"></i>
     					</td>
-    					<td class="info"><span>运输中</span>(由分部运往快递网点)</td>
+    					<td class="info"><span>運輸中</span>(由分部運往快遞網點)</td>
     				</tr>
     				<?php } ?>
     				<?php if($row['delivertime']<(time()-$fa4)){ ?>
@@ -289,7 +289,7 @@
     					<td class="process">
     						<i class="fa fa-truck"></i>
     					</td>
-    					<td class="info"><span>派件中</span>(由快递小哥送达物件)</td>
+    					<td class="info"><span>派件中</span>(由快遞小哥送達物件)</td>
     				</tr>
     				<?php } ?>
     				<?php if($row['delivertime']<(time()-$fa5)){ ?>
@@ -302,14 +302,14 @@
     					<td class="process">
     						<i class="fa fa-truck"></i>
     					</td>
-    					<td class="info"><span>已送达</span>(顾客已签收物件) 买家若无异议，10天內系統將自动确认收货，货款將打到卖家钱包</td>
+    					<td class="info"><span>已送達</span>(顧客已簽收物件) 買家若無異議，10天內系統將自動確認收貨，貨款將打到賣家錢包</td>
     				</tr>
     				<?php } ?>
 				<?php } ?>
                 <br>
 				{else /}
 
-				<!-- 快遞单當前狀态，包括0在途，1攬收，2疑難，3签收，4退签，5派件，6退回，7轉投 等7个狀态 -->
+				<!-- 快遞單當前狀態，包括0在途，1攬收，2疑難，3簽收，4退簽，5派件，6退回，7轉投 等7個狀態 -->
 
 					{volist name="list" id="vo"}
 
@@ -323,19 +323,19 @@
 
 							    {case value="在途"}<i class="fa fa-chevron-circle-up"></i>{/case}
 
-							    {case value="揽收"}<i class="fa fa-archive"></i>{/case}
+							    {case value="攬收"}<i class="fa fa-archive"></i>{/case}
 
-								{case value="疑难"}<i class="fa fa-exclamation-circle"></i>{/case}
+								{case value="疑難"}<i class="fa fa-exclamation-circle"></i>{/case}
 
-								{case value="签收"}<i class="fa fa-check"></i>{/case}
+								{case value="簽收"}<i class="fa fa-check"></i>{/case}
 
-								{case value="退签"}<i class="fa fa-reply"></i>{/case}
+								{case value="退簽"}<i class="fa fa-reply"></i>{/case}
 
 								{case value="派件"}<i class="fa fa-user"></i>{/case}
 
 								{case value="退回"}<i class="fa fa-hand-paper-o"></i>{/case}
 
-								{case value="转投"}<i class="fa fa-share-square"></i>{/case}
+								{case value="轉投"}<i class="fa fa-share-square"></i>{/case}
 
 							{/switch}
 

@@ -6,7 +6,7 @@ use addons\wanlshop\library\WanlChat\WanlChat;
 use think\Db;
 use Exception;
 /**
- * 订单退款管理
+ * 訂單退款管理
  *
  * @icon fa fa-circle-o
  */
@@ -15,7 +15,7 @@ class Refund extends Wanlshop
     protected $noNeedLogin = '';
     protected $noNeedRight = '*';
     /**
-     * Refund模型对象
+     * Refund模型對象
      * @var \app\index\model\wanlshop\Refund
      */
     protected $model = null;
@@ -38,13 +38,13 @@ class Refund extends Wanlshop
      */
     public function index()
     {
-        //當前是否为关联查詢
+        //當前是否爲關聯查詢
         $this->relationSearch = true;
-        //设置过濾方法
+        //設置過濾方法
         $this->request->filter(['strip_tags', 'trim']);
         if ($this->request->isAjax())
         {
-            //如果发送的來源是Selectpage，則轉发到Selectpage
+            //如果發送的來源是Selectpage，則轉發到Selectpage
             if ($this->request->request('keyField'))
             {
                 return $this->selectpage();
@@ -77,7 +77,7 @@ class Refund extends Wanlshop
     }
 	
 	/**
-	 * 退款详情
+	 * 退款詳情
 	 */
 	public function detail($ids = null, $type = 0)
 	{
@@ -118,70 +118,70 @@ class Refund extends Wanlshop
 		    $this->error(__('You have no permission'));
 		}
 		if ($row['state'] == 2 || $row['state'] == 3 || $row['state'] == 4 || $row['state'] == 5) {
-			$this->error(__('當前狀态，不可操作'));
+			$this->error(__('當前狀態，不可操作'));
 		}
-		// 判斷金额
+		// 判斷金額
 		// if(number_format($row['price'], 2) > number_format($row->pay->price, 2)){
-		// 	$this->error(__('非法退款金额，金额超过订单金额！！请拒絕退款！！'));
+		// 	$this->error(__('非法退款金額，金額超過訂單金額！！請拒絕退款！！'));
 		// }
 		$result = false;
 		Db::startTrans();
 		try {
-			// 判斷退款类型
+			// 判斷退款類型
 			if($row['type'] == 0){
 				$refund_status = 3;
 				$data['state'] = 4; // 退款完成
-				$data['completetime'] = time(); // 完成退款 时间
-				$content = '卖家同意退款，'.$row['price'].'NT$退款到买家賬号余额';
-				// 如果僅有壹个商品的订单退款完成，同时关闭订单
+				$data['completetime'] = time(); // 完成退款 時間
+				$content = '賣家同意退款，'.$row['price'].'NT$退款到買家賬號餘額';
+				// 如果僅有壹個商品的訂單退款完成，同時關閉訂單
 				$this->setRefundState($row['order_id']);
-				// 查詢订单是已确定收货
+				// 查詢訂單是已確定收貨
 				$order = model('app\index\model\wanlshop\Order')->get($row['order_id']);
 				
 				
 				$shop  = model('app\index\model\wanlshop\Shop')->get($order['shop_id']);
-				// 更新钱包
-				// 1.此订单如果已确认收货扣商家
-				// 2.此订单沒有确认收货，平台退款	
+				// 更新錢包
+				// 1.此訂單如果已確認收貨扣商家
+				// 2.此訂單沒有確認收貨，平台退款	
 				if($order['state'] == 4){
 					// 扣商家$order['shop']['user_id']
-					controller('addons\wanlshop\library\WanlPay\WanlPay')->money(-$row['price'], $shop['user_id'], '确认收货，同意退款', 'refund', $order['order_no']);
+					controller('addons\wanlshop\library\WanlPay\WanlPay')->money(-$row['price'], $shop['user_id'], '確認收貨，同意退款', 'refund', $order['order_no']);
 
 					// 退款給用戶
-					controller('addons\wanlshop\library\WanlPay\WanlPay')->money(+$row['price'], $row['user_id'], '卖家同意退款', 'refund', $order['order_no']);
+					controller('addons\wanlshop\library\WanlPay\WanlPay')->money(+$row['price'], $row['user_id'], '賣家同意退款', 'refund', $order['order_no']);
 					
 					if($order['wholesale_id']!=0&&$order['is_wholesale']==1){
-					    controller('addons\wanlshop\library\WanlPay\WanlPay')->money(+$order['pay']['wholesale_price'], $shop['user_id'], '一键批发,货款退回', 'refund', $order['order_no']);
+					    controller('addons\wanlshop\library\WanlPay\WanlPay')->money(+$order['pay']['wholesale_price'], $shop['user_id'], '一鍵批發,貨款退回', 'refund', $order['order_no']);
 					}
 				}else{
 					//退款給用戶
-					controller('addons\wanlshop\library\WanlPay\WanlPay')->money(+$row['price'], $row['user_id'], '卖家同意退款', 'refund', $order['order_no']);
+					controller('addons\wanlshop\library\WanlPay\WanlPay')->money(+$row['price'], $row['user_id'], '賣家同意退款', 'refund', $order['order_no']);
 					if($order['wholesale_id']!=0&&$order['is_wholesale']==1){
-					    controller('addons\wanlshop\library\WanlPay\WanlPay')->money(+$order['pay']['wholesale_price'], $shop['user_id'], '一键批发,货款退回', 'refund', $order['order_no']);
+					    controller('addons\wanlshop\library\WanlPay\WanlPay')->money(+$order['pay']['wholesale_price'], $shop['user_id'], '一鍵批發,貨款退回', 'refund', $order['order_no']);
 					}
 				}
-				// 推送开始
+				// 推送開始
 				$this->pushRefund($row['id'], $row['order_id'], $row['goods_ids'], $title = '退款已完成');
 			}else if($row['type'] == 1){
 				$refund_status = 2;
-				$data['state'] = 1; // 先同意退款，還需要买家繼续退货
-				$data['agreetime'] = time(); // 卖家同意 时间
-				// 退货地址
+				$data['state'] = 1; // 先同意退款，還需要買家繼續退貨
+				$data['agreetime'] = time(); // 賣家同意 時間
+				// 退貨地址
 				$shopConfig = model('app\index\model\wanlshop\ShopConfig')
 					->where(['shop_id' => $this->shop->id])
 					->field('returnAddr,returnName,returnPhoneNum')
 					->find();
-				$content = '卖家同意退货申请，退货地址：'.$shopConfig['returnName'].'，'.$shopConfig['returnPhoneNum'].'，'.$shopConfig['returnAddr'];
-				// 推送开始
-				$this->pushRefund($row['id'], $row['order_id'], $row['goods_ids'], $title = '卖家同意退货');
+				$content = '賣家同意退貨申請，退貨地址：'.$shopConfig['returnName'].'，'.$shopConfig['returnPhoneNum'].'，'.$shopConfig['returnAddr'];
+				// 推送開始
+				$this->pushRefund($row['id'], $row['order_id'], $row['goods_ids'], $title = '賣家同意退貨');
 			}else{
-				$this->error(__('非法退款类型，请拒絕退款！'));
+				$this->error(__('非法退款類型，請拒絕退款！'));
 			}
-			// 更新商品狀态
+			// 更新商品狀態
 			$this->setOrderGoodsState($refund_status, $row['goods_ids']);
 			// 更新退款
 			$result = $row->allowField(true)->save($data);
-			// 写入日誌
+			// 寫入日誌
 			$this->refundLog($row['user_id'], $ids, $content);
 			Db::commit();
 		} catch (ValidateException $e) {
@@ -202,7 +202,7 @@ class Refund extends Wanlshop
 	}
 	
 	/**
-	 * 确认收货
+	 * 確認收貨
 	 */
 	public function receiving($ids = null)
 	{
@@ -214,56 +214,56 @@ class Refund extends Wanlshop
 		    $this->error(__('You have no permission'));
 		}
 		if ($row['state'] == 2 || $row['state'] == 3 || $row['state'] == 4 || $row['state'] == 5) {
-			$this->error(__('當前狀态，不可操作'));
+			$this->error(__('當前狀態，不可操作'));
 		}
 		$result = false;
 		Db::startTrans();
 		try {
-			// 判斷退款类型
+			// 判斷退款類型
 			if($row['type'] == 1){
-				// 判斷金额
+				// 判斷金額
 				if($row['price'] > $row->pay->price){
-					$this->error(__('非法退款金额，金额超过订单金额！！请拒絕退款！！'));
+					$this->error(__('非法退款金額，金額超過訂單金額！！請拒絕退款！！'));
 				}
 			}else{
-				$this->error(__('非法退款类型，请拒絕退款！'));
+				$this->error(__('非法退款類型，請拒絕退款！'));
 			}
-			// 更新商品狀态
+			// 更新商品狀態
 			$this->setOrderGoodsState(3, $row['goods_ids']);
-			// 查詢订单是已确定收货
+			// 查詢訂單是已確定收貨
 			$order = model('app\index\model\wanlshop\Order')->get($row['order_id']);
 			$shop  = model('app\index\model\wanlshop\Shop')->get($order['shop_id']);
-			// 更新钱包
-			// 1.此订单如果已确认收货扣商家
-			// 2.此订单沒有确认收货，平台退款	
+			// 更新錢包
+			// 1.此訂單如果已確認收貨扣商家
+			// 2.此訂單沒有確認收貨，平台退款	
 			if($order['state'] == 4){
 				// 扣商家
-				controller('addons\wanlshop\library\WanlPay\WanlPay')->money(-$row['price'], $shop['user_id'], '确认收货，同意退款', 'refund', $order['order_no']);
+				controller('addons\wanlshop\library\WanlPay\WanlPay')->money(-$row['price'], $shop['user_id'], '確認收貨，同意退款', 'refund', $order['order_no']);
 
 				// 退款給用戶
-				controller('addons\wanlshop\library\WanlPay\WanlPay')->money(+$row['price'], $row['user_id'], '卖家同意退款', 'refund', $order['order_no']);
+				controller('addons\wanlshop\library\WanlPay\WanlPay')->money(+$row['price'], $row['user_id'], '賣家同意退款', 'refund', $order['order_no']);
 				
 				if($order['wholesale_id']!=0&&$order['is_wholesale']==1){
-					   controller('addons\wanlshop\library\WanlPay\WanlPay')->money(+$order['pay']['wholesale_price'], $shop['user_id'], '一键批发,货款退回', 'refund', $order['order_no']);
+					   controller('addons\wanlshop\library\WanlPay\WanlPay')->money(+$order['pay']['wholesale_price'], $shop['user_id'], '一鍵批發,貨款退回', 'refund', $order['order_no']);
 				}
 
-				//后续版本推送订购单
+				//後續版本推送訂購單
 			}else{
 				//退款給用戶
-				controller('addons\wanlshop\library\WanlPay\WanlPay')->money(+$row['price'], $row['user_id'], '卖家同意退款', 'refund', $order['order_no']);
+				controller('addons\wanlshop\library\WanlPay\WanlPay')->money(+$row['price'], $row['user_id'], '賣家同意退款', 'refund', $order['order_no']);
 
                 if($order['wholesale_id']!=0&&$order['is_wholesale']==1){
-					   controller('addons\wanlshop\library\WanlPay\WanlPay')->money(+$order['pay']['wholesale_price'], $shop['user_id'], '一键批发,货款退回', 'refund', $order['order_no']);
+					   controller('addons\wanlshop\library\WanlPay\WanlPay')->money(+$order['pay']['wholesale_price'], $shop['user_id'], '一鍵批發,貨款退回', 'refund', $order['order_no']);
 				}
-				//后续版本推送订购单
+				//後續版本推送訂購單
 			}
-			// 推送开始
+			// 推送開始
 			$this->pushRefund($row['id'], $row['order_id'], $row['goods_ids'], $title = '退款已完成');
-			// 写入日誌
-			$this->refundLog($row['user_id'], $ids, '卖家确认收到退货，並將'.$row['price'].'NT$退款到买家账号余额');
+			// 寫入日誌
+			$this->refundLog($row['user_id'], $ids, '賣家確認收到退貨，並將'.$row['price'].'NT$退款到買家賬號餘額');
 			// 更新退款
 			$result = $row->allowField(true)->save(['state' => 4,'completetime' => time()]);
-			// 如果僅有壹个商品的订单退款完成，同时关闭订单
+			// 如果僅有壹個商品的訂單退款完成，同時關閉訂單
 			$this->setRefundState($row['order_id']);
 		    Db::commit();
 		} catch (ValidateException $e) {
@@ -296,7 +296,7 @@ class Refund extends Wanlshop
 		    $this->error(__('You have no permission'));
 		}
 		if ($row['state'] != 0) {
-			$this->error(__('當前狀态，不可操作'));
+			$this->error(__('當前狀態，不可操作'));
 		}
 		if ($this->request->isPost()) {
 		    $params = $this->request->post("row/a");
@@ -305,14 +305,14 @@ class Refund extends Wanlshop
 		        Db::startTrans();
 		        try {
 					$params['state'] = 2;
-					// 写入日誌
-					$this->refundLog($row['user_id'], $row['id'], '卖家拒絕了您的退款申请，拒絕理由：'.$params['refuse_content']);
-					// 更新商品狀态
+					// 寫入日誌
+					$this->refundLog($row['user_id'], $row['id'], '賣家拒絕了您的退款申請，拒絕理由：'.$params['refuse_content']);
+					// 更新商品狀態
 					$this->setOrderGoodsState(5, $row['goods_ids']);
-					// 更新订单狀态
+					// 更新訂單狀態
 					$this->setRefundState($row['order_id']);
-					// 推送开始
-					$this->pushRefund($row['id'], $row['order_id'], $row['goods_ids'], $title = '退款申请被拒絕');
+					// 推送開始
+					$this->pushRefund($row['id'], $row['order_id'], $row['goods_ids'], $title = '退款申請被拒絕');
 					// 更新退款
 					$result = $row->allowField(true)->save($params);
 		            Db::commit();
@@ -341,25 +341,25 @@ class Refund extends Wanlshop
 	/**
 	 * 推送退款消息（方法內使用）
 	 *
-	 * @param string refund_id 订单ID
-	 * @param string order_id 订单ID
-	 * @param string goods_id 订单ID
-	 * @param string title 标题
+	 * @param string refund_id 訂單ID
+	 * @param string order_id 訂單ID
+	 * @param string goods_id 訂單ID
+	 * @param string title 標題
 	 */
 	private function pushRefund($refund_id = 0, $order_id = 0, $goods_id = 0, $title = '')
 	{
 		$order = model('app\index\model\wanlshop\Order')->get($order_id);
 		$goods = model('app\index\model\wanlshop\OrderGoods')->get($goods_id);
 		$msg = [
-			'user_id' => $order['user_id'], // 推送目标用戶
+			'user_id' => $order['user_id'], // 推送目標用戶
 			'shop_id' => $this->shop->id, 
-			'title' => $title,  // 推送标题
-			'image' => $goods['image'], // 推送图片
-			'content' => '您申请退款的商品 '.(mb_strlen($goods['title'],'utf8') >= 25 ? mb_substr($goods['title'],0,25,'utf-8').'...' : $goods['title']).' '.$title, 
-			'type' => 'order',  // 推送类型
-			'modules' => 'refund',  // 模塊类型
+			'title' => $title,  // 推送標題
+			'image' => $goods['image'], // 推送圖片
+			'content' => '您申請退款的商品 '.(mb_strlen($goods['title'],'utf8') >= 25 ? mb_substr($goods['title'],0,25,'utf-8').'...' : $goods['title']).' '.$title, 
+			'type' => 'order',  // 推送類型
+			'modules' => 'refund',  // 模塊類型
 			'modules_id' => $refund_id,  // 模塊ID
-			'come' => '订单'.$order['order_no'] // 來自
+			'come' => '訂單'.$order['order_no'] // 來自
 		];
 		$this->wanlchat->send($order['user_id'], $msg);
 		$notice = model('app\index\model\wanlshop\Notice');
@@ -368,12 +368,12 @@ class Refund extends Wanlshop
 	}
 	
 	/**
-	 * 修改订单狀态（方法內使用）
+	 * 修改訂單狀態（方法內使用）
 	 *
-	 * @ApiSummary  (WanlShop 修改订单狀态)
+	 * @ApiSummary  (WanlShop 修改訂單狀態)
 	 * @ApiMethod   (POST)
 	 * 
-	 * @param string $id 订单ID
+	 * @param string $id 訂單ID
 	 */
 	private function setRefundState($order_id = 0)
 	{
@@ -409,12 +409,12 @@ class Refund extends Wanlshop
 	}
 	
 	/**
-	 * 更新订单商品狀态（方法內使用）
+	 * 更新訂單商品狀態（方法內使用）
 	 *
-	 * @ApiSummary  (WanlShop 更新订单商品狀态)
+	 * @ApiSummary  (WanlShop 更新訂單商品狀態)
 	 * @ApiMethod   (POST)
 	 * 
-	 * @param string $status 狀态
+	 * @param string $status 狀態
 	 * @param string $goods_id 商品ID
 	 */
 	private function setOrderGoodsState($status = 0, $goods_id = 0)

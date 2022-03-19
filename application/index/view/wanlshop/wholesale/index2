@@ -13,7 +13,7 @@
         </div>
         <div class="title">{$item.title}</div>
         <div class="tag_warp">
-            <div class="sdby">一件代发</div>
+            <div class="sdby">一件代發</div>
         </div>
         <div class="price_warp price_warp_price_list">
             <span class="price"><i><strong>¥</strong></i>{$item.price}</span>

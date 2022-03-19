@@ -14,15 +14,15 @@ class ShopFreight extends Model
     // 表名
     protected $name = 'wanlshop_shop_freight';
     
-    // 自动写入时间戳字段
+    // 自動寫入時間戳字段
     protected $autoWriteTimestamp = 'int';
 
-    // 定义时间戳字段名
+    // 定義時間戳字段名
     protected $createTime = 'createtime';
     protected $updateTime = 'updatetime';
     protected $deleteTime = 'deletetime';
 
-    // 追加属性
+    // 追加屬性
     protected $append = [
         'delivery_text',
         'isdelivery_text',
@@ -84,9 +84,13 @@ class ShopFreight extends Model
         return isset($list[$value]) ? $list[$value] : '';
     }
 
-	public function freightdata()
-	{
-	    return $this->hasMany('app\index\model\wanlshop\ShopFreightData', 'freight_id', 'id', [], 'LEFT');
-	}
+	public function freightdata()
+
+	{
+
+	    return $this->hasMany('app\index\model\wanlshop\ShopFreightData', 'freight_id', 'id', [], 'LEFT');
+
+	}
+
 	
 }

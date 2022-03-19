@@ -57,13 +57,13 @@ class Coupon extends Wanlshop
 
     {
 
-        //设置过濾方法
+        //設置過濾方法
 
         $this->request->filter(['strip_tags']);
 
         if ($this->request->isAjax()) {
 
-            //如果发送的來源是Selectpage，則轉发到Selectpage
+            //如果發送的來源是Selectpage，則轉發到Selectpage
 
             if ($this->request->request('keyField')) {
 
@@ -121,7 +121,7 @@ class Coupon extends Wanlshop
 
     {
 
-        //设置过濾方法
+        //設置過濾方法
 
         $this->request->filter(['strip_tags']);
 
@@ -179,7 +179,7 @@ class Coupon extends Wanlshop
 
     {
 
-    	//设置过濾方法
+    	//設置過濾方法
 
     	$this->request->filter(['strip_tags', 'trim']);
 
@@ -265,7 +265,7 @@ class Coupon extends Wanlshop
 
     /**
 
-     * 编輯
+     * 編輯
 
      */
 

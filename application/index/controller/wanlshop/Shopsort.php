@@ -10,7 +10,7 @@ use think\exception\ValidateException;
 use fast\Tree;
 
 /**
- * 商家自定義分类
+ * 商家自定義分類
  *
  */
 class Shopsort extends Wanlshop
@@ -19,7 +19,7 @@ class Shopsort extends Wanlshop
     protected $noNeedRight = '*';
     
     /**
-     * Shopsort模型对象
+     * Shopsort模型對象
      * @var \app\index\model\wanlshop\Shopsort
      */
     protected $model = null;
@@ -50,7 +50,7 @@ class Shopsort extends Wanlshop
 
         if ($this->request->isAjax()) {
 
-    		//如果发送的來源是Selectpage，則轉发到Selectpage 1.0.2升級
+    		//如果發送的來源是Selectpage，則轉發到Selectpage 1.0.2升級
 
     		if ($this->request->request('keyField'))
 
@@ -77,7 +77,7 @@ class Shopsort extends Wanlshop
     }
    
     /**
-     * 选择鏈接
+     * 選擇鏈接
      */
     public function select()
     {
@@ -124,7 +124,7 @@ class Shopsort extends Wanlshop
     }
    
     /**
-     * 编輯
+     * 編輯
      */
     public function edit($ids = null)
     {

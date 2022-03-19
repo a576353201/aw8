@@ -8,7 +8,7 @@ use think\Config;
 use think\Db;
 
 /**
- * 主页
+ * 主頁
  * @internal
  */
 class Chat extends Wanlshop
@@ -26,7 +26,7 @@ class Chat extends Wanlshop
 
 	/**
 
-	 * 即时通讯綁定client_id 1.0.2升級
+	 * 即時通訊綁定client_id 1.0.2升級
 
 	 */
 
@@ -34,7 +34,7 @@ class Chat extends Wanlshop
 
 	{
 
-	    //设置过濾方法
+	    //設置過濾方法
 
 	    $this->request->filter(['strip_tags']);
 
@@ -48,7 +48,7 @@ class Chat extends Wanlshop
 
 			$this->wanlchat->bind($client_id, $user_id);
 
-	        // 查詢是否有離线消息 1.0.2升級 棄用貌似意義不大
+	        // 查詢是否有離線消息 1.0.2升級 棄用貌似意義不大
 
 	   //      $list = $this->model
 
@@ -90,11 +90,11 @@ class Chat extends Wanlshop
 
 		if(!$this->wanlchat->isWsStart()){
 
-			$this->error('请啟动IM即时通讯服务');
+			$this->error('請啟動IM即時通訊服務');
 
 		}
 
-		//设置过濾方法
+		//設置過濾方法
 
 		$this->request->filter(['strip_tags']);
 
@@ -148,7 +148,7 @@ class Chat extends Wanlshop
 
 		    foreach (collection($list)->toArray() as $user) {
 
-		        //查詢店铺为讀消息
+		        //查詢店鋪爲讀消息
 
 		        $count = $chatModel
 
@@ -156,7 +156,7 @@ class Chat extends Wanlshop
 
 		            ->count();
 
-		        //查詢和店铺最新消息
+		        //查詢和店鋪最新消息
 
 		        $content = $chatModel->where("((form_uid={$uid} and to_id={$user['id']}) or (form_uid={$user['id']} and to_id={$uid})) and type='chat'")
 
@@ -166,7 +166,7 @@ class Chat extends Wanlshop
 
 		            ->find();
 
-		        //轉換图片类型
+		        //轉換圖片類型
 
 				if($content['message']['type'] == 'img'){
 
@@ -190,11 +190,11 @@ class Chat extends Wanlshop
 
 				}else{
 
-					$msgtext = '[未知消息类型]';
+					$msgtext = '[未知消息類型]';
 
 				}
 
-		        //整理输出
+		        //整理輸出
 
 		        $chat[] = [
 
@@ -214,7 +214,7 @@ class Chat extends Wanlshop
 
 		        ];
 
-				// 时间排序
+				// 時間排序
 
 				$datetime[] = $content['createtime'];
 
@@ -252,7 +252,7 @@ class Chat extends Wanlshop
 
 	/**
 
-	 * 历史消息条 1.0.2升級
+	 * 歷史消息條 1.0.2升級
 
 	 */
 
@@ -260,7 +260,7 @@ class Chat extends Wanlshop
 
 	{
 
-	    //设置过濾方法
+	    //設置過濾方法
 
 	    $this->request->filter(['strip_tags']);
 
@@ -272,7 +272,7 @@ class Chat extends Wanlshop
 
 	        $uid = $this->auth->id;
 
-	        // 设置成已讀
+	        // 設置成已讀
 
 	        $this->model
 
@@ -288,7 +288,7 @@ class Chat extends Wanlshop
 
 	            ->order('createtime esc')
 
-	            ->limit(500) //最多拉取500条，叠代版本做分页
+	            ->limit(500) //最多拉取500條，疊代版本做分頁
 
 	            ->select();
 
@@ -316,7 +316,7 @@ class Chat extends Wanlshop
 
 	{
 
-	    //设置过濾方法
+	    //設置過濾方法
 
 	    $this->request->filter(['strip_tags']);
 
@@ -328,7 +328,7 @@ class Chat extends Wanlshop
 
 	        $uid = $this->auth->id;
 
-	        // 设置成已讀
+	        // 設置成已讀
 
 	        $this->model
 
@@ -343,11 +343,11 @@ class Chat extends Wanlshop
 	}
     
     /**
-     * 发送消息
+     * 發送消息
      */
     public function chatSend()
     {
-        //设置过濾方法
+        //設置過濾方法
         $this->request->filter(['strip_tags']);
         if ($this->request->isAjax()) {
             $message = $this->request->post();
@@ -355,9 +355,9 @@ class Chat extends Wanlshop
 
 			$message['form']['shop_id'] = $this->shop->id;
             // 未來增加權限判斷
-            // 查詢是否在线
+            // 查詢是否在線
 			$online = $this->wanlchat->isOnline($message['to_id']);
-            // 保存聊天条到服务器
+            // 保存聊天條到服務器
             $data = $this->model;
             $data->form_uid = $message['form']['id'];
             $data->to_id = $message['to_id'];
@@ -367,9 +367,9 @@ class Chat extends Wanlshop
             $data->online = $online;
             $data->save();
             $message['id'] = $data->id;
-            // 在线发送
+            // 在線發送
             $online == 1 ? ($this->wanlchat->send($message['to_id'], $message)) : '';
-            $this->success(__('发送成功'));
+            $this->success(__('發送成功'));
         }
     }
 }

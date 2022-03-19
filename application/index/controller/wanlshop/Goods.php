@@ -10,7 +10,7 @@ use think\exception\ValidateException;
 use fast\Tree;
 
 /**
- * 产品管理
+ * 產品管理
  * @internal
  */
 class Goods extends Wanlshop
@@ -20,7 +20,7 @@ class Goods extends Wanlshop
     protected $searchFields = 'title';
     
     /**
-     * Goods模型对象
+     * Goods模型對象
      * @var \app\index\model\wanlshop\Goods
      */
     protected $model = null;
@@ -29,10 +29,10 @@ class Goods extends Wanlshop
     {
         parent::_initialize();
         $this->model = new \app\index\model\wanlshop\Goods;
-        // 类目
+        // 類目
         $tree = Tree::instance();
 
-		// 1.0.2升級 过濾隐藏
+		// 1.0.2升級 過濾隱藏
         $tree->init(model('app\index\model\wanlshop\Category')->where(['type' => 'goods', 'isnav' => 1])->field('id,pid,name')->order('weigh asc,id asc')->select());
         $this->assignconfig('channelList', $tree->getTreeArray(0));
         $this->view->assign("flagList", $this->model->getFlagList());
@@ -48,12 +48,12 @@ class Goods extends Wanlshop
      */
     public function index()
     {
-        //當前是否为关联查詢
+        //當前是否爲關聯查詢
         $this->relationSearch = true;
-        //设置过濾方法
+        //設置過濾方法
         $this->request->filter(['strip_tags']);
         if ($this->request->isAjax()) {
-            //如果发送的來源是Selectpage，則轉发到Selectpage
+            //如果發送的來源是Selectpage，則轉發到Selectpage
             if ($this->request->request('keyField')) {
                 return $this->selectpage();
             }
@@ -83,7 +83,7 @@ class Goods extends Wanlshop
     }
     
     /**
-     * 选择鏈接
+     * 選擇鏈接
      */
     public function select()
     {
@@ -94,7 +94,7 @@ class Goods extends Wanlshop
     }
     
     /**
-     * 仓库中的商品
+     * 倉庫中的商品
      */
     public function stock()
     {
@@ -109,7 +109,7 @@ class Goods extends Wanlshop
 
 	{
 
-		//设置过濾方法
+		//設置過濾方法
 
 		$this->request->filter(['']);
 
@@ -119,9 +119,9 @@ class Goods extends Wanlshop
 
 	        if ($params) {
 
-				// 判斷产品属性是否存在
+				// 判斷產品屬性是否存在
 
-				empty($params['spuItem'])?$this->error(__('请完善：销售资讯-产品內容')):'';
+				empty($params['spuItem'])?$this->error(__('請完善：銷售資訊-產品內容')):'';
 
 	            $result = false;
 
@@ -129,9 +129,9 @@ class Goods extends Wanlshop
 
 	            try {
 
-	                $spudata = isset($params['spu'])?$params['spu']:$this->error(__('请填写销售资讯-产品內容'));
+	                $spudata = isset($params['spu'])?$params['spu']:$this->error(__('請填寫銷售資訊-產品內容'));
 
-	                $spuItem = isset($params['spuItem'])?$params['spuItem']:$this->error(__('请填写销售资讯-产品內容-产品規格'));
+	                $spuItem = isset($params['spuItem'])?$params['spuItem']:$this->error(__('請填寫銷售資訊-產品內容-產品規格'));
 
 	                // 獲取自增ID
 
@@ -175,7 +175,7 @@ class Goods extends Wanlshop
 
 	                }
 
-					// 写入SPU
+					// 寫入SPU
 
 					$spu = [];
 
@@ -199,7 +199,7 @@ class Goods extends Wanlshop
 
 					}
 
-					// 写入SKU
+					// 寫入SKU
 
 					$sku = [];
 
@@ -278,7 +278,7 @@ class Goods extends Wanlshop
         
         if(empty($this->channelList)){
             $params1['shop_id']  = $shop_id;
-            $params1['name']     = '不另行分类';
+            $params1['name']     = '不另行分類';
             $params1['pid']      = 0;
             $params1['image']    = '/uploads/20210112/375bbf2c271dd04d69c2e19c0d42f446.png';
             $params1['status']   = 'normal';
@@ -309,7 +309,7 @@ class Goods extends Wanlshop
                 Db::startTrans();
                 try {
 					$this->model2->shop_id    = $shop_id;
-					$this->model2->name       = '包邮';
+					$this->model2->name       = '包郵';
 					$this->model2->delivery   = 5;
 					$this->model2->isdelivery = 1;
 					if($this->model2->save()){
@@ -335,11 +335,11 @@ class Goods extends Wanlshop
 
 		$row['brand'] = model('app\index\model\wanlshop\Brand')->where(['state' => 1])->count();
 
-		// 判斷是否有店铺分类
+		// 判斷是否有店鋪分類
 
 		$row['shopsort'] = model('app\index\model\wanlshop\ShopSort')->where('shop_id',$shop_id)->count();
 
-		// 判斷是否有运费模板
+		// 判斷是否有運費模板
 
 		$row['freight'] = model('app\index\model\wanlshop\ShopFreight')->where('shop_id',$shop_id)->count();
 
@@ -347,7 +347,7 @@ class Goods extends Wanlshop
 
 		$row['config'] = model('app\index\model\wanlshop\ShopConfig')->where('shop_id',$shop_id)->find();
 
-		// 打开方式
+		// 打開方式
 
 		$this->assignconfig("isdialog", IS_DIALOG);
 
@@ -359,12 +359,12 @@ class Goods extends Wanlshop
 
     
     /**
-     * 编輯
+     * 編輯
      */
     public function edit($ids = null)
     {
 
-		//设置过濾方法
+		//設置過濾方法
 
 		$this->request->filter(['']);
         $row = $this->model->get($ids);
@@ -387,24 +387,24 @@ class Goods extends Wanlshop
         if ($this->request->isPost()) {
             
             if ($row['wholesale_id'] != 0) {
-                $this->error('批发商品不予許修改');
+                $this->error('批發商品不予許修改');
             }
 
             $params = $this->request->post("row/a");
             if ($params) {
 
-				// 判斷产品属性是否存在
+				// 判斷產品屬性是否存在
 
-				empty($params['spuItem'])?$this->error(__('请完善：销售资讯-产品內容')):'';
+				empty($params['spuItem'])?$this->error(__('請完善：銷售資訊-產品內容')):'';
                 $result = false;
                 Db::startTrans();
                 try {
 
-					$spudata = isset($params['spu'])?$params['spu']:$this->error(__('请填写销售资讯-产品內容'));
+					$spudata = isset($params['spu'])?$params['spu']:$this->error(__('請填寫銷售資訊-產品內容'));
 
-					$spuItem = isset($params['spuItem'])?$params['spuItem']:$this->error(__('请填写销售资讯-产品內容-产品規格'));
+					$spuItem = isset($params['spuItem'])?$params['spuItem']:$this->error(__('請填寫銷售資訊-產品內容-產品規格'));
 
-					// 写入表单
+					// 寫入表單
 
 					$data = $params;
 
@@ -420,11 +420,11 @@ class Goods extends Wanlshop
 					$data['price'] = min($data['price']);
 					$maxprice      = max($maxprice);
 					if($row['wholesale_id']!=0&&$row['maxprice']!=0&&$maxprice>$row['maxprice']){
-					    echo '{"code":0,"msg":"零售价不能高出批发价的12%","data":"","url":"","wait":3}';exit;
+					    echo '{"code":0,"msg":"零售價不能高出批發價的12%","data":"","url":"","wait":3}';exit;
 					}
                     $result = $row->allowField(true)->save($data);
 
-					// 刪除原來数据,重新写入SPU
+					// 刪除原來數據,重新寫入SPU
 
 					model('app\index\model\wanlshop\GoodsSpu')
 
@@ -454,7 +454,7 @@ class Goods extends Wanlshop
 
 					}
 
-					//标记旧版SKU数据
+					//標記舊版SKU數據
 
 					$oldsku = [];
 
@@ -476,7 +476,7 @@ class Goods extends Wanlshop
 
 					}
 
-					// 写入SKU
+					// 寫入SKU
 
 					$sku = [];
 
@@ -573,7 +573,7 @@ class Goods extends Wanlshop
     }
     
     /**
-     * 添加类目属性
+     * 添加類目屬性
      */
     public function attribute()
     {
@@ -592,7 +592,7 @@ class Goods extends Wanlshop
      */
     public function recyclebin()
     {
-        //设置过濾方法
+        //設置過濾方法
         $this->request->filter(['strip_tags']);
         if ($this->request->isAjax()) {
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
@@ -651,7 +651,7 @@ class Goods extends Wanlshop
     
     /**
 
-     * 真实刪除
+     * 真實刪除
 
      */
 

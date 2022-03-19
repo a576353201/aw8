@@ -14,7 +14,7 @@ use think\Session;
 use think\Validate;
 
 /**
- * 会员中心
+ * 會員中心
  */
 class User extends Frontend
 {
@@ -31,7 +31,7 @@ class User extends Frontend
             $this->error(__('User center already closed'));
         }
 
-        //監聽注册登录退出的事件
+        //監聽註冊登錄退出的事件
         Hook::add('user_login_successed', function ($user) use ($auth) {
             $expire = input('post.keeplogin') ? 30 * 86400 : 0;
             Cookie::set('uid', $user->id, $expire);
@@ -52,7 +52,7 @@ class User extends Frontend
     }
 
     /**
-     * 会员中心
+     * 會員中心
      */
     public function index()
     {
@@ -63,7 +63,7 @@ class User extends Frontend
     }
 
     /**
-     * 注册会员
+     * 註冊會員
      */
     public function register()
     {
@@ -101,7 +101,7 @@ class User extends Frontend
                 'mobile'    => $mobile,
                 '__token__' => $token,
             ];
-            //验证码
+            //驗證碼
             $captchaResult = true;
             $captchaType = config("fastadmin.user_register_captcha");
             if ($captchaType) {
@@ -142,7 +142,7 @@ class User extends Frontend
     }
 
     /**
-     * 会员登录
+     * 會員登錄
      */
     public function login()
     {
@@ -196,7 +196,7 @@ class User extends Frontend
     }
 
     /**
-     * 退出登录
+     * 退出登錄
      */
     public function logout()
     {
@@ -206,7 +206,7 @@ class User extends Frontend
     }
 
     /**
-     * 个人信息
+     * 個人信息
      */
     public function profile()
     {
@@ -215,7 +215,7 @@ class User extends Frontend
     }
 
     /**
-     * 修改密码
+     * 修改密碼
      */
     public function changepwd()
     {
@@ -265,7 +265,7 @@ class User extends Frontend
 
     public function attachment()
     {
-        //设置过濾方法
+        //設置過濾方法
         $this->request->filter(['strip_tags']);
         if ($this->request->isAjax()) {
             $mimetypeQuery = [];

@@ -5,7 +5,7 @@ namespace app\index\controller\wanlshop;
 use app\common\controller\Wanlshop;
 
 /**
- * 图标管理
+ * 圖標管理
  *
  * @icon fa fa-circle-o
  */
@@ -14,7 +14,7 @@ class Icon extends Wanlshop
     protected $noNeedLogin = '*';
     protected $noNeedRight = '*';
     /**
-     * Icon模型对象
+     * Icon模型對象
      * @var \app\admin\model\wanlshop\Icon
      */
     protected $model = null;
@@ -31,9 +31,9 @@ class Icon extends Wanlshop
      */
     public function index()
     {
-        //當前是否为关联查詢
+        //當前是否爲關聯查詢
         $this->relationSearch = true;
-        //设置过濾方法
+        //設置過濾方法
         $this->request->filter(['strip_tags']);
         if ($this->request->isAjax()) {
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
@@ -57,7 +57,7 @@ class Icon extends Wanlshop
     }
     
     /**
-     * 选择鏈接
+     * 選擇鏈接
      */
     public function select()
     {
