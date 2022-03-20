@@ -406,7 +406,7 @@ class User extends Api
      * @param string $newpassword 新密码
      * @param string $captcha     验证码
      */
-    public function resetpwd()
+    public function resetpwd2()
     {
 		//设置过濾方法
 		$this->request->filter(['strip_tags']);
@@ -439,6 +439,40 @@ class User extends Api
 			}
 		}
 		$this->error(__('非法请求'));
+    }
+
+
+
+
+
+    public function resetpwd()
+    {
+        //设置过濾方法
+        $this->request->filter(['strip_tags']);
+        if ($this->request->isPost()) {
+            $user = $this->auth->getUser();
+
+            $oldpay   = $this->request->post('oldpwd');
+            $newpay   = $this->request->post('newpwd');
+            $renewpay = $this->request->post('newpwd1');
+            $newpassword = $this->request->post("newpassword");
+
+
+            if($newpay!=$newpassword){
+                $this->error('兩次密码输入不一致');
+            }
+            //var_dump($user);exit;
+            if(md5(md5($oldpay) . $user['salt'])==$user['password']){
+                //$ret = $this->auth->changepwd($newpay, '', true);
+                $user->password = md5(md5($newpay) . $user['salt']);
+                $user->save();
+                $this->success(__('Reset password successful'));
+            }else{
+                $this->error('旧密码输入錯誤');
+            }
+
+        }
+        $this->error(__('非法请求'));
     }
     
     /**
