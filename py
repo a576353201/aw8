@@ -27,3 +27,6 @@ modulenotfounderror no module named ‘_ctypes’ make *** install error 1
 yum install libffi-devel -y
 再：
 make install
+
+
+/usr/local/python3/bin/pip3 install requests
