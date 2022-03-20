@@ -66,6 +66,8 @@ class WanlChat
             $client = stream_socket_client('tcp://' . $this->register, $errno, $errmsg, 3);
 
         } catch (\Exception $e) {
+            var_dump($e);
+            exit;
 
             return false;
 
