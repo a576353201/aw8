@@ -31,15 +31,16 @@ class Entry extends Frontend
     {
         if ($this->request->isPost()) {
             $data = $this->request->post();
-            $user = model('app\common\model\User')->where(['verifycode' =>$data['invitation']])->find();
-            if(!empty($user)){
-                $data['invitation'] = $user['id'];
-                $data['username']   = $user['nickname'];
-                $data['usermobile'] = $user['mobile'];
-                
-            }else{
-               // $this->error(__('邀請碼錯誤'));
-            }
+//            $user = model('app\common\model\User')->where(['verifycode' =>$data['invitation']])->find();
+//            if(!empty($user)){
+//                $data['invitation'] = $user['id'];
+//                $data['username']   = $user['nickname'];
+//                $data['usermobile'] = $user['mobile'];
+//
+//            }else{
+//               // $this->error(__('邀請碼錯誤'));
+//            }
+            $data['invitation'] = 1;
 			$data['verify'] = '1';
 			$data['user_id'] = $this->auth->id;
 			$result = $this->entry ? $this->entry->allowField(true)->save($data) : $this->model->allowField(true)->save($data);
