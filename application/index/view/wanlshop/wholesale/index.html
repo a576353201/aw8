@@ -4,7 +4,35 @@
             <li <?php if($status==0){?>class="active"<?php }?>><a href="{:url('index/wanlshop.wholesale/index')}?order=desc&offset=0&limit=10&status=0">{:__('All')}</a></li>
             <li <?php if($status==1){?>class="active"<?php }?>><a href="{:url('index/wanlshop.wholesale/index')}?order=desc&offset=0&limit=10&status=1">{:__('On the shelf')}</a></li>
             <li <?php if($status==2){?>class="active"<?php }?>><a href="{:url('index/wanlshop.wholesale/index')}?order=desc&offset=0&limit=10&status=2">{:__('Not on sale')}</a></li>
+
+
+
+
+
         </ul>
+
+        <form action="" method="get" class="sidebar-form" onsubmit="return false;">
+
+            <div class="input-group">
+
+                <input type="text" name="q" class="form-control" placeholder="搜索商品名称">
+
+                <span class="input-group-btn">
+
+										<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+
+										</button>
+
+									</span>
+
+                <div class="menuresult list-group sidebar-form hide" style="width: 210px;">
+
+                </div>
+
+            </div>
+
+        </form>
+
 
     </div>
     <div class="panel-body">

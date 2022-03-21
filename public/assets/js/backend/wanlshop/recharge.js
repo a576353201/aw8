@@ -44,7 +44,7 @@ function(e, t, a, i, r) {
                     formatter: i.api.formatter.images
                 },
                 {
-                    field: "money",
+                    field: "amount",
                     title: __("Money")
                 },
                 {

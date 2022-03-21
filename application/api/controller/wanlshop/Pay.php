@@ -154,7 +154,7 @@ class Pay extends Api
                 'status'    => 'created'
             ]);
 
-                $this->success('提现申请成功！请等待后台審核', $money);
+                $this->success('充值申请成功！请等待后台審核', $money);
 
 
 		}

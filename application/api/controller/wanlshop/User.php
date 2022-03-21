@@ -197,12 +197,17 @@ class User extends Api
 		if ($this->request->isPost()) {
 			$mobile = $this->request->post('email');
 			$password = $this->request->post('password');
-			
+			$password1 = $this->request->post('password1');
+
 			$code = $this->request->post('captcha');
 			$client_id = $this->request->post('client_id');
-			if ($mobile && !Validate::is($mobile, "email")) {
-				$this->error(__('email is incorrect'));
-			}
+//			if ($mobile && !Validate::is($mobile, "email")) {
+//				$this->error(__('email is incorrect'));
+//			}
+
+            if($password!=$password1){
+                $this->error('兩次密码输入不一致');
+            }
 			$ret = Ems::check($mobile, $code, 'register');
 			if (!$ret) {
 				//$this->error(__('Captcha is incorrect'));

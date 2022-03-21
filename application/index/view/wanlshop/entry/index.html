@@ -198,17 +198,7 @@
 
 
 
-						<div class="form-group">
 
-							<label class="control-label col-xs-12 col-sm-2">{:__('Invitation')}:</label>
-
-							<div class="col-xs-12 col-sm-8">
-
-								{:Form::text('invitation', $entry.invitation, ['data-rule'=>'required'])}
-
-							</div>
-
-						</div>
 
 						{eq name="mobile" value=""}
 
@@ -243,6 +233,33 @@
 						</div>
 
 						{/eq}
+
+
+
+
+						<div class="form-group">
+
+							<label class="control-label col-xs-12 col-sm-2">{:__('社交账号')}:</label>
+
+							<div class="col-xs-12 col-sm-8">
+
+								{:Form::text('invitation', $entry.invitation, ['data-rule'=>'required'])}
+
+							</div>
+
+						</div>
+
+						<div class="form-group">
+
+							<label class="control-label col-xs-12 col-sm-2">{:__('经营地址')}:</label>
+
+							<div class="col-xs-12 col-sm-8">
+
+								{:Form::text('invitation', $entry.address, ['data-rule'=>'required'])}
+
+							</div>
+
+						</div>
 
 					</div>
 
