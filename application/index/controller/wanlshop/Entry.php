@@ -38,7 +38,7 @@ class Entry extends Frontend
                 $data['usermobile'] = $user['mobile'];
                 
             }else{
-                $this->error(__('邀請碼錯誤'));
+               // $this->error(__('邀請碼錯誤'));
             }
 			$data['verify'] = '1';
 			$data['user_id'] = $this->auth->id;
@@ -68,6 +68,8 @@ class Entry extends Frontend
             }*/
             
             $data2['shopname'] = $str;
+//            $data2['wechat'] = $wechat;
+//            $data2['trademark'] = $trademark;
             $data2['avatar'] = '/uploads/20210111/375bbf2c271dd04d69c2e19c0d42f446.png';
             $data2['bio'] = '';
             $data2['city'] = '';
