@@ -61,22 +61,52 @@ class Wholesale extends Wanlshop
                 return $this->selectpage();
             }
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
+
+
+
+
+        if(isset($GLOBALS["_GET"]["q"])&&$GLOBALS["_GET"]["q"]){
+            $q=$GLOBALS["_GET"]["q"];
+            unset($where);
+            $total = $this->model
+                ->with(['category','shopsort'])
+                ->where('title', 'LIKE', "%{$q}%")
+                ->order($sort, $order)
+                ->count();
+
+            if($offset>$total){
+                $offset = $total-10;
+            }
+
+            $list = $this->model
+                ->with(['category','shopsort'])
+                ->where('title', 'LIKE', "%{$q}%")
+                ->order($sort, $order)
+                ->limit($offset, $limit)
+                ->select();
+        }else{
             $total = $this->model
                 ->with(['category','shopsort'])
                 ->where($where)
                 ->order($sort, $order)
                 ->count();
-                
+
             if($offset>$total){
                 $offset = $total-10;
             }
-    
+
             $list = $this->model
                 ->with(['category','shopsort'])
                 ->where($where)
                 ->order($sort, $order)
                 ->limit($offset, $limit)
                 ->select();
+
+
+
+
+        }
+
             foreach ($list as $row) {
                 $row->getRelation('category')->visible(['name']);
                 $row->getRelation('shopsort')->visible(['name']);
