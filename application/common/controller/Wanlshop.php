@@ -142,6 +142,9 @@ class Wanlshop extends Controller
 
 				switch ($this->shopauth->verify) {
 
+
+
+
 				    case 0:
 
 						$this->error(__('審核信息尚未完善'),'index/wanlshop/entry');

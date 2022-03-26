@@ -41,11 +41,63 @@ class Address extends Api
     public function address()
     {
         if ($this->request->isPost()) {
+
+
+
+
+
+
 			//设置过濾方法
 			$this->request->filter(['strip_tags']);
         	$request = $this->request->post();
         	$address = new \app\api\model\wanlshop\Address();
         	$data = $request['data'];
+
+
+            switch ($data['formatted_address']){
+
+                case "0":
+                    $data['country']='韩国';
+                    $data['province']='韩国';
+                    $data['city']='韩国';
+                    break;
+                case "1":
+                    $data['country']='日本';
+                    $data['province']='日本';
+                    $data['city']='日本';
+                    break;
+
+
+                case "2":
+                    $data['country']='新加坡';
+                    $data['province']='新加坡';
+                    $data['city']='新加坡';
+                    break;
+
+                case "3":
+                    $data['country']='马来西亚';
+                    $data['province']='马来西亚';
+                    $data['city']='马来西亚';
+                    break;
+
+
+                case "4":
+                    $data['country']='泰国';
+                    $data['province']='泰国';
+                    $data['city']='泰国';
+                    break;
+
+                case "5":
+                    $data['country']='菲律宾';
+                    $data['province']='菲律宾';
+                    $data['city']='菲律宾';
+                    break;
+
+
+
+
+
+            }
         	$data['user_id'] = $this->auth->id;
         	$count = $address->where(['user_id'=>$data['user_id']])->count();
 			// 操作        	
