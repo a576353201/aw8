@@ -80,9 +80,9 @@ class Validate extends Api
     public function check_mobile_exist()
     {
         $mobile = $this->request->request('mobile');
-        $count = User::where('mobile', '=', $mobile)->count();
+        $count = User::where('email', '=', $mobile)->count();
         if (!$count) {
-            $this->error(__('手机号不存在'));
+            $this->error(__('手机号不存在22'));
         }
         $this->success();
     }

@@ -222,8 +222,8 @@ class Auth
      */
     public function login($account, $password)
     {
-        $field = Validate::is($account, 'email') ? 'email' : (Validate::regex($account, '/^1\d{10}$/') ? 'mobile' : 'username');
-        $user = User::get([$field => $account]);
+      //  $field = Validate::is($account, 'mobile') ? 'email' : (Validate::regex($account, '/^1\d{10}$/') ? 'mobile' : 'username');
+        $user = User::get(['email' => $account]);
         if (!$user) {
             $this->setError('Account is incorrect');
             return false;

@@ -116,6 +116,42 @@ class Recharge extends Backend
     	return $this->view->fetch();
 
     }
+
+
+
+    /**
+     * 變更会员余额
+     * @param int    $money   余额
+     * @param int    $user_id 会员ID
+     * @param string $memo    備注
+     * @param string $type    类型
+     * @param string $ids  	  業务ID
+     */
+    public  function money($money, $user_id, $memo, $type = '', $ids = '')
+    {
+        $user = model('app\common\model\User')->get($user_id);
+        if ($user && $money != 0) {
+            $before = $user->money;
+            $after = function_exists('bcadd') ? bcadd($user->money, $money, 2) : $user->money + $money;
+            //更新会员信息
+            $user->save(['money' => $after]);
+            //写入日誌
+            $row = model('app\common\model\MoneyLog')->create([
+                'user_id' => $user_id,
+                'money' => $money, // 操作金额
+                'before' => $before, // 原金额
+                'after' => $after, // 增加后金额
+                'memo' => $memo, // 備注
+                'type' => $type, // 类型
+                'service_ids' => $ids // 業务ID
+            ]);
+            return $row;
+        }else{
+
+            return ['code' => 500 ,'msg' => '變更金额失敗'];
+
+        }
+    }
     
     
     /**
@@ -178,14 +214,14 @@ class Recharge extends Backend
 
     		    $result = $row->allowField(true)->save([
 
-					'status' => 'successed',
+					'status' => 'paid',
 
-					'transfertime' => time()
+					'updatetime' => time()
 
 				]);
 				
 				// 更新用户金额
-                controller('addons\wanlshop\library\WanlPay\WanlPay')->money(+$row['money'], $row['user_id'], '儲值成功', 'recharge', $row['id']);
+                self::money(+$row['amount'], $row['user_id'], '儲值成功', 'recharge', $row['id']);
 
     		    Db::commit();
 

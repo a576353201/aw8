@@ -6,12 +6,15 @@ return [
     'Shopname' => '店鋪名稱',
     'Keywords' => '店鋪關鍵字',
     'Description' => '店鋪描述',
+
+    'dpspjjb' => '店鋪商品加价比',
+
     'Service_ids' => '店鋪服務',
     'Avatar' => '店鋪頭像',
     'State' => '店鋪類型',
     'Level' => '店鋪等級',
     'Bio' => '店鋪簡介',
-    'City' => '店鋪所在地2',
+    'City' => '店鋪所在地',
     'Like' => '收藏/喜歡',
     'Weigh' => '權重',
     'Createtime' => '創建時間',

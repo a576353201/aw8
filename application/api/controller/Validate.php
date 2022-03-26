@@ -97,7 +97,7 @@ class Validate extends Api
         $mobile = $this->request->request('mobile');
         $count = User::where('mobile', '=', $mobile)->count();
         if (!$count) {
-            $this->error(__('手机号不存在'));
+            $this->error(__('手机号不存在33'));
         }
         $this->success();
     }

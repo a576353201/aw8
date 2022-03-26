@@ -26,6 +26,8 @@ class Shop extends Model
     protected $append = [
         'state_text',
 
+
+
         'status_text',
 
 		'isself' //追加是否爲自營店

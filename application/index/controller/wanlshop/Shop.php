@@ -96,9 +96,9 @@ class Shop extends Wanlshop
                     $result = $row->allowField(true)->save($params);
 
 
-                    if($row->shop->dpspjjb!=$params['dpspjjb']){
-
-                    }
+//                    if($row->dpspjjb!=$params['dpspjjb']){
+//
+//                    }
                     Db::commit();
                 } catch (ValidateException $e) {
                     Db::rollback();
