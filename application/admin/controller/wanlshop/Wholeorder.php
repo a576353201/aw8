@@ -275,7 +275,7 @@ class Wholeorder extends Backend
             $order = [];
 			foreach ($request['row']['order']['id'] as $key => $id) {
                 $express_no = $request['row']['order']['express_no'][$key];
-                $express_name = $request['row']['express_name'];
+                $express_name = $request['row']['order']['express_name'][$key];
                 $order[] = [
                     'id' => $id,
                     'express_name' => $express_name,

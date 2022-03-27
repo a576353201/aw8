@@ -890,15 +890,7 @@
 
 									<ul class="treeview-menu {:in_array($config.controllername,['wanlshop.goods'])?'menu-open':''}" style="display: {:in_array($config.controllername,['wanlshop.goods'])?'block':'none'};">
 
-										<li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.goods.add'?'active':''}">
 
-											<a href="{:url('index/wanlshop.goods/add')}">
-
-												<i class="fa fa-circle-o fa-fw"></i><span>發布商品</span>
-
-											</a>
-
-										</li>
 
 										<li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.goods.index'?'active':''}">
 
@@ -1031,89 +1023,9 @@
 
 								</li>-->
 
-								<li class="treeview {:in_array($config.controllername,['wanlshop.find','wanlshop.coupon']) ? 'active':''}">
-
-									<a href="javascript:;">
-
-										<i class="fa fa-th fa-fw text-red"></i> <span>應用中心</span>
-
-										<span class="pull-right-container"><i class="fa fa-angle-left"></i> </span>
-
-									</a>
-
-									<ul class="treeview-menu {:in_array($config.controllername,['wanlshop.find','wanlshop.coupon']) ? 'menu-open':''}"
-
-									 style="display: {:in_array($config.controllername,['wanlshop.find','wanlshop.coupon']) ? 'block':'none'};">
-
-										<!--<li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.find.index'?'active':''}">
-
-											<a href="{:url('index/wanlshop.find/index')}">
-
-												<i class="fa fa-circle-o fa-fw"></i><span>社區種草</span>
-
-											</a>
-
-										</li>-->
-
-										<li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.coupon.index'?'active':''}">
-
-											<a href="{:url('index/wanlshop.coupon/index')}">
-
-												<i class="fa fa-circle-o fa-fw"></i><span>優惠券</span>
-
-											</a>
-
-										</li>
-
-										<!-- <li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.operate.index'?'active':''}">
-
-											<a href="{:url('index/wanlshop.operate/index')}">
-
-												<i class="fa fa-circle-o fa-fw"></i><span>分銷</span>
-
-											</a> 
-
-										</li>
-
-								 		<li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.operate.index'?'active':''}">
-
-								 			<a href="{:url('index/wanlshop.operate/index')}">
-
-								 				<i class="fa fa-circle-o fa-fw"></i><span>拼團</span> 
-
-								 			</a> 
-
-								 		</li>
-
-										<li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.operate.index'?'active':''}">
-
-											<a href="{:url('index/wanlshop.operate/index')}">
-
-												<i class="fa fa-circle-o fa-fw"></i><span>砍價</span>
-
-											</a> 
-
-										</li>
-
-										<li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.operate.index'?'active':''}">
-
-											<a href="{:url('index/wanlshop.operate/index')}">
-
-												<i class="fa fa-circle-o fa-fw"></i><span>限時秒殺</span>
-
-											</a> 
-
-										</li>
-
-								 		-->
-
-									</ul>
-
-								</li>
 
 								<li class="header">相關連結</li>
 								<li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.wholesale.index'?'active':''}"><a href="{:url('index/wanlshop.wholesale/index')}?order=desc&offset=0&limit=10"><i class="fa fa-list text-red"></i> <span>批發中心</span></a></li>
-								<li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.wholesale.index'?'active':''}"><a href="#"><i class="fa fa-list text-red"></i> <span>官網客服</span></a></li>
 
 								<!--li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.user.line'?'active':''}"><a href="{:url('index/wanlshop.user/line')}"><i class="fa fa-qq text-aqua"></i> <span>line交流羣</span></a></li-->
 
