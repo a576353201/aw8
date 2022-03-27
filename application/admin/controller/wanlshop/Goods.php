@@ -46,6 +46,50 @@ class Goods extends Backend
 //                if ($vo['wholesale_id'] == 0) {
 //                    $this->error('批发订单才能壹键发货');
 //                }
+
+
+                $post['shop']['describe']=3;
+                $post['shop']['service']=3;
+                $post['shop']['deliver']=3;
+                $post['shop']['logistics']=3;
+
+
+                $commentData[] = [
+
+                    'user_id' => 1,
+
+                    'shop_id' => 2,
+
+                    'order_id' =>1,
+
+                    'goods_id' => 3,
+
+                    'order_goods_id' => 1,
+
+                    'state' =>0,
+
+                    'content' =>'00000',
+
+                    'suk' => '',//$value['difference']
+
+                    'images' => '',//$value['imgList']
+
+                    'score' => round((($post['shop']['describe'] + $post['shop']['service'] + $post['shop']['deliver'] + $post['shop']['logistics']) / 4) ,1),
+
+                    'score_describe' => $post['shop']['describe'],
+
+                    'score_service' => $post['shop']['service'],
+
+                    'score_deliver' => $post['shop']['deliver'],
+
+                    'score_logistics' => $post['shop']['logistics'],
+
+                    'switch' => 0
+
+                ];
+
+
+
                 $order[] = [
                     'id' => $vo['id'],
                     'sales' =>$vo['sales']+$sales
