@@ -55,7 +55,7 @@ class Common extends Api
 		// 壹次性獲取模塊
 		$modulesData  = [
 			"homeModules" => $homeList,
-			"categoryModules" => $tree->getTreeArray(0),
+			"categoryModules" => $tree->genTree($tree->arr),//$tree->getTreeArray(0),
 			"searchModules" => $searchList
 		];
 		// 追加h5地址用於分享二維碼等
