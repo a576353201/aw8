@@ -18,23 +18,25 @@ class Goods extends Wanlshop
     protected $noNeedLogin = '';
     protected $noNeedRight = '*';
     protected $searchFields = 'title';
-    
+
     /**
      * Goods模型對象
      * @var \app\index\model\wanlshop\Goods
      */
     protected $model = null;
-    
+
     public function _initialize()
     {
         parent::_initialize();
         $this->model = new \app\index\model\wanlshop\Goods;
         // 類目
+// 類目
         $tree = Tree::instance();
+        $tree->init(model('app\index\model\wanlshop\Category')->where(['type' => 'goods', 'isnav' => 1])->field('id, pid, name, image')->order('weigh asc')->select());
 
-		// 1.0.2升級 過濾隱藏
-        $tree->init(model('app\index\model\wanlshop\Category')->where(['type' => 'goods', 'isnav' => 1])->field('id,pid,name')->order('weigh asc,id asc')->select());
-        $this->assignconfig('channelList', $tree->getTreeArray(0));
+        // 1.0.2升級 過濾隱藏
+//        $tree->init(model('app\index\model\wanlshop\Category')->where(['type' => 'goods', 'isnav' => 1])->field('id,pid,name')->order('weigh asc,id asc')->select());
+       $this->assignconfig('channelList', $tree->genTree($tree->arr));
         $this->view->assign("flagList", $this->model->getFlagList());
         $this->view->assign("stockList", $this->model->getStockList());
         $this->view->assign("specsList", $this->model->getSpecsList());
@@ -42,7 +44,7 @@ class Goods extends Wanlshop
         $this->view->assign("activityList", $this->model->getActivityList());
         $this->view->assign("statusList", $this->model->getStatusList());
     }
-    
+
     /**
      * 查看
      */
@@ -63,7 +65,7 @@ class Goods extends Wanlshop
                 ->where($where)
                 ->order($sort, $order)
                 ->count();
-    
+
             $list = $this->model
                 ->with(['category','shopsort'])
                 ->where($where)
@@ -76,12 +78,12 @@ class Goods extends Wanlshop
             }
             $list = collection($list)->toArray();
             $result = array("total" => $total, "rows" => $list);
-    
+
             return json($result);
         }
         return $this->view->fetch();
     }
-    
+
     /**
      * 選擇鏈接
      */
@@ -92,7 +94,7 @@ class Goods extends Wanlshop
         }
         return $this->view->fetch();
     }
-    
+
     /**
      * 倉庫中的商品
      */
@@ -100,182 +102,182 @@ class Goods extends Wanlshop
     {
         return $this->view->fetch('wanlshop/goods/index');
     }
-    
+
     /**
      * 添加
      */
 
-	public function add()
+    public function add()
 
-	{
+    {
 
-		//設置過濾方法
+        //設置過濾方法
 
-		$this->request->filter(['']);
+        $this->request->filter(['']);
 
-	    if ($this->request->isPost()) {
+        if ($this->request->isPost()) {
 
-	        $params = $this->request->post("row/a");
+            $params = $this->request->post("row/a");
 
-	        if ($params) {
+            if ($params) {
 
-				// 判斷產品屬性是否存在
+                // 判斷產品屬性是否存在
 
-				empty($params['spuItem'])?$this->error(__('請完善：銷售資訊-產品內容')):'';
+                empty($params['spuItem'])?$this->error(__('請完善：銷售資訊-產品內容')):'';
 
-	            $result = false;
+                $result = false;
 
-	            Db::startTrans();
+                Db::startTrans();
 
-	            try {
+                try {
 
-	                $spudata = isset($params['spu'])?$params['spu']:$this->error(__('請填寫銷售資訊-產品內容'));
+                    $spudata = isset($params['spu'])?$params['spu']:$this->error(__('請填寫銷售資訊-產品內容'));
 
-	                $spuItem = isset($params['spuItem'])?$params['spuItem']:$this->error(__('請填寫銷售資訊-產品內容-產品規格'));
+                    $spuItem = isset($params['spuItem'])?$params['spuItem']:$this->error(__('請填寫銷售資訊-產品內容-產品規格'));
 
-	                // 獲取自增ID
+                    // 獲取自增ID
 
-	                $this->model->shop_id = $this->shop->id;
+                    $this->model->shop_id = $this->shop->id;
 
-	                //$this->model->brand_id = $params['brand_id'];
-	                
-	                $this->model->brand = $params['brand'];
+                    //$this->model->brand_id = $params['brand_id'];
 
-	                $this->model->category_id = $params['category_id'];
+                    $this->model->brand = $params['brand'];
 
-					if(isset($params['attribute'])){
+                    $this->model->category_id = $params['category_id'];
 
-						$this->model->category_attribute = json_encode($params['attribute'], JSON_UNESCAPED_UNICODE);
+                    if(isset($params['attribute'])){
 
-					}
+                        $this->model->category_attribute = json_encode($params['attribute'], JSON_UNESCAPED_UNICODE);
 
-	                $this->model->title = $params['title'];
+                    }
 
-	                $this->model->image = $params['image'];
+                    $this->model->title = $params['title'];
 
-	                $this->model->images = $params['images'];
+                    $this->model->image = $params['image'];
 
-	                $this->model->description = $params['description'];
+                    $this->model->images = $params['images'];
 
-	                $this->model->stock = $params['stock'];
+                    $this->model->description = $params['description'];
 
-	                $this->model->status = $params['status'];
+                    $this->model->stock = $params['stock'];
 
-	                $this->model->content = $params['content'];
+                    $this->model->status = $params['status'];
 
-	                $this->model->shop_category_id = $params['shop_category_id'];
+                    $this->model->content = $params['content'];
 
-	                $this->model->price = min($params['price']);
+                    $this->model->shop_category_id = $params['shop_category_id'];
 
-	                $this->model->freight_id = $params['freight_id'];
+                    $this->model->price = min($params['price']);
 
-	                if($this->model->save()){
+                    $this->model->freight_id = $params['freight_id'];
 
-	                	$result = true;
+                    if($this->model->save()){
 
-	                }
+                        $result = true;
 
-					// 寫入SPU
+                    }
 
-					$spu = [];
+                    // 寫入SPU
 
-					foreach (explode(",", $spudata) as $key => $value) {
+                    $spu = [];
 
-					    $spu[] = [
+                    foreach (explode(",", $spudata) as $key => $value) {
 
-					        'goods_id'	=> $this->model->id,
+                        $spu[] = [
 
-					        'name'		=> $value,
+                            'goods_id'	=> $this->model->id,
 
-					        'item'		=> $spuItem[$key]
+                            'name'		=> $value,
 
-					    ];
+                            'item'		=> $spuItem[$key]
 
-					}
+                        ];
 
-					if(!model('app\index\model\wanlshop\GoodsSpu')->allowField(true)->saveAll($spu)){
+                    }
 
-						$result == false;
+                    if(!model('app\index\model\wanlshop\GoodsSpu')->allowField(true)->saveAll($spu)){
 
-					}
+                        $result == false;
 
-					// 寫入SKU
+                    }
 
-					$sku = [];
+                    // 寫入SKU
 
-					foreach ($params['sku']  as $key => $value) {
+                    $sku = [];
 
-					    $sku[] = [
+                    foreach ($params['sku']  as $key => $value) {
 
-					        'goods_id' 		=> $this->model->id,
+                        $sku[] = [
 
-					        'difference' 	=> $value,
+                            'goods_id' 		=> $this->model->id,
 
-					        'market_price' 	=> $params['market_price'][$key],
+                            'difference' 	=> $value,
 
-					        'price' 		=> $params['price'][$key],
+                            'market_price' 	=> $params['market_price'][$key],
 
-					        'stock' 		=> $params['stocks'][$key],
+                            'price' 		=> $params['price'][$key],
 
-					        'weigh' 		=> $params['weigh'][$key]!=''?$params['weigh'][$key] : 0,
+                            'stock' 		=> $params['stocks'][$key],
 
-					        'sn' 			=> $params['sn'][$key]!=''?$params['sn'][$key] : 'wanl_'.time()
+                            'weigh' 		=> $params['weigh'][$key]!=''?$params['weigh'][$key] : 0,
 
-					    ];
+                            'sn' 			=> $params['sn'][$key]!=''?$params['sn'][$key] : 'wanl_'.time()
 
-					}
+                        ];
 
-					if(!model('app\index\model\wanlshop\GoodsSku')->allowField(true)->saveAll($sku)){
+                    }
 
-						$result == false;
+                    if(!model('app\index\model\wanlshop\GoodsSku')->allowField(true)->saveAll($sku)){
 
-					}
+                        $result == false;
 
-	                Db::commit();
+                    }
 
-	            } catch (ValidateException $e) {
+                    Db::commit();
 
-	                Db::rollback();
+                } catch (ValidateException $e) {
 
-	                $this->error($e->getMessage());
+                    Db::rollback();
 
-	            } catch (PDOException $e) {
+                    $this->error($e->getMessage());
 
-	                Db::rollback();
+                } catch (PDOException $e) {
 
-	                $this->error($e->getMessage());
+                    Db::rollback();
 
-	            } catch (Exception $e) {
+                    $this->error($e->getMessage());
 
-	                Db::rollback();
+                } catch (Exception $e) {
 
-	                $this->error($e->getMessage());
+                    Db::rollback();
 
-	            }
+                    $this->error($e->getMessage());
 
-	            if ($result !== false) {
+                }
 
-	                $this->success();
+                if ($result !== false) {
 
-	            } else {
+                    $this->success();
 
-	                $this->error(__('No rows were inserted'));
+                } else {
 
-	            }
+                    $this->error(__('No rows were inserted'));
 
-	        }
+                }
 
-	        $this->error(__('Parameter %s can not be empty', ''));
+            }
 
-	    }
+            $this->error(__('Parameter %s can not be empty', ''));
 
-	    $shop_id = $this->shop->id;
-	    
-	    $this->model1 = new \app\index\model\wanlshop\ShopSort;
-	    $tree = Tree::instance();
+        }
+
+        $shop_id = $this->shop->id;
+
+        $this->model1 = new \app\index\model\wanlshop\ShopSort;
+        $tree = Tree::instance();
         $tree->init(collection($this->model1->where('shop_id', $shop_id)->order('weigh desc,id desc')->select())->toArray(), 'pid');
         $this->channelList = $tree->getTreeList($tree->getTreeArray(0), 'name');
-        
+
         if(empty($this->channelList)){
             $params1['shop_id']  = $shop_id;
             $params1['name']     = '不另行分類';
@@ -301,72 +303,72 @@ class Goods extends Wanlshop
                 $this->error(__('No rows were inserted'));
             }
         }
-        
+
         $this->model2 = new \app\index\model\wanlshop\ShopFreight;
         $freight = model('app\index\model\wanlshop\ShopFreight')->where('shop_id',$shop_id)->count();
         if(empty($freight)){
-                $result2 = false;
-                Db::startTrans();
-                try {
-					$this->model2->shop_id    = $shop_id;
-					$this->model2->name       = '包郵';
-					$this->model2->delivery   = 5;
-					$this->model2->isdelivery = 1;
-					if($this->model2->save()){
-						$result2 = true;
-					}
-                    Db::commit();
-                } catch (ValidateException $e) {
-                    Db::rollback();
-                    $this->error($e->getMessage());
-                } catch (PDOException $e) {
-                    Db::rollback();
-                    $this->error($e->getMessage());
-                } catch (Exception $e) {
-                    Db::rollback();
-                    $this->error($e->getMessage());
+            $result2 = false;
+            Db::startTrans();
+            try {
+                $this->model2->shop_id    = $shop_id;
+                $this->model2->name       = '包郵';
+                $this->model2->delivery   = 5;
+                $this->model2->isdelivery = 1;
+                if($this->model2->save()){
+                    $result2 = true;
                 }
-                if ($result2 == false) {
-                    $this->error(__('No rows were inserted'));
-                }
+                Db::commit();
+            } catch (ValidateException $e) {
+                Db::rollback();
+                $this->error($e->getMessage());
+            } catch (PDOException $e) {
+                Db::rollback();
+                $this->error($e->getMessage());
+            } catch (Exception $e) {
+                Db::rollback();
+                $this->error($e->getMessage());
+            }
+            if ($result2 == false) {
+                $this->error(__('No rows were inserted'));
+            }
         }
 
-		// 判斷是否存在品牌
+        // 判斷是否存在品牌
 
-		$row['brand'] = model('app\index\model\wanlshop\Brand')->where(['state' => 1])->count();
+        $row['brand'] = model('app\index\model\wanlshop\Brand')->where(['state' => 1])->count();
 
-		// 判斷是否有店鋪分類
+        // 判斷是否有店鋪分類
 
-		$row['shopsort'] = model('app\index\model\wanlshop\ShopSort')->where('shop_id',$shop_id)->count();
+        $row['shopsort'] = model('app\index\model\wanlshop\ShopSort')->where('shop_id',$shop_id)->count();
 
-		// 判斷是否有運費模板
+        // 判斷是否有運費模板
 
-		$row['freight'] = model('app\index\model\wanlshop\ShopFreight')->where('shop_id',$shop_id)->count();
+        $row['freight'] = model('app\index\model\wanlshop\ShopFreight')->where('shop_id',$shop_id)->count();
 
-		// 判斷是否有寄件人信息
+        // 判斷是否有寄件人信息
 
-		$row['config'] = model('app\index\model\wanlshop\ShopConfig')->where('shop_id',$shop_id)->find();
+        $row['config'] = model('app\index\model\wanlshop\ShopConfig')->where('shop_id',$shop_id)->find();
 
-		// 打開方式
+        // 打開方式
 
-		$this->assignconfig("isdialog", IS_DIALOG);
+        $this->assignconfig("isdialog", IS_DIALOG);
 
-		$this->view->assign("row", $row);
+        $this->view->assign("row", $row);
 
-		return $this->view->fetch();
+        return $this->view->fetch();
 
-	}
+    }
 
-    
+
     /**
      * 編輯
      */
     public function edit($ids = null)
     {
 
-		//設置過濾方法
+        //設置過濾方法
 
-		$this->request->filter(['']);
+        $this->request->filter(['']);
         $row = $this->model->get($ids);
         if (!$row) {
             $this->error(__('No Results were found'));
@@ -374,18 +376,18 @@ class Goods extends Wanlshop
         if ($row['shop_id'] != $this->shop->id) {
             $this->error(__('You have no permission'));
         }
-		// 查詢SKU
+        // 查詢SKU
 
-		$skuItem = model('app\index\model\wanlshop\GoodsSku')
+        $skuItem = model('app\index\model\wanlshop\GoodsSku')
 
-			->where(['goods_id' => $ids, 'state' => 0])
+            ->where(['goods_id' => $ids, 'state' => 0])
 
-			->field('id,difference,price,market_price,stock,weigh,sn,sales,state')
+            ->field('id,difference,price,market_price,stock,weigh,sn,sales,state')
 
-			->select();
+            ->select();
 
         if ($this->request->isPost()) {
-            
+
             if ($row['wholesale_id'] != 0) {
                 $this->error('批發商品不予許修改');
             }
@@ -393,120 +395,120 @@ class Goods extends Wanlshop
             $params = $this->request->post("row/a");
             if ($params) {
 
-				// 判斷產品屬性是否存在
+                // 判斷產品屬性是否存在
 
-				empty($params['spuItem'])?$this->error(__('請完善：銷售資訊-產品內容')):'';
+                empty($params['spuItem'])?$this->error(__('請完善：銷售資訊-產品內容')):'';
                 $result = false;
                 Db::startTrans();
                 try {
 
-					$spudata = isset($params['spu'])?$params['spu']:$this->error(__('請填寫銷售資訊-產品內容'));
+                    $spudata = isset($params['spu'])?$params['spu']:$this->error(__('請填寫銷售資訊-產品內容'));
 
-					$spuItem = isset($params['spuItem'])?$params['spuItem']:$this->error(__('請填寫銷售資訊-產品內容-產品規格'));
+                    $spuItem = isset($params['spuItem'])?$params['spuItem']:$this->error(__('請填寫銷售資訊-產品內容-產品規格'));
 
-					// 寫入表單
+                    // 寫入表單
 
-					$data = $params;
+                    $data = $params;
 
-					if(isset($data['attribute'])){
+                    if(isset($data['attribute'])){
 
-						$data['category_attribute'] = json_encode($data['attribute'], JSON_UNESCAPED_UNICODE);
+                        $data['category_attribute'] = json_encode($data['attribute'], JSON_UNESCAPED_UNICODE);
 
-					}
-					
-					//var_dump($data['price']);exit;
-					$maxprice      = $data['price'];
+                    }
 
-					$data['price'] = min($data['price']);
-					$maxprice      = max($maxprice);
-					if($row['wholesale_id']!=0&&$row['maxprice']!=0&&$maxprice>$row['maxprice']){
-					    echo '{"code":0,"msg":"零售價不能高出批發價的12%","data":"","url":"","wait":3}';exit;
-					}
+                    //var_dump($data['price']);exit;
+                    $maxprice      = $data['price'];
+
+                    $data['price'] = min($data['price']);
+                    $maxprice      = max($maxprice);
+                    if($row['wholesale_id']!=0&&$row['maxprice']!=0&&$maxprice>$row['maxprice']){
+                        echo '{"code":0,"msg":"零售價不能高出批發價的12%","data":"","url":"","wait":3}';exit;
+                    }
                     $result = $row->allowField(true)->save($data);
 
-					// 刪除原來數據,重新寫入SPU
+                    // 刪除原來數據,重新寫入SPU
 
-					model('app\index\model\wanlshop\GoodsSpu')
+                    model('app\index\model\wanlshop\GoodsSpu')
 
-						->where('goods_id','in',$ids)
+                        ->where('goods_id','in',$ids)
 
-						->delete();
+                        ->delete();
 
-					$spu = [];
+                    $spu = [];
 
-					foreach (explode(",", $spudata) as $key => $value) {
+                    foreach (explode(",", $spudata) as $key => $value) {
 
-					    $spu[] = [
+                        $spu[] = [
 
-					        'goods_id' => $ids,
+                            'goods_id' => $ids,
 
-					        'name' => $value,
+                            'name' => $value,
 
-					        'item' => $spuItem[$key]
+                            'item' => $spuItem[$key]
 
-					    ];
+                        ];
 
-					}
+                    }
 
-					if(!model('app\index\model\wanlshop\GoodsSpu')->allowField(true)->saveAll($spu)){
+                    if(!model('app\index\model\wanlshop\GoodsSpu')->allowField(true)->saveAll($spu)){
 
-						$result == false;
+                        $result == false;
 
-					}
+                    }
 
-					//標記舊版SKU數據
+                    //標記舊版SKU數據
 
-					$oldsku = [];
+                    $oldsku = [];
 
-					foreach ($skuItem as $value) {
+                    foreach ($skuItem as $value) {
 
-						$oldsku[] = [
+                        $oldsku[] = [
 
-							'id' => $value['id'],
+                            'id' => $value['id'],
 
-							'state' => 1
+                            'state' => 1
 
-						];
+                        ];
 
-					}
+                    }
 
-					if(!model('app\index\model\wanlshop\GoodsSku')->allowField(true)->saveAll($oldsku)){
+                    if(!model('app\index\model\wanlshop\GoodsSku')->allowField(true)->saveAll($oldsku)){
 
-						$result == false;
+                        $result == false;
 
-					}
+                    }
 
-					// 寫入SKU
+                    // 寫入SKU
 
-					$sku = [];
+                    $sku = [];
 
-					foreach ($params['sku'] as $key => $value) {
+                    foreach ($params['sku'] as $key => $value) {
 
-					    $sku[] = [
+                        $sku[] = [
 
-					        'goods_id' => $ids,
+                            'goods_id' => $ids,
 
-					        'difference' => $value,
+                            'difference' => $value,
 
-					        'market_price' => $params['market_price'][$key],
+                            'market_price' => $params['market_price'][$key],
 
-					        'price' => $params['price'][$key],
+                            'price' => $params['price'][$key],
 
-					        'stock' => $params['stocks'][$key],
+                            'stock' => $params['stocks'][$key],
 
-					        'weigh' => $params['weigh'][$key]!=''?$params['weigh'][$key] : 0,
+                            'weigh' => $params['weigh'][$key]!=''?$params['weigh'][$key] : 0,
 
-					        'sn' => $params['sn'][$key]!=''?$params['sn'][$key] : 'wanl_'.time()
+                            'sn' => $params['sn'][$key]!=''?$params['sn'][$key] : 'wanl_'.time()
 
-					    ];
+                        ];
 
-					}
+                    }
 
-					if(!model('app\index\model\wanlshop\GoodsSku')->allowField(true)->saveAll($sku)){
+                    if(!model('app\index\model\wanlshop\GoodsSku')->allowField(true)->saveAll($sku)){
 
-						$result == false;
+                        $result == false;
 
-					}
+                    }
 
                     Db::commit();
                 } catch (ValidateException $e) {
@@ -528,39 +530,39 @@ class Goods extends Wanlshop
             $this->error(__('Parameter %s can not be empty', ''));
         }
 
-		$spuData = model('app\index\model\wanlshop\GoodsSpu')->all(['goods_id' => $ids]);
+        $spuData = model('app\index\model\wanlshop\GoodsSpu')->all(['goods_id' => $ids]);
 
-		$suk = [];
+        $suk = [];
 
-		foreach ($skuItem as $vo) {
+        foreach ($skuItem as $vo) {
 
-		    $suk[] = explode(",", $vo['difference']);
+            $suk[] = explode(",", $vo['difference']);
 
-		}
+        }
 
-		$spu = [];
+        $spu = [];
 
-		foreach ($spuData as $vo) {
+        foreach ($spuData as $vo) {
 
-		    $spu[] = $vo['name'];
+            $spu[] = $vo['name'];
 
-		}
+        }
 
-		$spuItem = [];
+        $spuItem = [];
 
-		foreach ($spuData as $vo) {
+        foreach ($spuData as $vo) {
 
-		    $spuItem[] = explode(",", $vo['item']);
+            $spuItem[] = explode(",", $vo['item']);
 
-		}
+        }
 
-		$skulist = [];
+        $skulist = [];
 
-		foreach ($skuItem as $vo) {
+        foreach ($skuItem as $vo) {
 
-		    $skulist[$vo['difference']] = $vo;
+            $skulist[$vo['difference']] = $vo;
 
-		}
+        }
 
         $this->assignconfig('spu', $spu);
         $this->assignconfig('spuItem', $spuItem);
@@ -571,7 +573,7 @@ class Goods extends Wanlshop
         $this->view->assign("row", $row);
         return $this->view->fetch();
     }
-    
+
     /**
      * 添加類目屬性
      */
@@ -586,7 +588,7 @@ class Goods extends Wanlshop
         }
         $this->error(__('Parameter %s can not be empty', ''));
     }
-    
+
     /**
      * 回收站
      */
@@ -601,21 +603,21 @@ class Goods extends Wanlshop
                 ->where($where)
                 ->order($sort, $order)
                 ->count();
-    
+
             $list = $this->model
                 ->onlyTrashed()
                 ->where($where)
                 ->order($sort, $order)
                 ->limit($offset, $limit)
                 ->select();
-    
+
             $result = array("total" => $total, "rows" => $list);
-    
+
             return json($result);
         }
         return $this->view->fetch();
     }
-    
+
     /**
      * 刪除
      */
@@ -625,7 +627,7 @@ class Goods extends Wanlshop
             $pk = $this->model->getPk();
             $this->model->where('shop_id', '=', $this->shop->id);
             $list = $this->model->where($pk, 'in', $ids)->select();
-    
+
             $count = 0;
             Db::startTrans();
             try {
@@ -648,7 +650,7 @@ class Goods extends Wanlshop
         }
         $this->error(__('Parameter %s can not be empty', 'ids'));
     }
-    
+
     /**
 
      * 真實刪除
@@ -712,7 +714,7 @@ class Goods extends Wanlshop
         $this->error(__('Parameter %s can not be empty', 'ids'));
 
     }
-    
+
     /**
      * 還原
      */
@@ -743,7 +745,7 @@ class Goods extends Wanlshop
         }
         $this->error(__('No rows were updated'));
     }
-    
+
     /**
      * 批量更新
      */
