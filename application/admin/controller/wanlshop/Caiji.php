@@ -1,6 +1,6 @@
 <?php
 
-namespace app\admin\controller\antshop;
+namespace app\admin\controller\wanlshop;
 
 use app\common\controller\Backend;
 use fast\Tree;
@@ -23,10 +23,10 @@ class Caiji extends Backend
     public function _initialize()
     {
         parent::_initialize();
-        $this->model = new \app\admin\model\antshop\Goods;
+        $this->model = new \app\admin\model\wanlshop\Goods;
         $tree = Tree::instance();
 
-        $this->flmodel = new \app\admin\model\antshop\Category;
+        $this->flmodel = new \app\admin\model\wanlshop\Category;
 
 
         $type = $this->request->request("type");
