@@ -4,11 +4,11 @@ define(["jquery", "bootstrap", "backend", "table", "form"], function (e, t, a, i
         index: function () {
             i.api.init({
                 extend: {
-                    index_url: "wanlshop/goods/index" + location.search,
+                    index_url: "wanlshop/wholesale/index" + location.search,
                     add_url: "",
                     edit_url: "",
-                    del_url: "wanlshop/goods/del",
-                    multi_url: "wanlshop/goods/multi",
+                    del_url: "wanlshop/wholesale/del",
+                    multi_url: "wanlshop/wholesale/multi",
                     table: "wanlshop_goods"
                 }
             });
@@ -103,7 +103,7 @@ define(["jquery", "bootstrap", "backend", "table", "form"], function (e, t, a, i
             i.api.init({extend: {dragsort_url: ""}});
             var t = e("#table");
             t.bootstrapTable({
-                url: "wanlshop/goods/recyclebin" + location.search,
+                url: "wanlshop/wholesale/recyclebin" + location.search,
                 pk: "id",
                 sortName: "id",
                 columns: [[{checkbox: !0}, {field: "id", title: __("Id")}, {
@@ -127,14 +127,14 @@ define(["jquery", "bootstrap", "backend", "table", "form"], function (e, t, a, i
                         text: __("Restore"),
                         classname: "btn btn-xs btn-info btn-ajax btn-restoreit",
                         icon: "fa fa-rotate-left",
-                        url: "wanlshop/goods/restore",
+                        url: "wanlshop/wholesale/restore",
                         refresh: !0
                     }, {
                         name: "Destroy",
                         text: __("Destroy"),
                         classname: "btn btn-xs btn-danger btn-ajax btn-destroyit",
                         icon: "fa fa-times",
-                        url: "wanlshop/goods/destroy",
+                        url: "wanlshop/wholesale/destroy",
                         refresh: !0
                     }],
                     formatter: i.api.formatter.operate
