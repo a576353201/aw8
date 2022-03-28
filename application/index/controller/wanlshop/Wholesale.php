@@ -36,7 +36,8 @@ class Wholesale extends Wanlshop
 
 		// 1.0.2升級 過濾隱藏
         $tree->init(model('app\index\model\wanlshop\Category')->where(['type' => 'goods', 'isnav' => 1])->field('id,pid,name')->order('weigh asc,id asc')->select());
-        $this->assignconfig('channelList', $tree->getTreeArray(0));
+         $this->assignconfig('channelList', $tree->genTree($tree->arr));
+
         
         $this->view->assign("flagList", $this->model->getFlagList());
         $this->view->assign("stockList", $this->model->getStockList());
@@ -145,7 +146,7 @@ class Wholesale extends Wanlshop
             $tree = Tree::instance();
     		// 1.0.2升級 過濾隱藏
             $tree->init(model('app\index\model\wanlshop\Category')->where(['type' => 'goods', 'isnav' => 1])->field('id,pid,name')->order('weigh asc,id asc')->select());
-            $Category = $tree->getTreeArray(0);
+            $Category = $tree->genTree($tree->arr);
             $Category = json_decode(json_encode($Category),true);
             
             
@@ -156,11 +157,13 @@ class Wholesale extends Wanlshop
                 foreach($v1['childlist'] as $k2=>$v2){
                     $Category[$k1]['allid'] = $Category[$k1]['allid'].','.$v2['id'];
                     $Category[$k1]['childlist'][$k2]['allid'] = $v2['id'];
+
+                    if(isset($v2['childlist'])){
                     foreach($v2['childlist'] as $k3=>$v3){
                         $Category[$k1]['allid'] = $Category[$k1]['allid'].','.$v3['id'];
                         $Category[$k1]['childlist'][$k2]['allid'] = $Category[$k1]['childlist'][$k2]['allid'].','.$v3['id'];
                         $Category[$k1]['childlist'][$k2]['childlist'][$k3]['allid'] = $v3['id'];
-                    }
+                    }}
                 }
             }
             $this->view->assign('category', $Category);
@@ -191,6 +194,8 @@ class Wholesale extends Wanlshop
                                     $Category2 = isset($v2['childlist'])?$v2['childlist']:'';
                                     break;
                                 }else{
+
+                                    if(isset($v2['childlist'])){
                                     foreach($v2['childlist'] as $k3=>$v3){
                                         if($v3['id'] == $categoryname){
                                             $one   = $v1['id'];
@@ -200,7 +205,7 @@ class Wholesale extends Wanlshop
                                             $Category2 = $v2['childlist'];
                                             break;
                                         }
-                                    }
+                                    }}
                                 }
                             }
                         }
