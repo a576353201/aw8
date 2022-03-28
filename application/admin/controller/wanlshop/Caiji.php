@@ -15,7 +15,7 @@ class Caiji extends Backend
     
     /**
      * Goods模型對象
-     * @var \app\admin\model\antshop\Goods
+     * @var \app\admin\model\wanlshop\Goods
      */
     protected $model = null;
     protected $flmodel = null;

@@ -4,12 +4,12 @@ define(["jquery", "bootstrap", "backend", "table", "form"], function (e, t, a, i
         index: function () {
             i.api.init({
                 extend: {
-                    index_url: "antshop/goods/index" + location.search,
+                    index_url: "wanlshop/goods/index" + location.search,
                     add_url: "",
                     edit_url: "",
-                    del_url: "antshop/goods/del",
-                    multi_url: "antshop/goods/multi",
-                    table: "antshop_goods"
+                    del_url: "wanlshop/goods/del",
+                    multi_url: "wanlshop/goods/multi",
+                    table: "wanlshop_goods"
                 }
             });
             var t = e("#table");
@@ -87,7 +87,7 @@ define(["jquery", "bootstrap", "backend", "table", "form"], function (e, t, a, i
                         var keyword=$("#keyword").val();
 
                         Fast.api.ajax({
-                            url: "antshop/caiji/cjstart1",
+                            url: "wanlshop/caiji/cjstart1",
                             data: {
                                 catid: catid,
                                 keyword: keyword
@@ -103,7 +103,7 @@ define(["jquery", "bootstrap", "backend", "table", "form"], function (e, t, a, i
             i.api.init({extend: {dragsort_url: ""}});
             var t = e("#table");
             t.bootstrapTable({
-                url: "antshop/goods/recyclebin" + location.search,
+                url: "wanlshop/goods/recyclebin" + location.search,
                 pk: "id",
                 sortName: "id",
                 columns: [[{checkbox: !0}, {field: "id", title: __("Id")}, {
@@ -127,14 +127,14 @@ define(["jquery", "bootstrap", "backend", "table", "form"], function (e, t, a, i
                         text: __("Restore"),
                         classname: "btn btn-xs btn-info btn-ajax btn-restoreit",
                         icon: "fa fa-rotate-left",
-                        url: "antshop/goods/restore",
+                        url: "wanlshop/goods/restore",
                         refresh: !0
                     }, {
                         name: "Destroy",
                         text: __("Destroy"),
                         classname: "btn btn-xs btn-danger btn-ajax btn-destroyit",
                         icon: "fa fa-times",
-                        url: "antshop/goods/destroy",
+                        url: "wanlshop/goods/destroy",
                         refresh: !0
                     }],
                     formatter: i.api.formatter.operate
@@ -142,7 +142,7 @@ define(["jquery", "bootstrap", "backend", "table", "form"], function (e, t, a, i
             }), i.api.bindevent(t)
 
         }, select: function () {
-            i.api.init({extend: {index_url: "antshop/goods/select"}});
+            i.api.init({extend: {index_url: "wanlshop/goods/select"}});
             var t = [], r = e("#table");
             r.on("check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table", function (a, i) {
                 "check" == a.type || "uncheck" == a.type ? i = [i] : t = [], e.each(i, function (e, i) {
