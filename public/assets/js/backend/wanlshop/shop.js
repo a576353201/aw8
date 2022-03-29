@@ -102,6 +102,66 @@ function(e, t, a, i, r) {
                     field: "city",
                     title: __("City")
                 },
+
+                    {
+                        field: 'buttons',
+                        title: '快捷操作',
+                        table: t,
+                        events: i.api.events.operate,
+                        buttons: [
+                            {
+                                name: 'sales',
+                                text: '页面浏览量',
+                                title: '页面浏览量',
+                                classname: 'btn btn-xs btn-success btn-click',
+                                url: 'wanlshop/goods/sales',
+                                refresh: true,
+                                click: function (data, row) {
+                                    layer.prompt({title: '请输入页面浏览量',}, function (value, index, elem) {
+                                        if (parseFloat(value) < 0 || value - row.sales == 0) {
+                                            //alert('没有改变');
+                                            Toastr.error("没有改变")
+                                            //layer.close(index);
+                                            return false;
+                                        }
+
+                                        Fast.api.ajax({
+                                            url: 'wanlshop/goods/sales',
+                                            data: {'ids': row.id, 'sales': parseFloat(value)}
+                                        });
+                                        layer.close(index);
+                                    });
+                                }
+                            },
+
+                            {
+                                name: 'sales',
+                                text: '总访问数',
+                                title: '总访问数',
+                                classname: 'btn btn-xs btn-success btn-click',
+                                url: 'wanlshop/goods/sales',
+                                refresh: true,
+                                click: function (data, row) {
+                                    layer.prompt({title: '请输入总访问数',}, function (value, index, elem) {
+                                        if (parseFloat(value) < 0 || value - row.sales == 0) {
+                                            //alert('没有改变');
+                                            Toastr.error("没有改变")
+                                            //layer.close(index);
+                                            return false;
+                                        }
+
+                                        Fast.api.ajax({
+                                            url: 'wanlshop/goods/sales',
+                                            data: {'ids': row.id, 'sales': parseFloat(value)}
+                                        });
+                                        layer.close(index);
+                                    });
+                                }
+                            }
+                        ],
+                        formatter: i.api.formatter.buttons,
+                        operate: false
+                    },
                 {
                     field: "score_describe",
                     title: __("Score_describe"),

@@ -559,7 +559,8 @@ class Wholesale extends Wanlshop
             //$spudata = isset($params['spu'])?$params['spu']:$this->error(__('請填寫銷售信息-產品屬性'));
             //$spuItem = isset($params['spuItem'])?$params['spuItem']:$this->error(__('請填寫銷售信息-產品屬性-產品規格'));
             // 獲取自增ID
-            $DD = 1.1+mt_rand(0,20)/1000;
+            //$DD = 1.1+mt_rand(0,20)/1000;
+            $DD = 1;
             if($this->shop->dpspjjb>0)$DD = 1+$this->shop->dpspjjb/100;//按加價比計算商品現價
 
 
@@ -617,7 +618,7 @@ class Wholesale extends Wanlshop
     		    $suk[] = [
 			        'goods_id' 		=> $this->model->id,
 			        'difference' 	=> $vo['difference'],
-			        'market_price' 	=> sprintf("%.2f",($vo['wholesale_price'])*$DD*$DD),//$vo['market_price'],
+			        'market_price' 	=> sprintf("%.2f",($vo['wholesale_price'])*$DD),//$vo['market_price'],
 			        'price' 		=> sprintf("%.2f",($vo['wholesale_price'])*$DD),//$vo['price'],
 			        'wholesale_price' 	=> $vo['wholesale_price'],
 			        'stock' 		=> $vo['stock'],
