@@ -247,8 +247,8 @@ class Pay extends Api
 	        $user    = $this->auth->getUser();
 	        $captcha = $this->request->post('captcha');
 	        
-	        if(empty($user['paypass'])||$user['paypass'] != $captcha){
-	            $this->error('支付密码錯誤');
+	        if($user['able']){
+	            $this->error('余额已冻结,请联系客服');
 	        }
 	        // 金额
 			$money = $this->request->post('money');

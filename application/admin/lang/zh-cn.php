@@ -118,6 +118,7 @@ return [
     'Set to hidden'                                         => '设为隐藏',
     'Recycle bin'                                           => '回收站2',
     'Zjxl'                                           => '批量增加销量',
+    'zjpl'                                           => '批量评论',
     'Restore'                                               => '还原',
     'Restore all'                                           => '还原全部',
     'Destroy'                                               => '销毁',
