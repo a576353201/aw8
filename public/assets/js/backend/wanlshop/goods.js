@@ -201,6 +201,51 @@ function(e, t, a, i, r) {
                             layer.close(index);
                         });
                     }),
+
+
+
+                e(document).on("click", ".btn-dialog4",
+                    function() {
+
+
+                        var io=   i.api.selectedids(t).join(",");
+                        alert(io);
+
+
+                        Layer.confirm("确定增加评论吗", {
+
+                            icon: 3,
+
+                            title: __("Warning"),
+
+                            offset: 0,
+
+                            shadeClose: !0
+
+                        }, function(o) {
+
+                            Fast.api.ajax({
+                                url: 'wanlshop/goods/zjpl',
+                                data: {'ids':io}
+                            });
+
+                        });
+
+                        // layer.prompt({title: '请输入新的销量',}, function (value, index, elem) {
+                        //     if (parseFloat(value) < 0 ) {
+                        //         //alert('没有改变');
+                        //         Toastr.error("没有改变")
+                        //         //layer.close(index);
+                        //         return false;
+                        //     }
+                        //
+                        //     Fast.api.ajax({
+                        //         url: 'wanlshop/goods/zjxl',
+                        //         data: {'ids':io, 'sales': parseFloat(value)}
+                        //     });
+                        //     layer.close(index);
+                        // });
+                    }),
             i.api.bindevent(t)
         },
         recyclebin: function() {
