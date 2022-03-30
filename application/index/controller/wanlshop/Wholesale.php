@@ -526,7 +526,11 @@ class Wholesale extends Wanlshop
         if ($row['shop_id'] != $this->shopid) {
             $this->error(__('You have no permission'));
         }
-        
+        if (!$this->shop->dpspjjb>0) {
+            $this->error('请先设置商品加价比率!');
+        }
+
+
         $skuItem = model('app\index\model\wanlshop\WholeSku')
 		->where(['goods_id' => $ids, 'state' => 0])
 		->field('id,difference,price,market_price,wholesale_price,stock,weigh,sn,sales,state')
