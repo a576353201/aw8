@@ -25,6 +25,45 @@ class Shop extends Api
 		$this->wanlchat = new WanlChat();
 
 	}
+
+
+    public function profile()
+    {
+        //设置过濾方法
+
+
+        $this->request->filter(['strip_tags']);
+        if ($this->request->isPost()) {
+            $user = $this->auth->getUser();
+            $avatar = $this->request->post('avatar', '', 'trim,strip_tags,htmlspecialchars');
+            if($avatar){
+                $user->avatar = $avatar;
+
+                $shopmodel = new \app\index\model\wanlshop\Shop;
+                $user = $this->auth->getUser();
+                $params = $this->request->post("row/a");
+                $shop= \app\index\model\wanlshop\Shop::get(['user_id' => $this->auth->id]);
+                $params['avatar']=$avatar;
+                $result = $shop->allowField(true)->save($params);
+            }else{
+                $username = $this->request->post('username');
+                $nickname = $this->request->post('nickname');
+                $bio = $this->request->post('bio');
+                if ($username) {
+                    $exists = \app\common\model\shop::where('username', $username)->where('id', '<>', $this->auth->id)->find();
+                    if ($exists) {
+                        $this->error(__('Username already exists'));
+                    }
+                    $user->username = $username;
+                }
+                $user->nickname = $nickname;
+                $user->bio = $bio;
+            }
+//            $user->save();
+            $this->success('返回成功',$user);
+        }
+        $this->error(__('非法请求'));
+    }
     
 	/**
 	 * 查詢店铺信息 1.0.2升級

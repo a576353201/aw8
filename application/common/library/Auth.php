@@ -405,6 +405,16 @@ class Auth
         $allowFields = $this->getAllowFields();
         $allowFields[] = 'session';
         $userinfo = array_intersect_key($data, array_flip($allowFields));
+        $userinfo["isshop"] = 0;
+        $shop= \app\index\model\wanlshop\Shop::get(['user_id' => $userinfo["id"]]);
+
+        if(isset($shop->status)&&$shop->status!=='hidden'){
+
+            $userinfo["isshop"] = 1;
+            $userinfo["shop_avatar"] =$shop->avatar;
+
+
+        }
         $userinfo = array_merge($userinfo, Token::get($this->_token));
         return $userinfo;
     }
