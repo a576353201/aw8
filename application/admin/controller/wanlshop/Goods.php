@@ -47,7 +47,7 @@ class Goods extends Backend
 //                    $this->error('批发订单才能壹键发货');
 //                }
 
-
+                $data=model('app\admin\model\wanlshop\Pinlun')->field("name")->limit(1)->orderRaw('rand()')->select();
                 $post['shop']['describe']=3;
                 $post['shop']['service']=3;
                 $post['shop']['deliver']=3;
@@ -68,7 +68,7 @@ class Goods extends Backend
 
                     'state' =>0,
 
-                    'content' =>'00000',
+                    'content' =>$data[0]->name,
 
                     'suk' => '',//$value['difference']
 
