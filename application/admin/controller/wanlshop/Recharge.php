@@ -24,6 +24,41 @@ class Recharge extends Backend
         $this->model = new \app\admin\model\wanlshop\Recharge;
         $this->view->assign("statusList", $this->model->getStatusList());
     }
+
+    public function index()
+    {
+        //设置过滤方法
+        $this->request->filter(['strip_tags', 'trim']);
+        if ($this->request->isAjax()) {
+            //如果发送的来源是Selectpage，则转发到Selectpage
+            if ($this->request->request('keyField')) {
+                return $this->selectpage();
+            }
+            list($where, $sort, $order, $offset, $limit) = $this->buildparams();
+
+            $list = $this->model
+                ->where($where)
+                ->order($sort, $order)
+                ->paginate($limit);
+
+            foreach ($list as $k=>&$v){
+
+                $v['username']=model('app\common\model\User')->where(['id' =>$v['user_id']])->find();
+
+                $v['username']=$v['username']->username;
+$dd=1;
+$dd=1;
+
+            }
+
+
+
+            $result = array("total" => $list->total(), "rows" => $list->items());
+
+            return json($result);
+        }
+        return $this->view->fetch();
+    }
     
     /**
 

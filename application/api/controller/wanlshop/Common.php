@@ -32,7 +32,10 @@ class Common extends Api
 	 */
     public function init()
     {
-		// 首頁
+
+        header('Content-type: application/json;charset=utf-8');
+
+        // 首頁
 		$homeList = model('app\api\model\wanlshop\Page')
 			->where('type','index')
 			->field('page, item')

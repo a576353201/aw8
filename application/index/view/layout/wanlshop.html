@@ -794,7 +794,7 @@
 								
 
 
-								<li class="treeview {:in_array($config.controllername,['wanlshop.order','wanlshop.refund'])?'active':''}">
+								<li class="treeview {:in_array($config.controllername,['wanlshop.order','wanlshop.refund','wanlshop.shop'])?'active':''}">
 
 									<a href="javascript:;">
 
@@ -804,15 +804,26 @@
 
 									</a>
 
-									<ul class="treeview-menu {:in_array($config.controllername,['wanlshop.order','wanlshop.refund'])?'menu-open':''}"
+									<ul class="treeview-menu {:in_array($config.controllername,['wanlshop.order','wanlshop.refund','wanlshop.shop'])?'menu-open':''}"
 
-									 style="display: {:in_array($config.controllername,['wanlshop.order','wanlshop.refund'])?'block':'none'};">
+									 style="display: {:in_array($config.controllername,['wanlshop.order','wanlshop.refund','wanlshop.shop'])?'block':'none'};">
 
 										<li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.order.index'?'active':''}">
 
 											<a href="{:url('index/wanlshop.order/index')}">
 
 												<i class="fa fa-circle-o fa-fw"></i><span>訂單管理</span>
+
+											</a>
+
+										</li>
+
+										<li class="{$config.controllername.'.'.$config.actionname == 'wanlshop.shop.moneylog'?'active':''}">
+
+											<a href="{:url('index/wanlshop.shop/moneylog')}">
+
+												<i class="fa fa-circle-o fa-fw"></i><span>账单明細
+</span>
 
 											</a>
 

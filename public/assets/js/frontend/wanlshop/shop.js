@@ -275,6 +275,54 @@ define(["jquery", "bootstrap", "backend", "table", "form", "vue"],
                 }),
                     i.api.bindevent(t)
             },
+
+
+            moneylog: function() {
+                i.api.init({
+                    extend: {
+                        index_url: "wanlshop/shop/moneylog" + location.search,
+                        add_url: "wanlshop/brand/add",
+                        edit_url: "wanlshop/brand/edit",
+                        del_url: "wanlshop/brand/del",
+                        multi_url: "wanlshop/brand/multi",
+                        dragsort_url: "",
+                        table: "wanlshop_brand"
+                    }
+                });
+                var t = e("#table");
+                t.bootstrapTable({
+                    url: e.fn.bootstrapTable.defaults.extend.index_url,
+                    pk: "id",
+                    sortName: "weigh",
+                    columns: [[{
+                        checkbox: !0
+                    },
+                        {
+                            field: "id",
+                            title: __("Id")
+                        },
+                        {
+                            field: "money",
+                            title: __("变动金额"),
+                        },
+                        {
+                            field: "memo",
+                            title: __("备注"),
+                        },
+
+                        {
+                            field: "createtime",
+                            title: __("Createtime"),
+                            operate: "RANGE",
+                            addclass: "datetimerange",
+                            formatter: i.api.formatter.datetime
+                        },
+
+
+                       ]]
+                }),
+                    i.api.bindevent(t)
+            },
             attachment: function() {
                 i.api.init({
                     extend: {

@@ -165,6 +165,39 @@ class Shop extends Wanlshop
     }
 
 
+    /**
+     * 獲取支付日誌
+     */
+    public function moneyLog()
+    { //當前是否爲關聯查詢
+        $this->relationSearch = true;
+        //設置過濾方法
+        $this->request->filter(['strip_tags', 'trim']);
+        if ($this->request->isAjax()) {
+            list($where, $sort, $order, $offset, $limit) = $this->buildparams();
+            $total = model('app\common\model\MoneyLog')
+                ->where('user_id', $this->auth->id)
+                ->order('createtime desc')
+                ->count();
+
+            $list = model('app\common\model\MoneyLog')
+                ->where('user_id', $this->auth->id)
+                ->order('createtime desc')
+                ->limit($offset, $limit)
+                ->select();
+
+
+
+
+            $list = collection($list)->toArray();
+            $result = array("total" => $total, "rows" => $list);
+
+            return json($result);
+        }
+        return $this->view->fetch();
+    }
+
+
 
 
     function Get_childsusers($members,$mid,$level=0){

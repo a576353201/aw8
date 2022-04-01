@@ -408,7 +408,7 @@
 								</a>
 								<a href="javascript:;" class="detail" data-id="<%=item.id%>">訂單詳情</a>
 
-							<a href="javascript:;" class="kuaidisub" data-id="<%=item.id%>">查看物流</a> </p>
+							 </p>
 
 							<% }else if(item.state == 4){ %>
 
@@ -472,7 +472,7 @@
 						<td class="fix-108 " style="border-bottom:#ccc solid 1px;">
 
 					        <% if(item.state == 1){ %>
-<a href="javascript:;" class="btn btn-xs btn-<%=labelarr[2]%> btn-editprice" data-toggle="tooltip" title="修改價格" data-id="<%=item.id%>" style="margin-left:10px;">修改價格</a>
+<!--<a href="javascript:;" class="btn btn-xs btn-<%=labelarr[2]%> btn-editprice" data-toggle="tooltip" title="修改價格" data-id="<%=item.id%>" style="margin-left:10px;">修改價格</a>-->
 							<% }else if(item.state == 2){ %>
                                 
                                 <% if(item.wholesale_id!=0){%>

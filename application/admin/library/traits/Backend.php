@@ -56,6 +56,8 @@ trait Backend
                 ->order($sort, $order)
                 ->paginate($limit);
 
+
+
             $result = array("total" => $list->total(), "rows" => $list->items());
 
             return json($result);

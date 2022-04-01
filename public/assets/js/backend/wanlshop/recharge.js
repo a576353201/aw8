@@ -30,7 +30,7 @@ function(e, t, a, i, r) {
                     title: __("User_id")
                 },
                 {
-                    field: "name",
+                    field: "username",
                     title: "用户名"
                 },
                 {
