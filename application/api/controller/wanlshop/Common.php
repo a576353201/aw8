@@ -6,6 +6,7 @@
 namespace app\api\controller\wanlshop;
 
 use app\common\controller\Api;
+use fast\Http;
 use OSS\Core\OssException;
 use OSS\OssClient;
 use fast\Random;
@@ -20,9 +21,77 @@ use think\Hook;
  */
 class Common extends Api
 {
-    protected $noNeedLogin = ['init','search','update','adverts','searchList','setSearch','about'];
+    protected $noNeedLogin = ['init','search','update','adverts','searchList','setSearch','about','fy'];
 	protected $noNeedRight = ['*'];
-    
+
+
+    public function fy()
+    {
+
+        $appid='20210829000929967';
+        $my='nBOic25Fv5Bbbp6SWj9Q';
+
+
+
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        mt_srand(10000000*(double)microtime());
+        for ($i = 0, $str = '', $lc = strlen($chars)-1; $i <9; $i++){
+            $str .= $chars[mt_rand(0, $lc)];
+        }
+        $q='apple';
+//        $from='en';
+//        $to='cht';//cht
+        $to='en';
+        $from='cht';//cht
+
+
+
+        $list = Db::name('wanlshop_category')->where(['type' => 'goods'])->whereNull('cname')->order('weigh desc,id desc')->select();
+
+
+        foreach ($list as &$vv) {
+            $q=$vv['name'];
+            mt_srand(10000000*(double)microtime());
+            for ($i = 0, $str = '', $lc = strlen($chars)-1; $i <9; $i++){
+                $str .= $chars[mt_rand(0, $lc)];
+            }
+
+            $salt=$str;//'1435660288';
+
+            $str1=$appid.$q.$salt.$my;
+            $sign=md5($str1);
+            $q=urlencode($q);
+            $sign=md5($str1);
+            $url='http://api.fanyi.baidu.com/api/trans/vip/translate?q='.$q.'&from='.$from.'&to='.$to.'&appid='.$appid.'&salt='.$salt.'&sign='.$sign;
+            $result = Http::sendRequest($url, [], 'GET');
+            // sleep(3);
+            $json=json_decode($result['msg']);
+
+            if(isset($json->trans_result)&&is_object($json->trans_result[0])) {
+                $cname=$json->trans_result[0]->dst;
+                Db::name('wanlshop_category')->where(['id' => $vv['id']])->update(['ename' => $cname]);
+            }
+
+            //model('app\api\model\antshop\CouponReceive')->where(['id' => $order['coupon_id']])->update(['state' => 1]);
+
+            $dd=1;
+
+        }
+
+        $list = Db::name('wanlshop_category')->where(['type' => 'goods'])->whereNull('ename')->order('weigh desc,id desc')->select();
+        if($list){
+            header('Location:http://127.0.0.1:89/api/wanlshop/common/fy' );
+            $dd=1;
+            $dd=1;
+            exit;
+        }
+
+
+
+
+        $dd=1;
+    }
 	/**
 	 * 壹次性加載App
 	 *
@@ -58,7 +127,7 @@ class Common extends Api
 		// 壹次性獲取模塊
 		$modulesData  = [
 			"homeModules" => $homeList,
-			"categoryModules" => $tree->genTree($tree->arr),//$tree->getTreeArray(0),
+			"categoryModules" => $tree->getTreeArray(0),//$tree->genTree($tree->arr),
 			"searchModules" => $searchList
 		];
 		// 追加h5地址用於分享二維碼等
