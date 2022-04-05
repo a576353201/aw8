@@ -70,8 +70,7 @@ $keyword='iphone 13';
 
         $dd=1;
 
-        $var = 'pen';
-        $var1 = 12;
+
 
         $catid = $this->request->post('catid');
         $keyword = $this->request->post('keyword');
@@ -81,8 +80,8 @@ $keyword='iphone 13';
         $keyword=urlencode($keyword);
   // echo   $ret1;
         $set_charset = 'export LANG=en_US.UTF-8;';
-      //$l = exec($set_charset."/usr/bin/python /www/wwwroot/pythcj/yyx.py  $var $var1",$Array,$ret2);
-        $l = exec("python /www/wwwroot/pythcj/xiapa.py  $keyword $catid",$Array,$ret2);
+      //$l = exec($set_charset."/usr/bin/python /www/wwwroot/pythcj.com/xiapa_pf.py  $var $var1",$Array,$ret2);
+        $l = exec("/usr/bin/python /www/wwwroot/pythcj.com/xiapa_pf.py  $keyword $catid",$Array,$ret2);
 //
 //        print_r($Array);
 //        echo   $ret2;

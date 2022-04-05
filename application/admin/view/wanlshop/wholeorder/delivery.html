@@ -109,8 +109,20 @@
 
 					<td style="vertical-align: middle;">{$order.address.address}</td>
 
-					<td style="text-align: center; vertical-align: middle;"><input class="form-control" type="text" value="" placeholder="此订单不可发货 填单" disabled></td>
+					<td style="text-align: center; vertical-align: middle;">
 
+						<input type="hidden" name="row[order][id][]" value="{$order.id}">
+
+						<input id="c-express_name" data-rule="required" class="form-control" name="row[order][express_name][]" type="text" value="{$order.express_name}">
+
+					</td>
+
+					<td style="text-align: center; vertical-align: middle;">
+
+
+						<input id="c-express_no" data-rule="required" class="form-control" name="row[order][express_no][]" type="text" value="{$order.express_no}">
+
+					</td>
 				</tr>
 
 				{/volist}
