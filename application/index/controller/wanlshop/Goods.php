@@ -36,7 +36,7 @@ class Goods extends Wanlshop
 
         // 1.0.2升級 過濾隱藏
 //        $tree->init(model('app\index\model\wanlshop\Category')->where(['type' => 'goods', 'isnav' => 1])->field('id,pid,name')->order('weigh asc,id asc')->select());
-       $this->assignconfig('channelList', $tree->genTree($tree->arr));
+       $this->assignconfig('channelList', $tree->getTreeArray(0));
         $this->view->assign("flagList", $this->model->getFlagList());
         $this->view->assign("stockList", $this->model->getStockList());
         $this->view->assign("specsList", $this->model->getSpecsList());

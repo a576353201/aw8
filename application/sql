@@ -1,0 +1,5 @@
+update fa_user set group_id=2 where id>1315
+
+
+
+update fa_wanlshop_goods_comment set user_id=(SELECT id FROM fa_user  where group_id=2 order by rand() limit 1)

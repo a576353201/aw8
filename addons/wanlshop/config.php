@@ -13,7 +13,7 @@ return [
             'package_name' => 'app.shop.pro',
             'cdnurl' => 'https://www.gfg.com',
             'appurl' => 'https://www.etet.com/api',
-            'socketurl' => 'ddd/',
+            'socketurl' => 'ws://127.0.0.1:7272',
             'debug' => 'Y',
         ],
         'rule' => '',

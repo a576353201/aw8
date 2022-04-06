@@ -36,7 +36,7 @@ class Wholesale extends Wanlshop
 
 		// 1.0.2升級 過濾隱藏
         $tree->init(model('app\index\model\wanlshop\Category')->where(['type' => 'goods', 'isnav' => 1])->field('id,pid,name')->order('weigh asc,id asc')->select());
-         $this->assignconfig('channelList', $tree->genTree($tree->arr));
+         $this->assignconfig('channelList', $tree->getTreeArray(0));
 
         
         $this->view->assign("flagList", $this->model->getFlagList());
@@ -146,7 +146,7 @@ class Wholesale extends Wanlshop
             $tree = Tree::instance();
     		// 1.0.2升級 過濾隱藏
             $tree->init(model('app\index\model\wanlshop\Category')->where(['type' => 'goods', 'isnav' => 1])->field('id,pid,name')->order('weigh asc,id asc')->select());
-            $Category = $tree->genTree($tree->arr);
+            $Category = $tree->getTreeArray(0);
             $Category = json_decode(json_encode($Category),true);
             
             
@@ -546,9 +546,9 @@ class Wholesale extends Wanlshop
         $wholesalecount = $this->model
                 ->where('shop_id='.$this->shop->id.' and wholesale_id!=0 and createtime<'.$day.' and createtime>'.$night)
                 ->count();
-        if ($wholesalecount>10000) {
-            $this->error('每天最多只能上架10件商品');
-        }
+//        if ($wholesalecount>10000) {
+//            $this->error('每天最多只能上架10件商品');
+//        }
         
         $wholesale = $this->model
                 ->where('shop_id='.$this->shop->id.' and wholesale_id='.$row['id'])
@@ -605,6 +605,7 @@ class Wholesale extends Wanlshop
 			$spu = [];
 			
 			foreach ($spudata as $vo) {
+                if(empty($vo['name']))$result = false;
 			    $spu[] = [
 			        'goods_id'	=> $this->model->id,
 			        'name'		=> $vo['name'],
@@ -613,12 +614,13 @@ class Wholesale extends Wanlshop
 			}
 			
 			if(!model('app\index\model\wanlshop\GoodsSpu')->allowField(true)->saveAll($spu)){
-				$result == false;
+				$result = false;
 			}
             $suk = [];
             
             //var_dump($DD);exit;
     		foreach ($skuItem as $vo) {
+    		    if($vo['difference']=='')$result = false;
     		    $suk[] = [
 			        'goods_id' 		=> $this->model->id,
 			        'difference' 	=> $vo['difference'],
@@ -631,9 +633,10 @@ class Wholesale extends Wanlshop
 			    ];
     		}
     		if(!model('app\index\model\wanlshop\GoodsSku')->allowField(true)->saveAll($suk)){
-				$result == false;
+				$result = false;
 			}
-            Db::commit();
+         if($result)   Db::commit();
+         else   Db::rollback();
         } catch (ValidateException $e) {
             Db::rollback();
             $this->error($e->getMessage());
@@ -647,7 +650,7 @@ class Wholesale extends Wanlshop
         if ($result !== false) {
             $this->success('上架成功');
         } else {
-            $this->error(__('No rows were inserted'));
+            $this->error(__('该批发商品库存不足!'));
         }
     }
 

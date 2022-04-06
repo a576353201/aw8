@@ -399,8 +399,12 @@ class Chat extends Api
 			$data['form']['id'] = 0;
 			$data['message']['type'] = 'text'; //默认消息
 			$data['createtime'] = time();
+
 			if($post['to_id'] == 0){
+
 				if($post['message']['type'] == 'text'){
+
+
 					if($content == '人工客服' || $content == '客服' || $content == '人工'){
 						// 查詢 哪个后台在线
 						$online = [];
@@ -445,6 +449,9 @@ class Chat extends Api
 							$data['message']['type'] = 'list';
 							$data['message']['content'] = $article;
 						}
+
+//                        var_dump($data);
+//                        exit;
 						$this->wanlchat->send($form_id, $data);
 					}
 				}else{
@@ -472,7 +479,7 @@ class Chat extends Api
 				// 在线发送
 				$this->wanlchat->send($post['to_id'], $post);
 			}
-			$this->success(__('请求成功'));
+			$this->success(__('请求成功33'));
 		}
 		$this->error(__('非法请求'));
 	}

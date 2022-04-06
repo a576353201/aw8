@@ -545,6 +545,7 @@ class Product extends Api
 		$where['goods_id'] = $id;
 		$comment['comment'] = $goodsCommentModel
 			->with(['user'])
+            ->group("content")
 			->where($where)
 			->paginate();
 		// $comment['tag'] = array_count_values($goodsCommentModel->where(['goods_id'=>$id])->limit(100)->column('tag')); //統计熱詞

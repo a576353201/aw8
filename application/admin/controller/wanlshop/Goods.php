@@ -56,7 +56,7 @@ class Goods extends Backend
 
                 $commentData[] = [
 
-                    'user_id' => 1,
+                    'user_id' => 1307,
 
                     'shop_id' => 2,
 

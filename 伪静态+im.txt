@@ -45,3 +45,7 @@ php think wanlshop:order start --daemon
 
 start php think wanlshop:chat --deploy register & start php think wanlshop:chat --deploy business &  start  php think wanlshop:chat --deploy gateway
 ss
+
+
+start php think antshop:chat --deploy register & start php think antshop:chat --deploy business &  start  php think antshop:chat --deploy gateway
+ss
