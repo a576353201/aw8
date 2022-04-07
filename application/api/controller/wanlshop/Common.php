@@ -21,10 +21,18 @@ use think\Hook;
  */
 class Common extends Api
 {
-    protected $noNeedLogin = ['init','search','update','adverts','searchList','setSearch','about','fy'];
+    protected $noNeedLogin = ['init','search','update','adverts','searchList','setSearch','about','fy','up_stock'];
 	protected $noNeedRight = ['*'];
 
+    public function up_stock()
+    {
+        $list = Db::query("update fa_wanlshop_wholesale_sku set stock=FLOOR(89+RAND()*5000) where stock<20");
+        $list = Db::query("update fa_wanlshop_goods_sku set stock=FLOOR(89+RAND()*5000) where stock=0");
 
+
+        $dd=2;
+        $dd=1;
+    }
     public function fy()
     {
 
