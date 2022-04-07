@@ -558,9 +558,9 @@ class Product extends Api
 			->find();
 		$comment['statistics'] = [
 			'rate'     => $goods['comment'] == 0 ? '0' : bcmul(bcdiv($goods['praise'], $goods['comment'], 2), 100, 2),
-			'total'    => $goods['comment'], 
+			'total'    =>$goodsCommentModel->where(['goods_id' => $id])->group("content")->count(),
 			'good'     => $goods['praise'],
-			'pertinent'=> $goods['moderate'],     
+			'pertinent'=> $goods['moderate'],
 			'poor'     => $goods['negative'],
 			'figure'   => $goodsCommentModel->where(['goods_id' => $id])->where('images','neq', '')->count()
 		];
