@@ -71,7 +71,18 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('City')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <div class='control-relative'><input id="c-city" data-rule="required" class="form-control" data-toggle="city-picker" name="row[city]" type="text" value="{$row.city|htmlentities}"></div>
+            <div class='control-relative'>
+
+<!--                <select  id="c-city" data-rule="required" class="form-control selectpicker" name="row[city]">-->
+<!--                    {foreach name="areaList" item="vo"}-->
+<!--                    <option value="{$key}" {in name="key" value="$row.city"}selected{/in}>{$vo}</option>-->
+<!--                    {/foreach}-->
+<!--                </select>-->
+                <input id="c-city" data-rule="required" class="form-control"  name="row[city]" type="text" value="{$row.city|htmlentities}">
+
+
+
+            </div>
         </div>
     </div>
     <div class="form-group">

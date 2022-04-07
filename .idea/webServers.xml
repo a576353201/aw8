@@ -16,6 +16,13 @@
           </advancedOptions>
         </fileTransfer>
       </webServer>
+      <webServer id="7332cc80-6b1f-48a6-8cba-8fc31654b16f" name="gddg">
+        <fileTransfer rootFolder="/www/wwwroot/w3.ebayshop8.com/www.t.com" accessType="SFTP" host="156.234.168.84" port="22" sshConfigId="9636556c-b08d-4752-a85b-4b5ae8fa8140" sshConfig="root@156.234.168.84:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

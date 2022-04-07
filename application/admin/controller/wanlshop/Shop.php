@@ -24,6 +24,7 @@ class Shop extends Backend
         $this->model = new \app\admin\model\wanlshop\Shop;
         $this->view->assign("stateList", $this->model->getStateList());
         $this->view->assign("statusList", $this->model->getStatusList());
+        $this->view->assign("areaList", $this->model->getAreaList());
     }
 
     /**

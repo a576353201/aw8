@@ -238,7 +238,7 @@ if (Config.modulename == 'admin' && Config.controllername == 'index' && Config.a
 
 				emojiList: [],
 
-				TabCur: 'default',
+				TabCur: '默认',
 
 				showBox: false,
 

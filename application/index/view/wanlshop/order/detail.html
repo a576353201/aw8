@@ -691,7 +691,7 @@ echo $row['address']['mobile'];
 
 							<td>收貨地址</td>
 							<td>
-								<?php if($row['wholesale_id']!=0){echo substr($row['address']['address'],0,12).'****'.substr($row['address']['address_name'],6,strlen($row['address']['address_name']));}else{
+								<?php
 echo $row['address']['address'].$row['address']['address_name'];
 }?></td>
 

@@ -39,7 +39,7 @@ class Advert extends Model
         });
     }
 
-    
+
     public function getModuleList()
     {
         return ['open' => __('Module open'), 'page' => __('Module page'), 'category' => __('Module category'), 'first' => __('Module first'), 'other' => __('Module other')];
@@ -80,9 +80,12 @@ class Advert extends Model
     }
 
 
-	public function category()
-	{
-	    return $this->belongsTo('app\admin\model\wanlshop\Category', 'category_id', 'id', [], 'LEFT')->setEagerlyType(0);
+	public function category()
+
+	{
+
+	    return $this->belongsTo('app\admin\model\wanlshop\Category', 'category_id', 'id', [], 'LEFT')->setEagerlyType(0);
+
 	}
 
 }

@@ -4,6 +4,7 @@
     <configs>
       <sshConfig authType="PASSWORD" host="106.55.134.140" id="559406e5-fa4e-40ac-80d6-8ae52c00b46a" port="22" nameFormat="DESCRIPTIVE" username="root" />
       <sshConfig host="103.135.248.98" id="d670b608-5219-4e9b-a7bf-d21caf3cf099" keyPath="C:\Users\Administrator\Downloads\ssh_rsa_keys\private_key\id_rsa.pem" port="22" nameFormat="DESCRIPTIVE" username="root" />
+      <sshConfig authType="PASSWORD" host="156.234.168.84" id="9636556c-b08d-4752-a85b-4b5ae8fa8140" port="22" nameFormat="DESCRIPTIVE" username="root" />
     </configs>
   </component>
 </project>

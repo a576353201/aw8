@@ -52,7 +52,10 @@ class Shop extends Model
         });
     }
 
-    
+    public function getAreaList()
+    {
+        return ['新加坡' => __('新加坡'), '菲律宾' => __('菲律宾'), '马来西亚' => __('马来西亚'), '日本' => __('日本'), '韩国' => __('韩国'), '泰国' => __('泰国')];
+    }
     public function getStateList()
     {
         return ['0' => __('State 0'), '1' => __('State 1'), '2' => __('State 2')];
@@ -83,6 +86,19 @@ class Shop extends Model
 	    return isset($list[$value]) ? $list[$value] : '';
 
 	}
+
+
+    public function getAreaTextAttr($value, $data)
+
+    {
+
+        $value = $value ? $value : (isset($data['status']) ? $data['status'] : '');
+
+        $list = $this->getAreaList();
+
+        return isset($list[$value]) ? $list[$value] : '';
+
+    }
 	
 	public function user()
 
