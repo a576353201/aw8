@@ -44,7 +44,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/guzzle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/markbaker/complex" />
       <excludeFolder url="file://$MODULE_DIR$/vendor" />
-      <excludeFolder url="file://$MODULE_DIR$/thinkphp" />
       <excludeFolder url="file://$MODULE_DIR$/runtime" />
       <excludeFolder url="file://$MODULE_DIR$/static" />
     </content>
