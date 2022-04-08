@@ -545,7 +545,6 @@ class Product extends Api
 		$where['goods_id'] = $id;
 		$comment['comment'] = $goodsCommentModel
 			->with(['user'])
-            ->group("content")
 			->where($where)
 			->paginate();
 		// $comment['tag'] = array_count_values($goodsCommentModel->where(['goods_id'=>$id])->limit(100)->column('tag')); //統计熱詞
@@ -558,7 +557,7 @@ class Product extends Api
 			->find();
 		$comment['statistics'] = [
 			'rate'     => $goods['comment'] == 0 ? '0' : bcmul(bcdiv($goods['praise'], $goods['comment'], 2), 100, 2),
-			'total'    =>$goodsCommentModel->where(['goods_id' => $id])->group("content")->count(),
+			'total'    =>$goodsCommentModel->where(['goods_id' => $id])->count(),
 			'good'     => $goods['praise'],
 			'pertinent'=> $goods['moderate'],
 			'poor'     => $goods['negative'],

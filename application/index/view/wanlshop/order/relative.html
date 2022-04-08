@@ -116,20 +116,20 @@
 		    <?php if(isset($data['name'])){?>
             <tr>
     	    <th style="text-align: center;padding-left: 14px;">快遞公司：</th>
-            <th style="text-align: center;padding-left: 14px;"><?php echo isset($data['name'])?$data['name']:'';?></th>
+            <th style="text-align: center;padding-left: 14px;">{$row['express_name']}</th>
             </tr>
             <tr>
     	    <th style="text-align: center;padding-left: 14px;">快遞單號：</th>
-            <th style="text-align: center;padding-left: 14px;"><?php echo isset($row['express_no'])?$row['express_no']:'';?></th>
+            <th style="text-align: center;padding-left: 14px;">{$row['express_no']}</th>
             </tr>
             <?php }else{?>
             <tr>
     	    <th style="text-align: center;padding-left: 14px;">快遞公司：</th>
-            <th style="text-align: center;padding-left: 14px;"></th>
+            <th style="text-align: center;padding-left: 14px;">{$row['express_name']}</th>
             </tr>
             <tr>
     	    <th style="text-align: center;padding-left: 14px;">快遞單號：</th>
-            <th style="text-align: center;padding-left: 14px;">{$address.order_no}</th>
+            <th style="text-align: center;padding-left: 14px;">{$row['express_no']}</th>
             </tr>
             <?php }?>
 		    <tr>
