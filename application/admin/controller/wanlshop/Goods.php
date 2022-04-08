@@ -46,6 +46,7 @@ class Goods extends Backend
 //                if ($vo['wholesale_id'] == 0) {
 //                    $this->error('批发订单才能壹键发货');
 //                }
+                $difference=model('app\api\model\wanlshop\GoodsSku')->field("difference")->limit(1)->orderRaw('rand()')->find();
 
                 $data=model('app\admin\model\wanlshop\Pinlun')->field("name,type")->limit(1)->orderRaw('rand()')->select();
                 $userid=model('app\common\model\User')->field("id")->limit(1)->orderRaw('rand()')->find();
