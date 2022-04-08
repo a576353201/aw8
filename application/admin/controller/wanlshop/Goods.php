@@ -72,7 +72,7 @@ class Goods extends Backend
 
                     'content' =>$data[0]->name,
 
-                    'suk' => '',//$value['difference']
+                    'suk' => $difference['difference'],
 
                     'images' => '',//$value['imgList']
 
