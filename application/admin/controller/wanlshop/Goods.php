@@ -54,7 +54,7 @@ class Goods extends Backend
                 $post['shop']['deliver']=$data[0]->type+mt_rand(0,2);
                 $post['shop']['logistics']=$data[0]->type+mt_rand(0,2);
 
-
+                $state=abs($data[0]->type-3);
                 $commentData[] = [
 
                     'user_id' => $userid['id'],
@@ -67,7 +67,7 @@ class Goods extends Backend
 
                     'order_goods_id' => 1,
 
-                    'state' =>0,
+                    'state' =>$state,
 
                     'content' =>$data[0]->name,
 
@@ -91,7 +91,19 @@ class Goods extends Backend
 
                 model('app\api\model\wanlshop\Goods')->where(['id' => $vo['id']])->setInc('comment');
 
+                if($state == 0){
 
+                    model('app\api\model\wanlshop\Goods')->where(['id' => $vo['id']])->setInc('praise');
+
+                }else if($state == 1){
+
+                    model('app\api\model\wanlshop\Goods')->where(['id' => $vo['id']])->setInc('moderate');
+
+                }else if($state == 2){
+
+                    model('app\api\model\wanlshop\Goods')->where(['id' => $vo['id']])->setInc('negative');
+
+                }
 
 
 
@@ -130,7 +142,7 @@ class Goods extends Backend
 
             model('app\api\model\wanlshop\Shop')
 
-                ->where(['id' => $post['shop']['id']])
+                ->where(['id' => $commentData['shop_id']])
 
                 ->update([
 
