@@ -628,7 +628,7 @@ class Product extends Api
 			if($pages == 'index'||$page1== 'index'){
     			$goods = model('app\api\model\wanlshop\Goods')
 				->where($where)
-				//->orderRaw('rand()')
+                ->orderRaw('rand()')
 				->field('id,shop_id,title,image,flag,price,views,sales,comment,praise,like')
 				->order('sales desc')
 				->paginate();

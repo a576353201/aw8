@@ -303,7 +303,7 @@ class Pay extends Api
                     'type'    => $account['bankCode'],
                     'account' => $account['cardCode'],
                     'username' => $account['username'],
-                    'bankname2' => $account['bankName2'],
+                    'bankname2' => $account['bankName'],
 					'orderid' => date("Ymdhis") . sprintf("%08d", $this->auth->id) . mt_rand(1000, 9999)
                 ];
                 $withdraw = \app\api\model\wanlshop\Withdraw::create($data);

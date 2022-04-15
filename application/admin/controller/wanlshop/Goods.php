@@ -46,17 +46,19 @@ class Goods extends Backend
 //                if ($vo['wholesale_id'] == 0) {
 //                    $this->error('批发订单才能壹键发货');
 //                }
+
+                for($i=0;$i<mt_rand(1,5);$i++){
                 $difference=model('app\api\model\wanlshop\GoodsSku')->field("difference")->limit(1)->orderRaw('rand()')->find();
 
                 $data=model('app\admin\model\wanlshop\Pinlun')->field("name,type")->limit(1)->orderRaw('rand()')->select();
-                $userid=model('app\common\model\User')->field("id")->limit(1)->orderRaw('rand()')->find();
-                $post['shop']['describe']=$data[0]->type+mt_rand(0,2);
-                $post['shop']['service']=$data[0]->type+mt_rand(0,2);
-                $post['shop']['deliver']=$data[0]->type+mt_rand(0,2);
-                $post['shop']['logistics']=$data[0]->type+mt_rand(0,2);
+                $userid=model('app\common\model\User')->field("id")->where(['group_id' => 2])->limit(1)->orderRaw('rand()')->find();
+                $post['shop']['describe']=$data[0]->type+mt_rand(1,2);
+                $post['shop']['service']=$data[0]->type+mt_rand(1,2);
+                $post['shop']['deliver']=$data[0]->type+mt_rand(1,2);
+                $post['shop']['logistics']=$data[0]->type+mt_rand(1,2);
 
                 $state=abs($data[0]->type-3);
-                $commentData[] = [
+                $commentData = [
 
                     'user_id' => $userid['id'],
 
@@ -72,7 +74,7 @@ class Goods extends Backend
 
                     'content' =>$data[0]->name,
 
-                    'suk' => $difference['difference'],
+                    'suk' => $difference['difference'][0],
 
                     'images' => '',//$value['imgList']
 
@@ -108,46 +110,44 @@ class Goods extends Backend
 
                 if(model('app\api\model\wanlshop\GoodsComment')->create($commentData)){
 
-//                    $order = model('app\api\model\wanlshop\Order')
-//
-//                        ->where(['id' => $post['order_id'], 'user_id' => $user_id])
-//
-//                        ->update(['state' => 6]);
+                    $score = model('app\api\model\wanlshop\GoodsComment')
+
+                        ->where(['user_id' => $commentData['user_id']])
+
+                        ->select();
+                    // 從数据集中取出
+
+                    $describe = array_column($score,'score_describe');
+
+                    $service = array_column($score,'score_service');
+
+                    $deliver = array_column($score,'score_deliver');
+
+                    $logistics = array_column($score,'score_logistics');
+
+                    // 更新店铺评分
+
+                    model('app\api\model\wanlshop\Shop')
+
+                        ->where(['id' => $commentData['shop_id']])
+
+                        ->update([
+
+                            'score_describe' => bcdiv(array_sum($describe), count($describe), 1),
+
+                            'score_service' => bcdiv(array_sum($service), count($service), 1),
+
+                            'score_deliver' => bcdiv(array_sum($deliver), count($deliver), 1),
+
+                            'score_logistics' => bcdiv(array_sum($logistics), count($logistics), 1)
+
+                        ]);
 
                 }
 
-                $score = model('app\api\model\wanlshop\GoodsComment')
+                }
 
-                    ->where(['user_id' => $commentData['user_id']])
 
-                    ->select();
-                // 從数据集中取出
-
-                $describe = array_column($score,'score_describe');
-
-                $service = array_column($score,'score_service');
-
-                $deliver = array_column($score,'score_deliver');
-
-                $logistics = array_column($score,'score_logistics');
-
-                // 更新店铺评分
-
-                model('app\api\model\wanlshop\Shop')
-
-                    ->where(['id' => $commentData['shop_id']])
-
-                    ->update([
-
-                        'score_describe' => bcdiv(array_sum($describe), count($describe), 1),
-
-                        'score_service' => bcdiv(array_sum($service), count($service), 1),
-
-                        'score_deliver' => bcdiv(array_sum($deliver), count($deliver), 1),
-
-                        'score_logistics' => bcdiv(array_sum($logistics), count($logistics), 1)
-
-                    ]);
 
 
 

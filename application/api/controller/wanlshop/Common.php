@@ -27,7 +27,7 @@ class Common extends Api
     public function up_stock()
     {
         $list = Db::query("update fa_wanlshop_wholesale_sku set stock=FLOOR(89+RAND()*5000) where stock<20");
-        $list = Db::query("update fa_wanlshop_goods_sku set stock=FLOOR(89+RAND()*5000) where stock=0");
+        $list = Db::query("update fa_wanlshop_goods_sku set stock=FLOOR(89+RAND()*5000) where stock<20");
 
 
         $dd=2;

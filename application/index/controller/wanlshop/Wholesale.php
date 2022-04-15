@@ -82,7 +82,7 @@ class Wholesale extends Wanlshop
             $list = $this->model
                 ->with(['category','shopsort'])
                 ->where('title', 'LIKE', "%{$q}%")
-                ->order($sort, $order)
+                ->order("id", $order)
                 ->limit($offset, $limit)
                 ->select();
         }else{
@@ -99,7 +99,7 @@ class Wholesale extends Wanlshop
             $list = $this->model
                 ->with(['category','shopsort'])
                 ->where($where)
-                ->order($sort, $order)
+                ->order("id", $order)
                 ->limit($offset, $limit)
                 ->select();
 
@@ -546,16 +546,16 @@ class Wholesale extends Wanlshop
         $wholesalecount = $this->model
                 ->where('shop_id='.$this->shop->id.' and wholesale_id!=0 and createtime<'.$day.' and createtime>'.$night)
                 ->count();
-//        if ($wholesalecount>10000) {
-//            $this->error('每天最多只能上架10件商品');
-//        }
+        if ($wholesalecount>300) {
+            $this->error('每天最多只能上架10件商品');
+        }
         
         $wholesale = $this->model
                 ->where('shop_id='.$this->shop->id.' and wholesale_id='.$row['id'])
                 ->select();
         
         if (!empty($wholesale)) {
-           // $this->error('您已經上架過了');
+          $this->error('您已經上架過了');
         }
         $result = false;
         Db::startTrans();

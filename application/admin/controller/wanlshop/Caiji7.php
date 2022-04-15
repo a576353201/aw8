@@ -45,27 +45,27 @@ class Caiji extends Backend
         $this->view->assign("statusList", $this->model->getStatusList());
     }
 
-    public function cjstarts1($ids = null)
+    public function cjstart1($ids = null)
     {
 
 
         $catid = $this->request->post('catid');
         $keyword = $this->request->post('keyword');
-        $catid=1;
-//$keyword='iphone 13';
+
+$keyword='iphone 13';
         $keyword=urlencode($keyword);
 
 
-        $var = 'pen';
+        $var = 'rule';
         $var1 = 12;
-        $l = exec("G:/mypython/venv/Scripts/python.exe G:/mypython/xiapa_pf.py  $keyword $catid",$Array,$ret);
+        $l = exec("G:/mypython/venv/Scripts/python.exe G:/mypython/xiapa_pfv4.py  $keyword $catid",$Array,$ret);
 
 
         $this->success();
     }
 
 
-    public function cjstart1($ids = null)
+    public function cjstart14($ids = null)
     {
 
         $dd=1;
