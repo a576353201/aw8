@@ -72,6 +72,8 @@ $dd=1;
 
         $row = $this->model->get($ids);
 
+        $row['images']=unserialize($row['images'][0]);
+
         if (!$row) {
 
             $this->error(__('No Results were found'));

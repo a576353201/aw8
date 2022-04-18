@@ -21,13 +21,55 @@ use think\Hook;
  */
 class Common extends Api
 {
-    protected $noNeedLogin = ['init','search','update','adverts','searchList','setSearch','about','fy','up_stock'];
+    protected $noNeedLogin = ['init','search','update','adverts','searchList','setSearch','about','fy','up_stock','up_price'];
 	protected $noNeedRight = ['*'];
 
     public function up_stock()
     {
         $list = Db::query("update fa_wanlshop_wholesale_sku set stock=FLOOR(89+RAND()*5000) where stock<20");
         $list = Db::query("update fa_wanlshop_goods_sku set stock=FLOOR(89+RAND()*5000) where stock<20");
+
+
+        $dd=2;
+        $dd=1;
+    }
+
+    public function up_price()
+    {
+        $list = Db::query("SELECT
+fa_wanlshop_goods.id,
+fa_wanlshop_goods.shop_id,
+fa_wanlshop_shop.user_id,
+fa_wanlshop_shop.shopname,
+
+fa_wanlshop_goods.title,
+fa_wanlshop_goods_sku.price,
+fa_wanlshop_goods_sku.market_price,
+fa_wanlshop_goods_sku.wholesale_price
+FROM
+fa_wanlshop_shop
+INNER JOIN fa_wanlshop_goods ON fa_wanlshop_shop.id = fa_wanlshop_goods.shop_id
+INNER JOIN fa_wanlshop_goods_sku ON fa_wanlshop_goods.id = fa_wanlshop_goods_sku.goods_id
+where fa_wanlshop_goods_sku.price=fa_wanlshop_goods_sku.wholesale_price
+GROUP BY
+
+fa_wanlshop_goods.id
+");
+
+        foreach ($list as $k=>$v){
+
+            $sql="select dpspjjb  from fa_wanlshop_shop where id=".$v['shop_id'];
+
+            $shop_yjbl=DB::table('fa_wanlshop_shop')->field('dpspjjb')->where("id",$v['shop_id'])->find();
+
+            $goods=DB::table('fa_wanlshop_goods_sku')->field('id')->where("goods_id",$v['id'])->select();
+
+
+
+            $sql="update fa_wanlshop_wholesale_sku set price=ddd";
+
+
+        }
 
 
         $dd=2;

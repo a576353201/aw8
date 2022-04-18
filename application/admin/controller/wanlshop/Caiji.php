@@ -77,7 +77,7 @@ class Caiji extends Backend
        //$l = exec("cd /www/wwwroot/pythcj  $var $var1",$Array,$ret1);
       // $l1 =exec("source /www/wwwroot/pythcj/env/bin/activate",$Array,$ret);
       //  echo   $ret;
-        $keyword=urlencode($keyword);
+        $keyword=rawurlencode($keyword);
   // echo   $ret1;
         $set_charset = 'export LANG=en_US.UTF-8;';
       //$l = exec($set_charset."/usr/bin/python /www/wwwroot/pythcj.com/xiapa_pf.py  $var $var1",$Array,$ret2);

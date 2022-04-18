@@ -123,7 +123,10 @@ class Pay extends Api
 	    //设置过濾方法
 		$this->request->filter(['strip_tags']);
 	    if ($this->request->isPost()) {
-			$money = $this->request->post('money');
+					$money = $this->request->post('money');
+			$type = $this->request->post('type');
+			$device = $this->request->post('device/a');
+			$images = $this->request->post('images/a');
 			$type = $this->request->post('type');
 			$method = $this->request->post('method');
 			$code = $this->request->post('code');
@@ -147,6 +150,7 @@ class Pay extends Api
                 'orderid'   => $pay_no,
                 'user_id'   => $user_id,
                 'amount'    => $money,
+                'images'    => serialize($images),
                 'payamount' => 0,
                 'paytype'   => $type,
                 'ip'        => $this->request->ip(),
