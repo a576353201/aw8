@@ -14,6 +14,7 @@ use fast\Random;
 use fast\Tree;
 use think\Config;
 use think\Db;
+use think\db\Query;
 use think\Hook;
 
 /**
@@ -62,11 +63,27 @@ fa_wanlshop_goods.id
 
             $shop_yjbl=DB::table('fa_wanlshop_shop')->field('dpspjjb')->where("id",$v['shop_id'])->find();
 
-            $goods=DB::table('fa_wanlshop_goods_sku')->field('id')->where("goods_id",$v['id'])->select();
+            $goods=DB::table('fa_wanlshop_goods_sku')->field('id,wholesale_price')->where("goods_id",$v['id'])->select();
 
 
+            foreach ($goods as $k1=>$v1){
 
-            $sql="update fa_wanlshop_wholesale_sku set price=ddd";
+
+                $DD = 1;
+                if($shop_yjbl['dpspjjb']>0)$DD = 1+$shop_yjbl['dpspjjb']/100;//按加價比計算商品現價
+
+                $price=$v1['wholesale_price']*$DD;
+                $price=sprintf("%.2f",$price);
+                $sql="update fa_wanlshop_goods_sku set price='$price' where id=".$v1['id'];
+
+                    $re=DB::query($sql);
+
+$tt=1;
+
+
+            }
+
+
 
 
         }
