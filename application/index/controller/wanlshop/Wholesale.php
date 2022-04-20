@@ -579,6 +579,7 @@ class Wholesale extends Wanlshop
 				$this->model->category_attribute = json_encode($row['attribute'], JSON_UNESCAPED_UNICODE);
 			}
             $this->model->title = $row['title'];
+            $this->model->proid = $row['proid'];
             $this->model->image = $row['image'];
             $this->model->images = $row['images'];
             $this->model->description = $row['description'];
