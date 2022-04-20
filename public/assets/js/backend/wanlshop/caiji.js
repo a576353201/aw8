@@ -85,12 +85,16 @@ define(["jquery", "bootstrap", "backend", "table", "form"], function (e, t, a, i
                         debugger
                         var catid=$("#cateid").val();
                         var keyword=$("#keyword").val();
+                        var price_min=$("#price_min").val();
+                        var limit=$("#limit").val();
 
                         Fast.api.ajax({
                             url: "wanlshop/caiji/cjstart1",
                             data: {
                                 catid: catid,
-                                keyword: keyword
+                                keyword: keyword,
+                                price_min: price_min,
+                                limit: limit,
 
                             }
                         }, function(data, ret) {

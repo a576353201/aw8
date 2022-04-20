@@ -43,6 +43,12 @@
                         </select>
 採集關鍵詞
                         <input id="keyword" class="js-icon-search form-control" type="text" placeholder="">
+
+
+                        价格起                        <input id="price_min" class="js-icon-search form-control" value="27" type="text" placeholder="">
+
+                        条数                        <input id="limit" class="js-icon-search form-control" value="20" type="text" placeholder="">
+
                         <a href="javascript:;" class="btn btn-success btn-cj" title="{:__('Add')}" ><i class="fa fa-plus"></i> {:__('Add')}</a>
                         <a class="btn btn-success  btn-cj  {:$auth->check('wanlshop/goods/recyclebin')?'':'hide'}"  title="{:__('開始採集')}"><i class="fa fa-recycle"></i> {:__('開始採集')}</a>
                     </div>
