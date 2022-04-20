@@ -102,6 +102,32 @@ define(["jquery", "bootstrap", "backend", "table", "form"], function (e, t, a, i
                             layer.msg('已加入隊列採集', {icon: 1});
                             return false;
                         });
+                    }),
+
+                e(document).on("click", ".btn-cjxf",
+                    function() {
+                        layer.prompt({title: '请输入要修复的商品id',}, function (value, index, elem) {
+                            if (parseFloat(value) < 0 ) {
+                                //alert('没有改变');
+                                Toastr.error("没有改变")
+                                //layer.close(index);
+                                return false;
+                            }
+
+                            Fast.api.ajax({
+                                url: "wanlshop/caiji/cjupgoodsbyid",
+                                data: {
+
+                                    id: value,
+
+                                }
+                            }, function(data, ret) {
+
+                                layer.msg('已加入修复队列', {icon: 1});
+                                return false;
+                            });
+                            layer.close(index);
+                        });
                     })
         }, recyclebin: function () {
             i.api.init({extend: {dragsort_url: ""}});

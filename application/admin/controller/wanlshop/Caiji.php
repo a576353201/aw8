@@ -65,7 +65,22 @@ class Caiji extends Backend
 
         $this->success();
     }
+    public function cjupgoodsbyid($ids = null)
+    {
 
+
+        $id = $this->request->post('id');
+
+//$keyword='iphone 13';
+
+
+        $var = 'pen';
+        $var1 = 12;
+        $l = exec("G:/mypython/venv/Scripts/python.exe G:/mypython/xiapa_pf.py  $id",$Array,$ret);
+
+
+        $this->success();
+    }
 
     public function cjstart122($ids = null)
     {
