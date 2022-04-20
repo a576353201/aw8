@@ -76,7 +76,7 @@ class Caiji extends Backend
 
         $var = 'pen';
         $var1 = 12;
-        $l = exec("G:/mypython/venv/Scripts/python.exe G:/mypython/xiapa_pf.py  $id",$Array,$ret);
+        $l = exec("G:/mypython/venv/Scripts/python.exe G:/mypython/xiapa_pfbyid.py  $id",$Array,$ret);
 
 
         $this->success();
