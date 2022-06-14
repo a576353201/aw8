@@ -599,7 +599,14 @@ class Wholesale extends Wanlshop
             //empty($row['wholesale_price'])?sprintf("%.2f",$wholesale_price*1.2):sprintf("%.2f",$row['wholesale_price']*1.2);
             //var_dump($this->model->price);exit;  sprintf("%.2f",$num);
             $this->model->freight_id = $row['freight_id'];
-            if($this->model->save()){
+
+            $wholesale22 = $this->model
+                ->where('shop_id='.$this->shop->id.' and wholesale_id='.$row['id'])
+                ->select();
+//            if (!empty($wholesale)) {
+//                $result= false;
+//            }
+            if(empty($wholesale22)&&$this->model->save()){
             	$result = true;
             }
 			// 寫入SPU

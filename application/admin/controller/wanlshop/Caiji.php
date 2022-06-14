@@ -53,14 +53,16 @@ class Caiji extends Backend
         $keyword = $this->request->post('keyword');
         $price_min = $this->request->post('price_min');
         $limit = $this->request->post('limit');
-        $catid=1;
+
 //$keyword='iphone 13';
         $keyword=urlencode($keyword);
 
 
         $var = 'pen';
         $var1 = 12;
-        $l = exec("G:/mypython/venv/Scripts/python.exe G:/mypython/xiapa_pf.py  $keyword $catid $price_min $limit",$Array,$ret);
+        $l = exec("/usr/bin/python /www/wwwroot/pythcj.com/xiapa_pf.py   $keyword $catid $price_min $limit",$Array,$ret2);
+
+//        $l = exec("G:/mypython/venv/Scripts/python.exe G:/mypython/xiapa_pf.py  $keyword $catid $price_min $limit",$Array,$ret);
 
 
         $this->success();
@@ -76,7 +78,9 @@ class Caiji extends Backend
 
         $var = 'pen';
         $var1 = 12;
-        $l = exec("G:/mypython/venv/Scripts/python.exe G:/mypython/xiapa_pfbyid.py  $id",$Array,$ret);
+//        $l = exec("G:/mypython/venv/Scripts/python.exe G:/mypython/xiapa_pfbyid.py  $id",$Array,$ret);
+        $l = exec("/usr/bin/python /www/wwwroot/pythcj.com/xiapa_pfbyid.py  $id",$Array,$ret3);
+
 
 
         $this->success();
